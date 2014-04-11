@@ -1,3 +1,4 @@
+<!--
 <div class="header" ng-controller="NavbarCtrl">
   <ul class="nav nav-pills pull-right">
     <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
@@ -5,4 +6,50 @@
     </li>
   </ul>
   <h3 class="text-muted">xploreBilbao</h3>
+</div> -->
+
+
+<div class="header" ng-controller="NavbarCtrl">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+			<!--
+			<button type="button" class="navbar-toggle" data-toogle="collapse" data-target=".navbar-collapse">
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+			</button>-->
+			<a class="navbar-brand" href="#">XploreBilbao</a>
+		</div>	
+		<div class="navbar-collapse collapse">  
+			<ul class="nav navbar-nav">
+  				<li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+  					<a ui-sref="{{item.state}}">
+  						<i class="icon fa fa-{item.icon}}"></i> {{item.title}}
+  					</a>
+  				</li>
+          	</ul>
+        	<ul class="nav navbar-nav pull-right">
+    			<li ng-hide="currentUser" ng-class="{active: isActive('/login')}">
+        			<a ng-click="login()">
+        				<i class="icon fa fa-sign-in"></i> Login 
+        			</a>
+      			</li>
+      			<li ng-hide="currentUser" ng-class="{active: isActive('/signup')}">
+        			<a ui-sref="signup">
+        				<i class="icon fa fa-users"></i> Registrarse
+        			</a>
+      			</li>
+      			<li ng-show="currentUser" ng-class="{active: isActive('/myroutes')}">
+        			<a ui-sref="myprofile">
+        				<i class="icon fa fa-user"></i> Mi Perfil
+        			</a>
+      			</li>
+      			<li ng-show="currentUser" ng-class="{active: isActive('/logout')}">
+        			<a ng-click="logout()">
+        				<i class="icon fa fa-sign-out"></i> Salir
+        			</a>
+      			</li>
+        	</ul>
+		</div>
+	</div>
 </div>

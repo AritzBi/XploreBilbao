@@ -4,9 +4,26 @@ angular.module('xploreBilbaoApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ui.bootstrap',
+  'ui.router'
 ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'partials/main.html',
+        controller: 'MainCtrl'
+      })
+      .state('signup',{
+        url: '/signUp',
+        templateUrl: 'partials/prueba.html',
+        controller: 'MainCtrl'      
+      });
+      
+    $urlRouterProvider.otherwise('/');
+  });
+ /* .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
@@ -21,4 +38,6 @@ angular.module('xploreBilbaoApp', [
       });
       
     $locationProvider.html5Mode(true);
-  });
+  });*/
+
+

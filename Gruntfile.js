@@ -44,10 +44,10 @@ module.exports = function (grunt) {
         }
       }
     },
-    open: {
+    open: {/*
       server: {
         url: 'http://localhost:<%= express.options.port %>'
-      }
+      }*/
     },
     watch: {
       js: {

@@ -15,7 +15,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config = require('./lib/config/config');
 
 var app = express();
-
+console.log('nodemon');
 // Express settings
 require('./lib/config/express')(app);
 
