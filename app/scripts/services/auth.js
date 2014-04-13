@@ -18,9 +18,10 @@ angular.module('xploreBilbaoApp')
        */
       login: function(user, callback) {
         var cb = callback || angular.noop;
-
+        console.log(user.username);
+        console.log(user.password);
         return Session.save({
-          email: user.email,
+          username: user.username,
           password: user.password
         }, function(user) {
           $rootScope.currentUser = user;

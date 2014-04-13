@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('LoginCtrl', function ($scope, $modalInstance){
+	.controller('LoginCtrl', function ($scope,Auth,$modalInstance){
+		$scope.user = {};
+		$scope.errors={};
 		$scope.login=function(form){
-			$scope.errors={};
 			if(form.$valid){
 				Auth.login({
-					email:$scope.user.email,
+					username: $scope.user.username,
 					password: $scope.user.password
 				})
 				.then(function(data){

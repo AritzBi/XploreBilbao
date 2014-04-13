@@ -5,14 +5,14 @@
 	<form class="form" name="form" ng-submit="login(form)">
 		<p class="alert alert-danger" ng-show="erros.other">
 			{{errors.other}}
-		</p>
+		</p>		
+		<div class="form-group ">
+			<input class="form-control input-lg" name="username" type="text" ng-model="user.username">
+		</div>
 		<div class="form-group">
 			<input class="form-control input-lg" name="email" type="text" ng-model="user.email">
 		</div>
 		<!-- FORM-ACTIONS End a form with a group of actions (buttons). When placed within a .form-actions, the buttons will automatically indent to line up with the form controls.-->
-		<div class="form-group ">
-			<input class="form-control input-lg" name="username" type="text" ng-model="user.username">
-		</div>
 		<div class="form-group">
         	<input class="form-control input-lg" name="password" type="password" ng-model="user.password">
         </div>
