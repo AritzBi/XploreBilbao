@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-  .controller('NavbarCtrl', function ($scope, $location, $modal) {
+  .controller('NavbarCtrl', function ($scope, Auth, $location, $modal) {
     $scope.menu = [{
       'title': 'Home',
       'state': 'home',
@@ -38,5 +38,14 @@ angular.module('xploreBilbaoApp')
     		templateUrl: 'partials/login.html',
     		controller: 'LoginCtrl',
     	});
+    };
+    $scope.signup = function signup(){
+      var instance=$modal.open({
+        templateUrl: 'partials/signup.html',
+        controller: 'SignupCtrl',
+      });
+    };
+    $scope.logout = function() {
+      Auth.logout();
     };
   });

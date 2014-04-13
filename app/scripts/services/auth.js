@@ -4,6 +4,7 @@ angular.module('xploreBilbaoApp')
   .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
     
     // Get currentUser from cookie
+    console.log($cookieStore);
     $rootScope.currentUser = $cookieStore.get('user') || null;
     $cookieStore.remove('user');
 
@@ -18,8 +19,6 @@ angular.module('xploreBilbaoApp')
        */
       login: function(user, callback) {
         var cb = callback || angular.noop;
-        console.log(user.username);
-        console.log(user.password);
         return Session.save({
           username: user.username,
           password: user.password
@@ -58,7 +57,6 @@ angular.module('xploreBilbaoApp')
        */
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
-
         return User.save(user,
           function(user) {
             $rootScope.currentUser = user;
