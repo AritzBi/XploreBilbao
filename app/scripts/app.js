@@ -15,6 +15,16 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/main.html',
         controller: 'MainCtrl'
       })
+      .state('pintxos',{
+        url: '/pintxos',
+        templateUrl: 'partials/hosteleria.html',
+        controller: 'PintxosCtrl'      
+      })     
+      .state('pintxos.pintxoInfo',{
+        url: '/{id}',
+        templateUrl: 'partials/hosteleriaInfo.html',
+        controller: 'PintxoInfoCtrl'      
+      })
       .state('signup',{
         url: '/signUp',
         templateUrl: 'partials/prueba.html',

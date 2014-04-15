@@ -4,7 +4,6 @@ angular.module('xploreBilbaoApp')
   .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
     
     // Get currentUser from cookie
-    console.log($cookieStore);
     $rootScope.currentUser = $cookieStore.get('user') || null;
     $cookieStore.remove('user');
 

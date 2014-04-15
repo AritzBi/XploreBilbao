@@ -1,0 +1,25 @@
+<div ng-include="'partials/navbar'"></div>
+	<div style="padding-top: 50px;"class="row">
+		<div class="col-md-8">
+			<div class="row" ng-repeat="pintxo in pintxos" ng-show="([pintxo] | customFilter:pintxosCategory).length > 0">
+				<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="well well-lg">
+				<div class="control-group">
+				    <div class="controls">
+				        <label class="checkbox" ng-repeat="category in pintxosCategory">
+				            <input type="checkbox" ng-model="category.isActivated" defaultChecked="true">
+				            {{category.first_type_es}}
+				        </label>     
+				    </div>
+				</div>
+			</div>
+		</div>
+	<!--	<div class="col-lg-10">
+			<div ui-view="">
+
+			</div>
+		</div>-->
+	</div>
