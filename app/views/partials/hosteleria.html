@@ -1,11 +1,29 @@
 <div ng-include="'partials/navbar'"></div>
 	<div style="padding-top: 50px;"class="row">
-		<div class="col-md-8">
-			<div class="row" ng-repeat="pintxo in pintxos" ng-show="([pintxo] | customFilter:pintxosCategory).length > 0">
-				<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<ul class="list-group">
+					<li  class="list-group-item" ng-repeat="pintxo in pintxos" ng-show="([pintxo] | customFilter:pintxosCategory).length > 0">
+						<div class="row">
+							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
+							<div class="col-md-6">
+								<h4>{{pintxo.denom_es}}</h4>
+							</div>
+							<div class="col-md-6">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+							</div>
+							<div class="col-md-8">
+								<p>{{pintxo.description_es}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="well well-lg">
 				<div class="control-group">
 				    <div class="controls">
