@@ -1,19 +1,73 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory){
+	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter){
 		$scope.pintxos=Pintxo.query();
 		$scope.pintxosCategory=pintxosCategory.query();
-
-		/*$scope.search={};
-		$scope.searchBy=function(){
-			return function(pintxo){
-				console.log(pintxo.first_type_es);
-				if($scope.search[pintxo.first_type_es]===true){
-					return true;
-				}
-			}
-		};*/
+		$scope.filteredItems = [];
+	    $scope.groupedItems = [];
+	    $scope.itemsPerPage = 5;
+	    $scope.pagedItems = [];
+	    $scope.currentPage = 0;
+	        // init the filtered items
+    	$scope.filterByCategory = function () {
+	        $scope.filteredItems = $filter('filter')($scope.pintxos, function (item) {
+	        	var found=false;
+	            angular.forEach($scope.pintxosCategory, function(category){
+	                    if(category.isActivated){
+	                            if(item.first_type_es === category.first_type_es){
+	                            	console.log("true");
+	                                found=true;
+	                            }
+	                    }
+	                });
+	                return found;
+	        });
+	        $scope.currentPage = 0;
+	        // now group by pages
+	        $scope.groupToPages();
+    	};
+		    // calculate page in place
+	    $scope.groupToPages = function () {
+	        $scope.pagedItems = [];
+	        console.log($scope.filteredItems.length);
+	        for (var i = 0; i < $scope.filteredItems.length; i++) {
+	            if (i % $scope.itemsPerPage === 0) {
+	                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [ $scope.filteredItems[i] ];
+	            } else {
+	                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
+	            }
+	        }
+	    };
+	    
+	    $scope.range = function (start, end) {
+	        var ret = [];
+	        if (!end) {
+	            end = start;
+	            start = 0;
+	        }
+	        for (var i = start; i < end; i++) {
+	            ret.push(i);
+	        }
+	        return ret;
+	    };
+	    
+	    $scope.prevPage = function () {
+	        if ($scope.currentPage > 0) {
+	            $scope.currentPage--;
+	        }
+	    };
+	    
+	    $scope.nextPage = function () {
+	        if ($scope.currentPage < $scope.pagedItems.length - 1) {
+	            $scope.currentPage++;
+	        }
+	    };
+	    
+	    $scope.setPage = function () {
+	        $scope.currentPage = this.n;
+	    }; 
+	     $scope.filterByCategory();           
 	})
 	.filter('customFilter',function(){
 		return function(items,types){
