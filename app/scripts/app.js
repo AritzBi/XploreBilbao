@@ -17,14 +17,24 @@ angular.module('xploreBilbaoApp', [
       })
       .state('pintxos',{
         url: '/pintxos',
-        templateUrl: 'partials/hosteleria.html',
+        templateUrl: 'partials/pintxo.html',
         controller: 'PintxosCtrl'      
       })     
       .state('pintxos.pintxoInfo',{
         url: '/{id}',
-        templateUrl: 'partials/hosteleriaInfo.html',
+        templateUrl: 'partials/pintxoInfo.html',
         controller: 'PintxoInfoCtrl'      
       })
+      .state('restaurantes',{
+        url: '/restaurantes',
+        templateUrl: 'partials/restaurant.html',
+        controller: 'RestaurantsCtrl'      
+      })
+      .state('restaurantes.restaurantesInfo',{
+        url: '/{id}',
+        templateUrl: 'partials/restaurantInfo.html',
+        controller: 'RestaurantsInfoCtrl'      
+      }) 
       .state('signup',{
         url: '/signUp',
         templateUrl: 'partials/prueba.html',
