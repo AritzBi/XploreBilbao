@@ -20,21 +20,27 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/pintxo.html',
         controller: 'PintxosCtrl'      
       })     
-      .state('pintxos.pintxoInfo',{
-        url: '/{id}',
+      .state('pintxoInfo',{
+        url: '/pintxos/{id}',
         templateUrl: 'partials/pintxoInfo.html',
         controller: 'PintxoInfoCtrl'      
       })
-      .state('restaurantes',{
-        url: '/restaurantes',
+      .state('restaurants',{
+        url: '/restaurants',
         templateUrl: 'partials/restaurant.html',
         controller: 'RestaurantsCtrl'      
       })
+      .state('restaurantInfo',{
+        url: '/restaurants/{id}',
+        templateUrl: 'partials/restaurantInfo.html',
+        controller: 'RestaurantsInfoCtrl'      
+      })
+      /*
       .state('restaurantes.restaurantesInfo',{
         url: '/{id}',
         templateUrl: 'partials/restaurantInfo.html',
         controller: 'RestaurantsInfoCtrl'      
-      }) 
+      }) **/
       .state('signup',{
         url: '/signUp',
         templateUrl: 'partials/prueba.html',

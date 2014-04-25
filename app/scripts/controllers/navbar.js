@@ -9,7 +9,7 @@ angular.module('xploreBilbaoApp')
     },
     {
       'title': 'Restaurantes',
-      'state': 'restaurantes',
+      'state': 'restaurants',
       'icon':  ''
     },
     {

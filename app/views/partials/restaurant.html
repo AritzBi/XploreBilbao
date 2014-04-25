@@ -3,11 +3,11 @@
 		<div class="col-md-9">
 			<div class="panel panel-default">
 				<ul class="list-group">
-					<li  class="list-group-item"  ng-repeat="restaurant in pagedItems[currentPage]" >
+					<li  class="list-group-item"  ng-repeat="restaurant in pagedItems[currentPage]" id="{{restaurant.id}}" >
 						<div class="row">
 							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
 							<div class="col-md-6">
-								<h4>{{restaurant.denom_es}}</h4>
+								<a ui-sref="restaurantInfo({id: restaurant.id})"><h4>{{restaurant.denom_es}}</h4></a>
 							</div>
 							<div class="col-md-6">
 							</div>
