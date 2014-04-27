@@ -11,7 +11,7 @@
 			{{pintxo.description_es}}
 		</div>
 	</div>
-	<div class="row">
+	<div class="row top-buffer">
 		<div class="col-lg-5">
 			<iframe width="450" height="250" frameborder="0" style="border:0" ng-src="{{url}}"></iframe>
 		</div>
@@ -19,6 +19,11 @@
 			{{pintxo.address}}
 		</div>
 		<div class="col-lg-5">
+			<ul class="list-group">
+				<li  class="list-group-item"  ng-repeat="comment in comments"  >
+				
+				</li>
+			</ul>
 		</div>
 	</div>
 
