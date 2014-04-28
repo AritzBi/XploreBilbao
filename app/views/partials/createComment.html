@@ -1,0 +1,21 @@
+<div class="modal-header">
+	<h3>Create Comment</h3>
+</div>
+<div class="modal-body">
+	<form class="form" name="form" ng-submit="createComment()">
+		<div class="row">
+				<div class="col-md-12">
+					<textarea class="form-control" name="comment" ng-model="data.comment" rows="10" placehorder="Escriba su opinión..."></textarea>
+				</div>
+		</div>
+		<div class="row top-medium-buffer">
+			<rating value="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+		</div> 
+		<div class="form-actions">
+       		<button type="submit" class="btn btn-primary">Añadir</button>
+        	<button class="btn btn-warning" ng-click="cancel($event)">Cancelar</button>
+    	</div>
+	</form>	
+</div>
+<div class="modal-footer">
+</div>

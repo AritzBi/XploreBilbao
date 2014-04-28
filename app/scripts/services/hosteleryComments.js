@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('HosteleryComments', function ($resource) {
-    return $resource('/api/pintxos/:id', {
+    return $resource('/api/hosteleryComments/:id', {
       id: '@id'
     }, { //parameters default
       update: {

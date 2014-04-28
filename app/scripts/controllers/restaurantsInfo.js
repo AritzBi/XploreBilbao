@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments){
+	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments,$modal,$rootScope){
 		Restaurant.get({id: $stateParams.id}).$promise.then(
 			function success (data) {
 				$scope.restaurant=data;
@@ -9,4 +9,14 @@ angular.module('xploreBilbaoApp')
 				$scope.url = $sce.trustAsResourceUrl($scope.url);
 				$scope.comments = HosteleryComments({id: $scope.restaurant.id});
 			});
+		$scope.createComment = function createComment(){
+    	var instance=$modal.open({
+    		templateUrl: 'partials/createComment.html',
+    		controller: 'CreateCommentCtrl',
+    		resolve: {
+    			hostelery_id: function(){ return $scope.restaurant.id }
+    		}
+    	});
+
+    };
 	});

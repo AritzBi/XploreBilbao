@@ -1,1 +1,7 @@
 .top-buffer { margin-top:75px; }
+.top-medium-buffer { margin-top:35px; }
+.glyphicon-star, .glyphicon-star-empty {
+  color:yellow;
+   font-size: 25px;
+}
+textarea { resize:none; }
