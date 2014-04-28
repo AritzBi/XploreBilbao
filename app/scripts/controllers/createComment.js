@@ -24,7 +24,7 @@ angular.module('xploreBilbaoApp')
       console.log(hostelery_id)
       HosteleryComments.save({note: $scope.overstar, comment: $scope.data.comment, hostelery_id: hostelery_id},function(comment){
         console.log(comment);
-        $modalInstance.dismiss();
+        $modalInstance.close(comment);
       });
     };
 
