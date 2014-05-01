@@ -1,7 +1,14 @@
 .top-buffer { margin-top:75px; }
 .top-medium-buffer { margin-top:35px; }
 .glyphicon-star, .glyphicon-star-empty {
-  color:yellow;
+	font-size: 25px;
+}
+.glyphicon-star-selected, .glyphicon-star-empty-selected {
+  color:red;
    font-size: 25px;
 }
+#rating:hover i {
+	color: green;
+}
 textarea { resize:none; }
+ 

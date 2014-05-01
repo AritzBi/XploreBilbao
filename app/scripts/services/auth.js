@@ -93,6 +93,7 @@ angular.module('xploreBilbaoApp')
        * @return {Object} user
        */
       currentUser: function() {
+        console.log("paso por aqui");
         return User.get();
       },
 
@@ -105,5 +106,9 @@ angular.module('xploreBilbaoApp')
         var user = $rootScope.currentUser;
         return !!user;
       },
+
+      currentUserId: function(){
+        return $rootScope.currentUser;
+      }
     };
   });

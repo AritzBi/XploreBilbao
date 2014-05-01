@@ -5,10 +5,22 @@
 			<img class="img-responsive"ng-src="images/{{restaurant.image_path}}">
 		</div>
 		<div class="col-lg-2">
-
+			<h3><span class="label label-success">{{restaurant.NOTE}}</span><h3>
 		</div>
 		<div class="col-lg-5">
 			{{restaurant.description_es}}
+			 <form ng-show="currentUser"  class="top-buffer" class="form" name="form" ng-submit="createComment()">
+  				<div class="form-actions">
+       				<button type="submit" class="btn btn-primary">Añadir</button>
+       				<rating value="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>
+        		<!--<button class="btn btn-warning" ng-click="cancel($event)">Cancelar</button>-->
+    			</div>
+				<div class="row">
+					<div class="col-md-12">
+						<textarea class="form-control" name="comment" ng-model="data.comment" rows="5" placehorder="Escriba su opinión..."></textarea>
+					</div>
+				</div>
+			</form>	
 		</div>
 	</div>
 	<div class ="row"></div>
@@ -20,10 +32,9 @@
 
 		</div>
 		<div class="col-lg-5">
-			 <button type="button" class="btn btn-default btn-primary"  ng-click="createComment()">
+			 <!--<button type="button" ng-show="currentUser" class="btn btn-default btn-primary"  ng-click="createComment()">
     			Nuevo comentario
-  			</button>
-
+  			</button>-->
 			<ul class="list-group">
 				<li  class="list-group-item"  ng-repeat="comment in comments"  >
 					{{comment.comment}}
