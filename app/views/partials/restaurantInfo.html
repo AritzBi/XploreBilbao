@@ -9,15 +9,27 @@
 		</div>
 		<div class="col-lg-5">
 			{{restaurant.description_es}}
-			 <form ng-show="currentUser"  class="top-buffer" class="form" name="form" ng-submit="createComment()">
+			 <form ng-show="currentUser" ng-hide="myComment" class="top-buffer" class="form" name="form" ng-submit="createComment()">
   				<div class="form-actions">
        				<button type="submit" class="btn btn-primary">Añadir</button>
-       				<rating value="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>
+       				<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>
         		<!--<button class="btn btn-warning" ng-click="cancel($event)">Cancelar</button>-->
     			</div>
 				<div class="row">
 					<div class="col-md-12">
-						<textarea class="form-control" name="comment" ng-model="data.comment" rows="5" placehorder="Escriba su opinión..."></textarea>
+						<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="5" placehorder="Escriba su opinión..."></textarea>
+					</div>
+				</div>
+			</form>	
+			<form ng-show="currentUser" ng-show="myComment" class="top-buffer" class="form" name="form" ng-submit="editComment()">
+  				<div class="form-actions">
+       				<button  type="submit" class="btn btn-primary">Edit</button>
+       				<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>
+        		<!--<button class="btn btn-warning" ng-click="cancel($event)">Cancelar</button>-->
+    			</div>
+				<div class="row">
+					<div class="col-md-12">
+						<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="5" placehorder="Escriba su opinión..."></textarea>
 					</div>
 				</div>
 			</form>	
