@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments,$modal,$rootScope,Auth){
+	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments,Auth){
 			    var user=Auth.currentUser();
 			    $scope.max=5;
 
@@ -26,8 +26,12 @@ angular.module('xploreBilbaoApp')
 						$scope.rate=5;
 						if(commentFound){
 							$scope.myComment=$scope.comments[commentNumber];
+							$scope.comments.splice(commentNumber,1);
+							$scope.isComment=true;
 						}else{
 							$scope.myComment={comment:'',note: 0};
+							$scope.isComment=false;
+
 						}
 
 					    $scope.ratingStates = [
@@ -36,7 +40,8 @@ angular.module('xploreBilbaoApp')
 
 						$scope.createComment = function() {
 				    		HosteleryComments.save({note: $scope.myComment.note, comment: $scope.myComment.comment, hostelery_id: $scope.restaurant.id },function(comment){
-		      					$scope.comments.push(comment);
+		      					$scope.myComment=comment;
+		      					$scope.isComment=true;
 		      				});
 				    	};
 				    	$scope.editComment = function() {
