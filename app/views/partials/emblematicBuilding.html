@@ -1,0 +1,61 @@
+<div ng-include="'partials/navbar'"></div>
+	<div style="padding-top: 50px;"class="row">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<ul class="list-group">
+					<li  class="list-group-item"  ng-repeat="emblematicBuilding in pagedItems[currentPage]" >
+						<div class="row">
+							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
+							<div class="col-md-6">
+								<a ui-sref="emblematicBuildingInfo({id: emblematicBuilding.id})"><h4>{{emblematicBuilding.denom_es}}</h4></a>
+							</div>
+							<div class="col-md-6">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<img class="img-responsive"ng-src="images/{{emblematicBuilding.image_path}}">
+							</div>
+							<div class="col-md-8">
+								<p>{{emblematicBuilding.description_es}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="well well-lg">
+				<div class="control-group">
+				    <div class="controls">
+				        <label class="checkbox" ng-repeat="category in buildingsCategory">
+				            <input type="checkbox" ng-change="filterByCategory()"ng-model="category.isActivated" defaultChecked="true">
+				            {{category.type_denom_es}}
+				        </label>     
+				    </div>
+				</div>
+			</div>
+		</div>
+	<!--	<div class="col-lg-10">
+			<div ui-view="">
+
+			</div>
+		</div>-->
+	</div>
+    <td colspan="6">
+	    <div class="pagination pull-right">
+	        <ul>
+	            <li ng-class="{disabled: currentPage == 0}">
+	                <a href ng-click="prevPage()">« Prev</a>
+	            </li>
+	            <li ng-repeat="n in range(pagedItems.length)"
+	                ng-class="{active: n == currentPage}"
+	            ng-click="setPage()">
+	                <a href ng-bind="n + 1">1</a>
+	            </li>
+	            <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+	                <a href ng-click="nextPage()">Next »</a>
+	            </li>
+	        </ul>
+	    </div>
+	</td>
