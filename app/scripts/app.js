@@ -40,6 +40,11 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/emblematicBuilding.html',
         controller: 'EmblematicBuildingsCtrl'      
       })
+      .state('buildingInfo',{
+        url: '/building/{id}',
+        templateUrl: 'partials/buildingInfo.html',
+        controller: 'EmblematicBuildingInfoCtrl'      
+      })
       /*
       .state('restaurantes.restaurantesInfo',{
         url: '/{id}',
