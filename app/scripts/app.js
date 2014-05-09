@@ -6,9 +6,10 @@ angular.module('xploreBilbaoApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'ui.router'
+  'ui.router',
+  'pascalprecht.translate'
 ])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config( function ($stateProvider, $urlRouterProvider, $translateProvider) {
     $stateProvider
       .state('home', {
         url: '/',
@@ -45,6 +46,11 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/buildingInfo.html',
         controller: 'EmblematicBuildingInfoCtrl'      
       })
+      .state('events',{
+        url: '/events',
+        templateUrl: 'partials/event.html',
+        controller: 'EventsCtrl'      
+      })
       /*
       .state('restaurantes.restaurantesInfo',{
         url: '/{id}',
@@ -58,6 +64,15 @@ angular.module('xploreBilbaoApp', [
       });
       
     $urlRouterProvider.otherwise('/');
+    /*$translateProvider.translations('en',{
+      test: 'test'
+    });
+    $translateProvider.translations('es',{
+      test: 'prueba'
+    });
+    $translateProvider.preferredLanguage('es');*/
+    $translateProvider.useUrlLoader('language/translation.json');
+    $translateProvider.preferredLanguage('es');
   });
  /* .config(function ($routeProvider, $locationProvider) {
     $routeProvider

@@ -27,6 +27,10 @@
 
     <!-- Add your site or application content here -->
     <div class="container" ui-view=""></div>
+    <div ng-controller="TranslateController">
+        <button ng-click="changeLanguage('es')" translate="BUTTON_TEXT_ES"></button>
+        <button ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>  
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <!--<script>
@@ -54,6 +58,8 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -70,6 +76,8 @@
     <script src="scripts/controllers/createComment.js"></script>
     <script src="scripts/controllers/emblematicBuildings.js"></script>
     <script src="scripts/controllers/emblematicBuildingInfo.js"></script>
+    <script src="scripts/controllers/translator.js"></script>
+    <script src="scripts/controllers/events.js"></script>
     <script src="scripts/services/auth.js"></script>
     <script src="scripts/services/session.js"></script>
     <script src="scripts/services/pintxo.js"></script>
@@ -81,6 +89,8 @@
     <script src="scripts/services/emblematicBuilding.js"></script>
     <script src="scripts/services/buildingsCategory.js"></script>
     <script src="scripts/services/buildingComments.js"></script>
+    <script src="scripts/services/events.js"></script>
+    <script src="scripts/services/eventsCategory.js"></script>
     <!-- endbuild -->
 </body>
 </html>

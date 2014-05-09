@@ -23,14 +23,14 @@ angular.module('xploreBilbaoApp')
       'icon':  ''
     },
     {
-      'title': 'Eventos',
-      'state': 'eventos',
-      'icon':  ''
-    },
-    {
       'title': 'Edificios emblemáticos',
       'state': 'emblematicBuildings',
       'icon':  ''
+    },
+    {
+      'title': 'Eventos',
+      'state': 'events',
+      'icon': ''
     }
     ];
     

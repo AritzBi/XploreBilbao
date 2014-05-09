@@ -13,7 +13,9 @@
     "angular-route": "1.2.11",
     "angular-ui-router": "*",
     "angular-ui-bootstrap":"*",
-    "angular-bootstrap":"*"
+    "angular-bootstrap":"*",
+    "angular-translate":"*",
+    "angular-translate-loader-url": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",
