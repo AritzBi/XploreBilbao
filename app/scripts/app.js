@@ -72,7 +72,7 @@ angular.module('xploreBilbaoApp', [
     });
     $translateProvider.preferredLanguage('es');*/
     $translateProvider.useUrlLoader('language/translation.json');
-    $translateProvider.preferredLanguage('es');
+    $translateProvider.preferredLanguage('en');
   });
  /* .config(function ($routeProvider, $locationProvider) {
     $routeProvider

@@ -17,7 +17,7 @@
 								<img class="img-responsive"ng-src="images/{{restaurant.image_path}}">
 							</div>
 							<div class="col-md-8">
-								<p>{{restaurant.description_es}}</p>
+								<p>{{restaurant['description_' + getLang()] }}</p>
 							</div>
 						</div>
 					</li>

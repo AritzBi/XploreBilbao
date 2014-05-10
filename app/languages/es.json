@@ -1,3 +1,5 @@
 {
-	"test": "prueba"
+	"test": "prueba",
+	"description": "{{restaurant.description_es}}"
+
 }
