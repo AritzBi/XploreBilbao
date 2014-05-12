@@ -7,7 +7,8 @@ angular.module('xploreBilbaoApp', [
   'ngRoute',
   'ui.bootstrap',
   'ui.router',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'leaflet-directive'
 ])
   .config( function ($stateProvider, $urlRouterProvider, $translateProvider) {
     $stateProvider
@@ -50,6 +51,11 @@ angular.module('xploreBilbaoApp', [
         url: '/events',
         templateUrl: 'partials/event.html',
         controller: 'EventsCtrl'      
+      })
+      .state('personalRoute',{
+        url: '/personalRoute',
+        templateUrl: 'partials/route.html',
+        controller: 'RouteCtrl'      
       })
       /*
       .state('restaurantes.restaurantesInfo',{

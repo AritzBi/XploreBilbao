@@ -31,6 +31,11 @@ angular.module('xploreBilbaoApp')
       'title': 'Eventos',
       'state': 'events',
       'icon': ''
+    },
+    {
+      'title': 'Ruta personalizada',
+      'state': 'personalRoute',
+      'icon': ''
     }
     ];
     
