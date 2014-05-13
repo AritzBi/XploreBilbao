@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-.controller('RouteCtrl', function ($scope,$stateParams, $sce,Auth){
+.controller('RouteCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
 	var tiles={
 		mapquestOSM:{
 			url: "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
@@ -23,13 +23,6 @@ angular.module('xploreBilbaoApp')
 	angular.extend($scope, {
 		//tiles: tiles.capaSatelite,
 		//baseLayer: layers.baselayers.mapquestOSM
-	    defaults: {
-	        path: {
-	            weight: 10,
-	            color: '#800000',
-	            opacity: 1
-	        }
-	    },
 	    center: {
 	        lat: 43.263163,
 	        lng: -2.935047,
@@ -38,24 +31,70 @@ angular.module('xploreBilbaoApp')
 	   	layers: {
 			baselayers:{
 				openstreetmap: {
-					name: "4",
+					name: "OpenStreetMap",
 					type: 'xyz',
-			        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+			        url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+			        layerParams:{
+	  				attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'}
 			    },
-				mapquestOSM:{
+				/*mapquestOSM:{
 					name: "1",
 					type: 'xyz',
-					url: "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg",
-				},
+					url: "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.jpg"
+				},*/
 				capaSatelite:{
-					name: "3",
+					name: "ArcGIS",
 					type: 'xyz',
-					url:'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg'
+					url:'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg',
+					layerParams:{
+	  					attribution: 'Mapas por <a href="http://arcgisonline.com" target="blank">ArcGIS Online</a>'}
 				}
 
 			}
 		}
 	});
+	var sidebar= L.control.sidebar('sidebar',{
+		position: 'left'
+	});
+	leafletData.getMap().then(function(map){
+		map.addControl(sidebar);
+		var sidebarControl=L.Control.extend({
+			options:{
+				position:'bottomleft'
+			},
+			onAdd: function(map){
+				var container=L.DomUtil.create('button','btn btn-lg btn-primary');
+				container.setAttribute("ng-click","toggle()");
+				return container;
+			}
+		});
+		map.addControl(new sidebarControl());
+	});
+
+	$scope.toggle = function(){
+		console.log("hoa");
+		sidebar.toggle();
+	};
+
+	$scope.getSubwayLines= function(){
+		Routes.getSubwayLines().$promise.then(
+			function success(data){
+				console.log(data[0].row_to_json);
+				$scope.geojson={
+                data: data[0].row_to_json,
+                style: {
+                    fillColor: "green",
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.7
+                }
+            }
+			}
+		);
+	};
+
 	/*    angular.extend($scope, {
         taipei: {
             lat: 25.0391667,
@@ -104,4 +143,4 @@ angular.module('xploreBilbaoApp')
 
 
 //Capa de satélite de ArcGIS
-});
+}]);

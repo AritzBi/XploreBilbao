@@ -16,7 +16,8 @@
     "angular-bootstrap":"*",
     "angular-translate":"*",
     "angular-translate-loader-url": "*",
-    "angular-leaflet-directive": "*"
+    "angular-leaflet-directive": "*",
+    "leaflet-sidebar":"*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",
