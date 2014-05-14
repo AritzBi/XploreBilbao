@@ -18,12 +18,24 @@ angular.module('xploreBilbaoApp')
       },
       getSubwayEntrances: {
         method: 'GET',
+        params: {
+          id:'getSubwayEntrances'
+        },
+        isArray: true
       },
       getTramLines:{
         method: 'GET',
+        params:{
+          id:'getTramLines'
+        },
+        isArray: true
       },
       getTramStops:{
         method: 'GET',
+        params:{
+          id:'getTramStops'
+        },
+        isArray: true
       }
     });
   });

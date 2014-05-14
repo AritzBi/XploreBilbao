@@ -1,6 +1,9 @@
 <div ng-include="'partials/navbar'"></div>
 <div style="padding-top: 50px;"class="row"></div>
 <button class="btn btn-lg btn-primary" ng-click="toggle()">Sidebar</button>
-<button class="btn btn-lg btn-primary" ng-click="getSubwayLines()">Get Route</button>
-<leaflet  layers="layers" paths="paths" geojson=geojson center="center" height="480px" ></leaflet>
+<button class="btn btn-lg btn-primary" ng-click="getSubwayLines()">Get SubwayLines</button>
+<button class="btn btn-lg btn-primary" ng-click="getSubwayEntrances()">Get Subway Entrances</button>
+<button class="btn btn-lg btn-primary" ng-click="getTramLines()">Get Tram Lines</button>
+<button class="btn btn-lg btn-primary" ng-click="getTramStops()">Get Tram Stops</button>
+<leaflet  center="center" height="480px" ></leaflet>
 <div id="sidebar">Hola Hola Tiempo de Juego </div>
