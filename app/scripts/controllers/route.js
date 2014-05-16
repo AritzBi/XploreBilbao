@@ -79,13 +79,13 @@ angular.module('xploreBilbaoApp')
 				tramStops.addLayer(L.geoJson(data[0].row_to_json,{style: style}));
         }
 	);
-	var sidebar= L.control.sidebar('sidebar',{
+	/*var sidebar= L.control.sidebar('sidebar',{
 		position: 'left'
-	});
+	});*/
 
 	leafletData.getMap().then(function(map){
 		L.control.layers(baseMaps,overlayMaps).addTo(map);
-		map.addControl(sidebar);
+		//map.addControl(sidebar);
 		var sidebarControl=L.Control.extend({
 			options:{
 				position:'bottomleft'
@@ -96,12 +96,11 @@ angular.module('xploreBilbaoApp')
 				return container;
 			}
 		});
-		map.addControl(new sidebarControl());
+		//map.addControl(new sidebarControl());
 	});
 
-	$scope.toggle = function(){
-		console.log("hoa");
+	/*$scope.toggle = function(){
 		sidebar.toggle();
-	};
+	};*/
 
 }]);

@@ -14,15 +14,17 @@
     <!-- build:css(app) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/leaflet-dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/my.css">
     <!--<link rel="stylesheet" href="styles/leaflet.css">-->
-    <link rel="stylesheet" href="styles/L.Control.Sidebar.css">
-    <link rel="stylesheet" href="styles/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="styles/L.Control.Sidebar.css">-->
+    <!--<link rel="stylesheet" href="styles/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="styles/font-awesome.min.css">-->
+    <link rel="stylesheet" href="styles/sidebar.css">
 
     <!-- endbuild -->
   </head>
@@ -32,7 +34,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container" ui-view=""></div>
+    <div class="fullHeight"  ui-view=""></div>
     <div ng-controller="TranslateController">
         <button ng-click="changeLanguage('es')" translate="BUTTON_TEXT_ES"></button>
         <button ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>  
@@ -73,7 +75,7 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="js/jquery-1.11.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
     <!--<script src="js/leaflet.js"></script>-->
     <script src="js/L.Control.Sidebar.js"></script>
     <!--<script src="js/main.js"></script>-->
