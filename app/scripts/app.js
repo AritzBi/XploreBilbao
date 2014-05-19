@@ -56,6 +56,14 @@ angular.module('xploreBilbaoApp', [
         url: '/personalRoute',
         templateUrl: 'partials/route.html',
         controller: 'RouteCtrl'      
+      })      
+      .state('personalRoute.topRoutes',{
+        templateUrl: 'partials/topRoutes.html',
+        controller: 'TopRoutesCtrl'      
+      })
+      .state('personalRoute.myRoutes',{
+        templateUrl: 'partials/myRoutes.html',
+        controller: 'MyRoutesCtrl'      
       })
       /*
       .state('restaurantes.restaurantesInfo',{
