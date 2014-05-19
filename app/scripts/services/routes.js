@@ -36,6 +36,12 @@ angular.module('xploreBilbaoApp')
           id:'getTramStops'
         },
         isArray: true
+      },
+      getWalkRoute:{
+        method: 'GET',
+        params:{
+          id:'getWalkRoute'
+        }
       }
     });
   });
