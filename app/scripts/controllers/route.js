@@ -104,3 +104,13 @@ angular.module('xploreBilbaoApp')
 	};*/
 
 }]);
+
+angular.module('xploreBilbaoApp')
+.controller('TopRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
+	
+}]);
+
+angular.module('xploreBilbaoApp')
+.controller('MyRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
+	
+}]);
