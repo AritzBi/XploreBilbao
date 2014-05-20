@@ -34,7 +34,7 @@ angular.module('xploreBilbaoApp')
     },
     {
       'title': 'Ruta personalizada',
-      'state': 'personalRoute.topRoutes',
+      'state': 'personalRoute',
       'icon': ''
     }
     ];

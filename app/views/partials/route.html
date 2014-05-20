@@ -2,7 +2,24 @@
 <div class="container-map">
 		<div class="col-md-3">
 			<div ui-view id="sidebar-wrapper">
-           
+           		 <ul ng-controller="TopRoutesCtrl" class="sidebar-nav list-group">
+					<li class="sidebar-brand list-group-item"><a ui-sref="personalRoute.myRoutes"><i class="fa pull-right fa-arrow-right"></i></a>Top Rutas
+					</li>
+					<li><a class ="list-group-item" href="#">Dashboard</a>
+					</li>
+					<li><a class ="list-group-item" href="#">Shortcuts</a>
+					</li>
+					<li><a class ="list-group-item" href="#">Overview</a>
+					</li>
+					<li><a class ="list-group-item" href="#">Events</a>
+					</li>
+					<li><a class ="list-group-item" href="#">About</a>
+					</li>
+					<li><a class ="list-group-item" href="#">Services</a>
+					</li>
+					<li><a class ="list-group-item" href="#">Contact</a>
+					</li>
+				</ul>
             </div>
 		</div>
 		<div class="col-md-9 fullHeight" >

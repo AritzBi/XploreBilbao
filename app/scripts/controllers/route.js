@@ -81,7 +81,7 @@ angular.module('xploreBilbaoApp')
         }
 	);
 
-	Routes.getWalkRoute().$promise.then(
+	/*Routes.getWalkRoute().$promise.then(
 		function success(data){
 				var style={
 	                    fillColor: "black",
@@ -93,6 +93,10 @@ angular.module('xploreBilbaoApp')
 	        	};
 				test.addLayer(L.geoJson(data,{style: style}));
 		}
+	);*/
+
+	Routes.getInfoRoutes().$promise.then(
+
 	);
 	/*var sidebar= L.control.sidebar('sidebar',{
 		position: 'left'
