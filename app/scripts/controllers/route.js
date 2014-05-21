@@ -96,7 +96,9 @@ angular.module('xploreBilbaoApp')
 	);*/
 
 	Routes.getInfoRoutes().$promise.then(
-
+		function success(data){
+			console.log(data);
+		}
 	);
 	/*var sidebar= L.control.sidebar('sidebar',{
 		position: 'left'
