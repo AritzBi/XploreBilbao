@@ -9,7 +9,8 @@
     "passport": "*",
     "passport-local": "*",
     "passport-facebook": "*",
-    "sequelize": "*"
+    "sequelize": "*",
+    "async":"*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

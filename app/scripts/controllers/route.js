@@ -20,13 +20,15 @@ angular.module('xploreBilbaoApp')
 		"MapQuest": mapquestOSM,
 		"ArcGIS": capaSatelite
 	};
-	var subwayLines=L.layerGroup(), subwayEntrances=L.layerGroup(),tramLines=L.layerGroup(),tramStops=L.layerGroup(), test=L.layerGroup();
+	var subwayLines=L.layerGroup(), subwayEntrances=L.layerGroup(),tramLines=L.layerGroup(),tramStops=L.layerGroup(), test=L.layerGroup(), test2=L.layerGroup(), test3=L.layerGroup();
 	var overlayMaps={
 		"SubwayLines": subwayLines,
 		"SubwayEntrances": subwayEntrances,
 		"TramLines": tramLines,
 		"TramStops": tramStops,
-		"Test": test
+		"Test": test,
+		"Test2": test2,
+		"Test3": test3
 	};
 	Routes.getSubwayLines().$promise.then(
 		function success(data){
@@ -97,7 +99,17 @@ angular.module('xploreBilbaoApp')
 
 	Routes.getInfoRoutes().$promise.then(
 		function success(data){
-			console.log(data);
+				var style={
+	                    fillColor: "green",
+	                    weight: 2,
+	                    opacity: 1,
+	                    color: 'green',
+	                    dashArray: '3',
+	                    fillOpacity: 0.7
+	        	};
+	        	test2.addLayer(L.geoJson(data[0],{style: style}));
+	        	test3.addLayer(L.geoJson(data[1],{style: style}));
+
 		}
 	);
 	/*var sidebar= L.control.sidebar('sidebar',{

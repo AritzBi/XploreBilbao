@@ -47,7 +47,8 @@ angular.module('xploreBilbaoApp')
         method: 'GET',
         params:{
           id:'getInfoRoutes'
-        }
+        },
+        isArray:true
       }
     });
   });
