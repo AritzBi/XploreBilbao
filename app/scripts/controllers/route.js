@@ -99,12 +99,14 @@ angular.module('xploreBilbaoApp')
 
 	Routes.getInfoRoutes().$promise.then(
 		function success(data){
+			$scope.topRoutes=data;
+			console.log($scope.topRoutes);
 				var style={
 	                    fillColor: "green",
-	                    weight: 2,
+	                    weight: 5,
 	                    opacity: 1,
 	                    color: 'green',
-	                    dashArray: '3',
+	                    dashArray: '9',
 	                    fillOpacity: 0.7
 	        	};
 	        	test2.addLayer(L.geoJson(data[0],{style: style}));
