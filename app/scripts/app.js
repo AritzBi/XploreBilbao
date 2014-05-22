@@ -65,6 +65,10 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/myRoutes.html',
         controller: 'MyRoutesCtrl'      
       })
+      .state('personalRoute.routeDetails',{
+        templateUrl: 'partials/routeDetails.html',
+        controller: 'RouteDetails'      
+      })
       /*
       .state('restaurantes.restaurantesInfo',{
         url: '/{id}',

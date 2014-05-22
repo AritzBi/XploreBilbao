@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-.controller('RouteCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
+.controller('RouteCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes){
 	angular.extend($scope, {
 	    center: {
 	        lat: 43.263163,
@@ -100,8 +100,18 @@ angular.module('xploreBilbaoApp')
 	Routes.getInfoRoutes().$promise.then(
 		function success(data){
 			$scope.topRoutes=data;
-			console.log($scope.topRoutes);
-				var style={
+			$scope.topRoutesInfo=new Array(data.length);
+			for(var i=0;i<data.length;i++){
+				$scope.topRoutesInfo[i]=new Array();
+				for(var j=0;j<data[i].features.length;j++){
+					if(data[i].features[j].properties){
+						$scope.topRoutesInfo[i].push($scope.topRoutes[i].features[j]);
+					}else{
+						break;
+					}
+				}
+			}
+			var style={
 	                    fillColor: "green",
 	                    weight: 5,
 	                    opacity: 1,
@@ -114,13 +124,10 @@ angular.module('xploreBilbaoApp')
 
 		}
 	);
-	/*var sidebar= L.control.sidebar('sidebar',{
-		position: 'left'
-	});*/
+
 
 	leafletData.getMap().then(function(map){
 		L.control.layers(baseMaps,overlayMaps).addTo(map);
-		//map.addControl(sidebar);
 		var sidebarControl=L.Control.extend({
 			options:{
 				position:'bottomleft'
@@ -131,20 +138,48 @@ angular.module('xploreBilbaoApp')
 				return container;
 			}
 		});
-		//map.addControl(new sidebarControl());
 	});
-
-	/*$scope.toggle = function(){
-		sidebar.toggle();
-	};*/
 
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('TopRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
-	
+.controller('TopRoutesCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes){
+	$scope.showInMap= function(routeId){
+		var style={
+                fillColor: "green",
+                weight: 5,
+                opacity: 1,
+                color: 'green',
+                dashArray: '9',
+                fillOpacity: 0.7
+	        	};
+	    leafletData.getMap().then(function(map){
+		    if($scope.geoJsonLayer){
+		    	map.removeLayer($scope.geoJsonLayer);
+		    }
+			var found=false;
+			for(var i=0;(i<$scope.topRoutes.length ) && !found;i++){
+				if($scope.topRoutes[i].properties.id === routeId){
+					found=true;
+					$scope.geoJsonLayer = L.geoJson($scope.topRoutes[i],{
+													style: style
+					});
+				}
+			}
+			$scope.geoJsonLayer.addTo(map);
+		});
+
+	}
+	$scope.showDetails= function(routeId){
+		console.log(routeId);
+		$state.go('personalRoute.routeDetails', {"id": routeId });
+	}
 }]);
 
+angular.module('xploreBilbaoApp')
+.controller('RouteDetails',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
+	console.log($stateParams);
+}]);
 angular.module('xploreBilbaoApp')
 .controller('MyRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
 	
