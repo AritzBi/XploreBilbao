@@ -100,18 +100,8 @@ angular.module('xploreBilbaoApp')
 	Routes.getInfoRoutes().$promise.then(
 		function success(data){
 			$scope.topRoutes=data;
-			$scope.topRoutesInfo=new Array(data.length);
-			for(var i=0;i<data.length;i++){
-				$scope.topRoutesInfo[i]=new Array();
-				for(var j=0;j<data[i].features.length;j++){
-					if(data[i].features[j].properties){
-						$scope.topRoutesInfo[i].push($scope.topRoutes[i].features[j]);
-					}else{
-						break;
-					}
-				}
-			}
-			var style={
+
+			/*var style={
 	                    fillColor: "green",
 	                    weight: 5,
 	                    opacity: 1,
@@ -120,7 +110,7 @@ angular.module('xploreBilbaoApp')
 	                    fillOpacity: 0.7
 	        	};
 	        	test2.addLayer(L.geoJson(data[0],{style: style}));
-	        	test3.addLayer(L.geoJson(data[1],{style: style}));
+	        	test3.addLayer(L.geoJson(data[1],{style: style}));*/
 
 		}
 	);
@@ -170,15 +160,39 @@ angular.module('xploreBilbaoApp')
 		});
 
 	}
-	$scope.showDetails= function(routeId){
-		console.log(routeId);
-		$state.go('personalRoute.routeDetails', {"id": routeId });
-	}
 }]);
 
 angular.module('xploreBilbaoApp')
 .controller('RouteDetails',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
 	console.log($stateParams);
+	/*$scope.topRoutesInfo=new Array(data.length);
+	for(var i=0;i<data.length;i++){
+		$scope.topRoutesInfo[i]=new Array();
+		for(var j=0;j<data[i].features.length;j++){
+			if(data[i].features[j].properties){
+				$scope.topRoutesInfo[i].push($scope.topRoutes[i].features[j]);
+			}else{
+				break;
+			}
+		}
+	}*/
+	var found=false;
+	for(var i=0;i<$scope.topRoutes.length&&!found;i++){
+		if($scope.topRoutes[i].properties.id === parseInt($stateParams.id)){
+			found=true;
+			$scope.routeDetails=$scope.topRoutes[i];
+		}
+	}
+	$scope.routeDetailsInfo=new Array();
+	for(var i=0;i<$scope.routeDetails.features.length;i++){
+		if($scope.routeDetails.features[i].properties){
+			$scope.routeDetailsInfo.push($scope.routeDetails.features[i]);
+		}else{
+			break;
+		}
+	}
+	console.log($scope.routeDetailsInfo);
+
 }]);
 angular.module('xploreBilbaoApp')
 .controller('MyRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){

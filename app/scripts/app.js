@@ -66,6 +66,7 @@ angular.module('xploreBilbaoApp', [
         controller: 'MyRoutesCtrl'      
       })
       .state('personalRoute.routeDetails',{
+        url: '/routeDetails/:id',
         templateUrl: 'partials/routeDetails.html',
         controller: 'RouteDetails'      
       })

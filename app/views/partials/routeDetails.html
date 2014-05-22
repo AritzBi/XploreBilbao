@@ -1,1 +1,8 @@
-asdas
+<ul class="sidebar-nav list-group">
+	<li class="sidebar-brand list-group-item"><a ui-sref="personalRoute.myRoutes"><i class="fa pull-right fa-arrow-right"></i></a>	Ruta desglosada
+	</li>
+	<li class ="list-group-item"  ng-repeat="location in routeDetailsInfo" > 
+	<a  ui-sref="personalRoute.myRoutes" >{{location.properties.denom_es}} </a>
+	<p>{{route.properties.description_es}}</p>
+	</li>
+</ul>
