@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-.controller('RouteCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes){
+.controller('RouteCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes",  function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes){
 	angular.extend($scope, {
 	    center: {
 	        lat: 43.263163,
@@ -163,19 +163,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('RouteDetails',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
-	console.log($stateParams);
-	/*$scope.topRoutesInfo=new Array(data.length);
-	for(var i=0;i<data.length;i++){
-		$scope.topRoutesInfo[i]=new Array();
-		for(var j=0;j<data[i].features.length;j++){
-			if(data[i].features[j].properties){
-				$scope.topRoutesInfo[i].push($scope.topRoutes[i].features[j]);
-			}else{
-				break;
-			}
-		}
-	}*/
+.controller('RouteDetails',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes",function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
 	var found=false;
 	for(var i=0;i<$scope.topRoutes.length&&!found;i++){
 		if($scope.topRoutes[i].properties.id === parseInt($stateParams.id)){
@@ -191,10 +179,38 @@ angular.module('xploreBilbaoApp')
 			break;
 		}
 	}
-	console.log($scope.routeDetailsInfo);
+	var style={
+	    fillColor: "green",
+	    weight: 5,
+	    opacity: 1,
+	    color: 'green',
+	    dashArray: '9',
+	    fillOpacity: 0.7
+	};
+	leafletData.getMap().then(function(map){
+	    if($scope.geoJsonLayer){
+	    	map.removeLayer($scope.geoJsonLayer);
+	    }
+		$scope.geoJsonLayer = L.geoJson($scope.routeDetails,{
+												style: style
+							});
+		$scope.geoJsonLayer.addTo(map);
+	});
 
 }]);
 angular.module('xploreBilbaoApp')
 .controller('MyRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
 	
 }]);
+
+
+angular.module('xploreBilbaoApp')
+.controller('ScrollCtrl',function ($scope,$location, $anchorScroll){
+	$scope.gotoBottom = function (){
+	    // set the location.hash to the id of
+	    // the element you wish to scroll to.
+	    $location.hash('bottom');
+	    // call $anchorScroll()
+	    $anchorScroll();
+	};
+});

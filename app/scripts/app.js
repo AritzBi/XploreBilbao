@@ -8,7 +8,8 @@ angular.module('xploreBilbaoApp', [
   'ui.bootstrap',
   'ui.router',
   'pascalprecht.translate',
-  'leaflet-directive'
+  'leaflet-directive',
+  'truncate'
 ])
   .config( function ($stateProvider, $urlRouterProvider, $translateProvider) {
     $stateProvider

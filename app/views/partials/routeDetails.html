@@ -1,8 +1,16 @@
 <ul class="sidebar-nav list-group">
-	<li class="sidebar-brand list-group-item"><a ui-sref="personalRoute.myRoutes"><i class="fa pull-right fa-arrow-right"></i></a>	Ruta desglosada
+	<li class="sidebar-brand list-group-item"><a ui-sref="personalRoute.myRoutes"></a>	Ruta desglosada
 	</li>
+	
 	<li class ="list-group-item"  ng-repeat="location in routeDetailsInfo" > 
-	<a  ui-sref="personalRoute.myRoutes" >{{location.properties.denom_es}} </a>
-	<p>{{route.properties.description_es}}</p>
+		<div class="row">
+				<h4>{{location.properties.denom_es}}</h4>
+			<div class="col-md-6">
+				<img class="img-responsive"ng-src="images/{{location.properties.image_path}}">
+			</div>	
+			<div class="col-md-6">
+				<p class="locations-list">{{location.properties.description_es | characters: 125}}</p>
+			</div>
+		</div>
 	</li>
 </ul>

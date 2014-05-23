@@ -18,7 +18,8 @@
     "angular-translate-loader-url": "*",
     "angular-leaflet-directive": "*",
     "leaflet-sidebar":"*",
-    "components-font-awesome": "*"
+    "components-font-awesome": "*",
+    "angular-truncate":"*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",
