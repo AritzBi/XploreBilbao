@@ -82,58 +82,16 @@ angular.module('xploreBilbaoApp')
 				tramStops.addLayer(L.geoJson(data[0].row_to_json,{style: style}));
         }
 	);
-
-	/*Routes.getWalkRoute().$promise.then(
-		function success(data){
-				var style={
-	                    fillColor: "black",
-	                    weight: 4,
-	                    opacity: 1,
-	                    color: 'black',
-	                    dashArray: '3',
-	                    fillOpacity: 0.7
-	        	};
-				test.addLayer(L.geoJson(data,{style: style}));
-		}
-	);*/
-
-	Routes.getInfoRoutes().$promise.then(
-		function success(data){
-			$scope.topRoutes=data;
-
-			/*var style={
-	                    fillColor: "green",
-	                    weight: 5,
-	                    opacity: 1,
-	                    color: 'green',
-	                    dashArray: '9',
-	                    fillOpacity: 0.7
-	        	};
-	        	test2.addLayer(L.geoJson(data[0],{style: style}));
-	        	test3.addLayer(L.geoJson(data[1],{style: style}));*/
-
-		}
-	);
-
-
-	leafletData.getMap().then(function(map){
-		L.control.layers(baseMaps,overlayMaps).addTo(map);
-		var sidebarControl=L.Control.extend({
-			options:{
-				position:'bottomleft'
-			},
-			onAdd: function(map){
-				var container=L.DomUtil.create('button','btn btn-lg btn-primary');
-				container.setAttribute("ng-click","toggle()");
-				return container;
-			}
-		});
-	});
-
 }]);
 
 angular.module('xploreBilbaoApp')
 .controller('TopRoutesCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes){
+	Routes.getTopRoutes().$promise.then(
+		function success(data){
+			$scope.topRoutes=data;
+		}
+	);
+
 	$scope.showInMap= function(routeId){
 		var style={
                 fillColor: "green",
@@ -143,22 +101,20 @@ angular.module('xploreBilbaoApp')
                 dashArray: '9',
                 fillOpacity: 0.7
 	        	};
-	    leafletData.getMap().then(function(map){
-		    if($scope.geoJsonLayer){
-		    	map.removeLayer($scope.geoJsonLayer);
-		    }
-			var found=false;
-			for(var i=0;(i<$scope.topRoutes.length ) && !found;i++){
-				if($scope.topRoutes[i].properties.id === routeId){
-					found=true;
-					$scope.geoJsonLayer = L.geoJson($scope.topRoutes[i],{
-													style: style
+	    Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
+	    	function success(data){
+	    		leafletData.getMap().then(function(map){
+	    			if($scope.geoJsonLayer){
+		    			map.removeLayer($scope.geoJsonLayer);
+		    		}
+		    		$scope.geoJsonLayer = L.geoJson(data,{
+						style: style
 					});
-				}
-			}
-			$scope.geoJsonLayer.addTo(map);
-		});
+					$scope.geoJsonLayer.addTo(map);
 
+	    		});
+	    	}
+	    );
 	}
 }]);
 

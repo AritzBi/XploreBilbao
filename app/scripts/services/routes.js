@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('Routes', function ($resource) {
-    return $resource('/api/routes/:id', {
+    return $resource('/api/routes/:id/:id2', {
       id: '@id'
     }, { //parameters default
       update: {
@@ -49,6 +49,19 @@ angular.module('xploreBilbaoApp')
           id:'getInfoRoutes'
         },
         isArray:true
+      },
+      getTopRoutes:{
+        method: 'GET',
+        params:{
+          id:'getTopRoutes'
+        },
+        isArray:true
+      },
+      getWalkingPathByRouteId:{
+        method: 'GET',
+        params:{
+          id:'getWalkingPathByRouteId'
+        }
       }
     });
   });
