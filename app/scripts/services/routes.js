@@ -62,6 +62,12 @@ angular.module('xploreBilbaoApp')
         params:{
           id:'getWalkingPathByRouteId'
         }
+      },
+      getRouteDetails:{
+        method: 'GET',
+        params:{
+          id:'getRouteDetails'
+        }
       }
     });
   });

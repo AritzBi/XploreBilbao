@@ -30,6 +30,7 @@ angular.module('xploreBilbaoApp')
 		"Test2": test2,
 		"Test3": test3
 	};
+	$scope.selectedRoute="pito";
 	Routes.getSubwayLines().$promise.then(
 		function success(data){
 				var style={
@@ -82,10 +83,14 @@ angular.module('xploreBilbaoApp')
 				tramStops.addLayer(L.geoJson(data[0].row_to_json,{style: style}));
         }
 	);
+	leafletData.getMap().then(function(map){
+		L.control.layers(baseMaps,overlayMaps).addTo(map);
+	});
+
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('TopRoutesCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes){
+.controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
 	Routes.getTopRoutes().$promise.then(
 		function success(data){
 			$scope.topRoutes=data;
@@ -107,53 +112,95 @@ angular.module('xploreBilbaoApp')
 	    			if($scope.geoJsonLayer){
 		    			map.removeLayer($scope.geoJsonLayer);
 		    		}
-		    		$scope.geoJsonLayer = L.geoJson(data,{
+		    		var found=false;
+		    		for(var i=0;i<$scope.topRoutes.length&&!found;i++){
+		    			if($scope.topRoutes[i].properties.id===routeId){
+		    				found=true;
+
+		    				for(var j=0;j<data.features.length;j++){
+		    					$scope.topRoutes[i].features.push(data.features[j]);
+		    				}
+		    			}
+		    		}
+		    		console.log($scope.topRoutes[i-1]);
+		    		$scope.geoJsonLayer = L.geoJson($scope.topRoutes[i-1],{
 						style: style
 					});
 					$scope.geoJsonLayer.addTo(map);
-
 	    		});
 	    	}
 	    );
 	}
+	$scope.showDetails= function(routeId){
+		var found=false;
+		var route;
+		for(var i=0;i<$scope.topRoutes.length;i++){
+ 			if($scope.topRoutes[i].properties.id === routeId){
+ 				found=true;
+ 				route=$scope.topRoutes[i];
+ 			}
+		}
+		if(found){
+			selectedRoute.setRoute(route);
+			$state.go('personalRoute.routeDetails', {hasWalkingPath: hasRoute(route) });
+		}
+	}
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('RouteDetails',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes",function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
-	var found=false;
-	for(var i=0;i<$scope.topRoutes.length&&!found;i++){
-		if($scope.topRoutes[i].properties.id === parseInt($stateParams.id)){
-			found=true;
-			$scope.routeDetails=$scope.topRoutes[i];
-		}
-	}
-	$scope.routeDetailsInfo=new Array();
-	for(var i=0;i<$scope.routeDetails.features.length;i++){
-		if($scope.routeDetails.features[i].properties){
-			$scope.routeDetailsInfo.push($scope.routeDetails.features[i]);
-		}else{
-			break;
-		}
-	}
+.controller('RouteDetails',["$scope","selectedRoute","leafletData","$stateParams", "$sce", "Auth", "Routes",function ($scope,selectedRoute,leafletData,$stateParams,$sce,Auth, Routes){
 	var style={
-	    fillColor: "green",
-	    weight: 5,
-	    opacity: 1,
-	    color: 'green',
-	    dashArray: '9',
-	    fillOpacity: 0.7
+                fillColor: "green",
+                weight: 5,
+                opacity: 1,
+                color: 'green',
+                dashArray: '9',
+                fillOpacity: 0.7
 	};
+	var route=selectedRoute.getRoute();
+	var routeId=route.properties.id;
+	var hasWalkingPath=$stateParams.hasWalkingPath;
+	for(var i=0;i<route.features.length;i++){
+		if(route.features[i].geometry.type === "Point"){
+			route.features.splice(i,1);
+		}
+	}	    		
 	leafletData.getMap().then(function(map){
-	    if($scope.geoJsonLayer){
-	    	map.removeLayer($scope.geoJsonLayer);
-	    }
-		$scope.geoJsonLayer = L.geoJson($scope.routeDetails,{
-												style: style
+		if($scope.geoJsonLayer){
+		    map.removeLayer($scope.geoJsonLayer);
+		}
+		Routes.getRouteDetails({id2: routeId}).$promise.then(
+			function success(data){
+				$scope.routeDetailsInfo=new Array();
+				for(var i=0;i<data.features.length;i++){
+					route.features.push(data.features[i]);
+					$scope.routeDetailsInfo.push(data.features[i]);
+				}
+				if(hasWalkingPath === true){
+					console.log("holaasdsad");
+					$scope.geoJsonLayer = L.geoJson(route,{
+						style: style
+					});
+					$scope.geoJsonLayer.addTo(map);
+				}else{
+					console.log("hola");
+					Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
+						function success(data){
+							for(var i=0;i<data.features.length;i++){
+    							route.features.push(data.features[i]);
+    						}
+    						$scope.geoJsonLayer = L.geoJson(route,{
+								style: style
 							});
-		$scope.geoJsonLayer.addTo(map);
+							$scope.geoJsonLayer.addTo(map);
+						}
+					);
+				}
+			}
+		);
 	});
-
 }]);
+
 angular.module('xploreBilbaoApp')
 .controller('MyRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
 	
@@ -170,3 +217,25 @@ angular.module('xploreBilbaoApp')
 	    $anchorScroll();
 	};
 });
+
+
+angular.module('xploreBilbaoApp')
+.service('selectedRoute',function(){
+	var selectedRoute={};
+	this.setRoute = function(route){
+		selectedRoute=route;
+	}
+	this.getRoute = function(){
+		return selectedRoute;
+	}
+});;
+
+function hasRoute(data){
+	var found=false;
+	for(var i=0;i<data.features.length&&!found;i++){
+		if(data.features[i].geometry.type === 'LineString'){
+			found=true;
+		}
+	}
+	return found;
+}
