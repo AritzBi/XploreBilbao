@@ -31,29 +31,30 @@
               <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;Rutas <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#"  ui-sref="personalRoute.topRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ranking de rutas</a></li>
-                <li><a href="#"  ui-sref="personalRoute.myRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Mis rutas</a></li>
-                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ruta personalizada</a></li>
+                <li><a href="#"  ui-sref="personalRoute.myRoutes" ng-show="currentUser" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Mis rutas</a></li>
+                <li><a ng-show="currentUser" href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ruta personalizada</a></li>
+                <li><a href="#" ng-show="currentUser" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Crear ruta</a></li>
               </ul>
           </li>
           	</ul>
         	<ul class="nav navbar-nav pull-right">
     			<li ng-hide="currentUser" ng-class="{active: isActive('/login')}">
-        			<a ng-click="login()">
+        			<a href="#" ng-click="login()">
         				<i class="icon fa fa-sign-in"></i> Login 
         			</a>
       			</li>
       			<li ng-hide="currentUser" ng-class="{active: isActive('/signup')}">
-        			<a ng-click="signup()">
+        			<a href="#" ng-click="signup()">
         				<i class="icon fa fa-users"></i> Registrarse
         			</a>
       			</li>
       			<li ng-show="currentUser" ng-class="{active: isActive('/myroutes')}">
-        			<a ui-sref="myprofile">
+        			<a href="#"  ui-sref="myprofile">
         				<i class="icon fa fa-user"></i> Mi Perfil
         			</a>
       			</li>
       			<li ng-show="currentUser" ng-class="{active: isActive('/logout')}">
-        			<a ng-click="logout()">
+        			<a href="#" ng-click="logout()">
         				<i class="icon fa fa-sign-out"></i> Salir
         			</a>
       			</li>

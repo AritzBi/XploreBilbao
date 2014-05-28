@@ -68,6 +68,13 @@ angular.module('xploreBilbaoApp')
         params:{
           id:'getRouteDetails'
         }
+      },
+      getMyRoutes:{
+        method: 'GET',
+        params:{
+          id:'getMyRoutes'
+        },
+        isArray:true
       }
     });
   });
