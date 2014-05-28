@@ -142,7 +142,7 @@ angular.module('xploreBilbaoApp')
 		}
 		if(found){
 			selectedRoute.setRoute(route);
-			$state.go('personalRoute.routeDetails', {hasWalkingPath: hasRoute(route) });
+			$state.go('personalRoute.routeDetails', {hasWalkingPath: hasRoute(route), origin: 1 });
 		}
 	}
 }]);
@@ -160,6 +160,12 @@ angular.module('xploreBilbaoApp')
 	var route=selectedRoute.getRoute();
 	var routeId=route.properties.id;
 	var hasWalkingPath=$stateParams.hasWalkingPath;
+	var originId=$stateParams.origin;
+	console.log(originId );
+	if($stateParams.origin === '1' ){
+		console.log("true");
+		$scope.origin="personalRoute.topRoutes";
+	}
 	for(var i=0;i<route.features.length;i++){
 		if(route.features[i].geometry.type === "Point"){
 			route.features.splice(i,1);
@@ -177,13 +183,11 @@ angular.module('xploreBilbaoApp')
 					$scope.routeDetailsInfo.push(data.features[i]);
 				}
 				if(hasWalkingPath === true){
-					console.log("holaasdsad");
 					$scope.geoJsonLayer = L.geoJson(route,{
 						style: style
 					});
 					$scope.geoJsonLayer.addTo(map);
 				}else{
-					console.log("hola");
 					Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
 						function success(data){
 							for(var i=0;i<data.features.length;i++){

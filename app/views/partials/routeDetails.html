@@ -1,7 +1,6 @@
 <ul class="sidebar-nav list-group">
-	<li class="sidebar-brand list-group-item"><a ui-sref="personalRoute.myRoutes"></a>	Ruta desglosada
+	<li class="sidebar-brand list-group-item"><a ui-sref="{{origin}}"><i class="fa pull-left fa-arrow-left"></i></a>	Ruta desglosada
 	</li>
-	
 	<li class ="list-group-item"  ng-repeat="location in routeDetailsInfo" > 
 		<div class="row">
 				<h4>{{location.properties.denom_es}}</h4>

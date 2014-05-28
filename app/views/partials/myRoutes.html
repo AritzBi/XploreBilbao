@@ -1,18 +1,13 @@
- <ul class="sidebar-nav list-group">
-	<li class="sidebar-brand list-group-item"><a ui-sref="personalRoute.topRoutes"><i class="fa pull-left fa-arrow-left"></i></a>Mis rutas<a ui-sref="personalRoute.myRoutes"><i class="fa pull-right fa-arrow-right"></i></a>
+<ul class="sidebar-nav list-group">
+	<li class="sidebar-brand list-group-item">Mis Rutas
 	</li>
-	<li><a class ="list-group-item" href="#">Dashboard</a>
-	</li>
-	<li><a class ="list-group-item" href="#">Shortcuts</a>
-	</li>
-	<li><a class ="list-group-item" href="#">Overview</a>
-	</li>
-	<li><a class ="list-group-item" href="#">Events</a>
-	</li>
-	<li><a class ="list-group-item" href="#">About</a>
-	</li>
-	<li><a class ="list-group-item" href="#">Services</a>
-	</li>
-	<li><a class ="list-group-item" href="#">Contact</a>
-	</li>
+	<div id="scrollArea" ng-controller="ScrollCtrl">
+		<li class ="list-group-item"  ng-repeat="route in topRoutes" > 
+			<a  ui-sref="personalRoute.myRoutes" >
+			{{route.properties.name_es}}</a><p>{{route.properties.description_es}}</p>
+			<button class="btn btn-primary" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
+			<button class="btn btn-primary" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
+			<!--<button class="btn btn-primary" ui-sref="personalRoute.routeDetails({id: route.properties.id })" type="submit">Desglosar</button>-->
+		</li>
+	</div>
 </ul>

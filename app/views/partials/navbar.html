@@ -27,6 +27,14 @@
   						<i class="icon fa fa-{item.icon}}"></i> {{item.title}}
   					</a>
   				</li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;Rutas <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"  ui-sref="personalRoute.topRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ranking de rutas</a></li>
+                <li><a href="#"  ui-sref="personalRoute.myRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Mis rutas</a></li>
+                <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ruta personalizada</a></li>
+              </ul>
+          </li>
           	</ul>
         	<ul class="nav navbar-nav pull-right">
     			<li ng-hide="currentUser" ng-class="{active: isActive('/login')}">

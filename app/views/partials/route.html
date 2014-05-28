@@ -2,19 +2,6 @@
 <div class="container-map">
 		<div class="col-md-3">
 			<div ui-view >
-           		 <ul ng-controller="TopRoutesCtrl" class="sidebar-nav list-group">
-					<li class="sidebar-brand list-group-item"><a ui-sref="personalRoute.myRoutes"><i class="fa pull-right fa-arrow-right"></i></a>Top Rutas
-					</li>
-					<div id="scrollArea" ng-controller="ScrollCtrl">
-						<li class ="list-group-item"  ng-repeat="route in topRoutes" > 
-							<a  ui-sref="personalRoute.myRoutes" >
-							{{route.properties.name_es}}</a><p>{{route.properties.description_es}}</p>
-							<button class="btn btn-primary" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
-							<button class="btn btn-primary" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
-							<!--<button class="btn btn-primary" ui-sref="personalRoute.routeDetails({id: route.properties.id })" type="submit">Desglosar</button>-->
-						</li>
-					</div>
-				</ul>
             </div>
 		</div>
 		<div class="col-md-9 fullHeight" >

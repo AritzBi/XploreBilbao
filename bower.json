@@ -18,7 +18,7 @@
     "angular-translate-loader-url": "*",
     "angular-leaflet-directive": "*",
     "leaflet-sidebar":"*",
-    "components-font-awesome": "*",
+    "components-font-awesome": "4.1",
     "angular-truncate": "*"
   },
   "devDependencies": {
