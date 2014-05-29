@@ -6,7 +6,7 @@ angular.module('xploreBilbaoApp')
 		$scope.buildingsCategory=buildingsCategory.query();
 		$scope.filteredItems = [];
 	    $scope.groupedItems = [];
-	    $scope.itemsPerPage = 5;
+	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
 	        // init the filtered items
@@ -65,20 +65,12 @@ angular.module('xploreBilbaoApp')
 	    $scope.setPage = function () {
 	        $scope.currentPage = this.n;
 	    }; 
-	     $scope.filterByCategory();           
-	})
-	.filter('customFilter',function(){
-		return function(items,types){
-			var filtered=[];
-			angular.forEach(types, function(category){
-				if(category.isActivated){
-					angular.forEach(items, function(item){
-						if(item.first_type_es === category.first_type_es){
-							filtered.push(item);
-						}
-					});
-				}
-			});
-			return filtered;
-		};
+	    $scope.filterByCategory();
+	     	   	$scope.arePages = function(){
+	    	if($scope.filteredItems.length === 0){
+	    		return true;
+	    	}else{
+	    		return false;
+	    	}
+	    }          
 	});

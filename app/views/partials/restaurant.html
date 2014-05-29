@@ -8,7 +8,7 @@
 						<div class="row">
 							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
 							<div class="col-md-6">
-								<a ui-sref="restaurantInfo({id: restaurant.id})"><h4>{{restaurant.denom_es}}</h4></a>
+								<a ui-sref="restaurantInfo({id: restaurant.id})"><h4>{{restaurant['denom_' + getLang()] }}</h4></a>
 							</div>
 							<div class="col-md-6">
 							</div>
@@ -31,7 +31,7 @@
 				    <div class="controls">
 				        <label class="checkbox" ng-repeat="category in restaurantsCategory">
 				            <input type="checkbox" ng-change="filterByCategory()"ng-model="category.isActivated" defaultChecked="true">
-				            {{category.first_type_es}}
+				            {{category['first_type_' + getLang()] }}
 				        </label>     
 				    </div>
 				</div>
@@ -43,21 +43,19 @@
 			</div>
 		</div>-->
 	</div>
-    <td colspan="6">
-	    <div class="pagination pull-right">
-	        <ul>
-	            <li ng-class="{disabled: currentPage == 0}">
-	                <a href ng-click="prevPage()">« Prev</a>
-	            </li>
-	            <li ng-repeat="n in range(pagedItems.length)"
-	                ng-class="{active: n == currentPage}"
-	            ng-click="setPage()">
-	                <a href ng-bind="n + 1">1</a>
-	            </li>
-	            <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
-	                <a href ng-click="nextPage()">Next »</a>
-	            </li>
-	        </ul>
-	    </div>
-	</td>
+    <div class="row pull-right">
+        <ul class="pagination">
+            <li ng-class="{disabled: currentPage == 0}" ng-hide="arePages()">
+                <a href ng-click="prevPage()">« Prev</a>
+            </li>
+            <li ng-repeat="n in range(pagedItems.length)"
+                ng-class="{active: n == currentPage}"
+            ng-click="setPage()">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="arePages()">
+                <a href ng-click="nextPage()">Next »</a>
+            </li>
+        </ul>
+    </div>
 </div>

@@ -1,0 +1,4 @@
+{
+	"test": "froga",
+	"description": "{{restaurant.description_en}}"
+}

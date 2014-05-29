@@ -1,14 +1,19 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter){
+	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter,$translate){
 		$scope.pintxos=Pintxo.query();
 		$scope.pintxosCategory=pintxosCategory.query();
 		$scope.filteredItems = [];
 	    $scope.groupedItems = [];
-	    $scope.itemsPerPage = 5;
+	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
+
+	   	$scope.getLang=function(){
+	  		var lang=$translate.use();
+	    	return lang;
+	    };
 	        // init the filtered items
     	$scope.filterByCategory = function () {
 	        $scope.filteredItems = $filter('filter')($scope.pintxos, function (item) {
@@ -16,7 +21,6 @@ angular.module('xploreBilbaoApp')
 	            angular.forEach($scope.pintxosCategory, function(category){
 	                    if(category.isActivated){
 	                            if(item.first_type_es === category.first_type_es){
-	                            	console.log("true");
 	                                found=true;
 	                            }
 	                    }
@@ -30,7 +34,6 @@ angular.module('xploreBilbaoApp')
 		    // calculate page in place
 	    $scope.groupToPages = function () {
 	        $scope.pagedItems = [];
-	        console.log($scope.filteredItems.length);
 	        for (var i = 0; i < $scope.filteredItems.length; i++) {
 	            if (i % $scope.itemsPerPage === 0) {
 	                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [ $scope.filteredItems[i] ];
@@ -67,20 +70,12 @@ angular.module('xploreBilbaoApp')
 	    $scope.setPage = function () {
 	        $scope.currentPage = this.n;
 	    }; 
+	   	$scope.arePages = function(){
+	    	if($scope.filteredItems.length === 0){
+	    		return true;
+	    	}else{
+	    		return false;
+	    	}
+	    }
 	     $scope.filterByCategory();           
-	})
-	.filter('customFilter',function(){
-		return function(items,types){
-			var filtered=[];
-			angular.forEach(types, function(category){
-				if(category.isActivated){
-					angular.forEach(items, function(item){
-						if(item.first_type_es === category.first_type_es){
-							filtered.push(item);
-						}
-					});
-				}
-			});
-			return filtered;
-		};
 	});
