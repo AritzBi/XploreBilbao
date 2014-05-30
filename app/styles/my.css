@@ -13,7 +13,9 @@
 textarea { resize:none; }
 
 .fullHeight {height:100%;}
-.container{height:100%;}
+
+
+
 
 .container-map{
 /*padding-left: 25px;*/
@@ -26,11 +28,18 @@ padding-bottom: 50px;
 html,body {
     height:100%; 
 }
+.data-container{
+  height: 725px;
+  overflow-y: auto;
+}
+
+
 .angular-leaflet-map{height:100%;}
 
 #scrollArea {
   height: 640px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 #bottom {

@@ -1,7 +1,8 @@
 <div class="container">
 <div ng-include="'partials/navbar'"></div>
-	<div style="padding-top: 50px;"class="row">
-		<div class="col-md-9">
+	<div style="padding-top: 50px;" >
+		<div class="row data-container">
+		<div class="col-md-9 col-lg-9">
 			<div class="panel panel-default">
 				<ul class="list-group">
 					<li  class="list-group-item"  ng-repeat="restaurant in pagedItems[currentPage]" id="{{restaurant.id}}" >
@@ -24,8 +25,8 @@
 					</li>
 				</ul>
 			</div>
-		</div>
-		<div class="col-md-3">
+			</div>
+		<div class="col-md-3 col-lg-3">
 			<div class="well well-lg">
 				<div class="control-group">
 				    <div class="controls">
@@ -37,25 +38,22 @@
 				</div>
 			</div>
 		</div>
-	<!--	<div class="col-lg-10">
-			<div ui-view="">
+				</div>
 
-			</div>
-		</div>-->
 	</div>
-    <div class="row pull-right">
-        <ul class="pagination">
-            <li ng-class="{disabled: currentPage == 0}" ng-hide="arePages()">
-                <a href ng-click="prevPage()">« Prev</a>
-            </li>
-            <li ng-repeat="n in range(pagedItems.length)"
-                ng-class="{active: n == currentPage}"
-            ng-click="setPage()">
-                <a href ng-bind="n + 1">1</a>
-            </li>
-            <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="arePages()">
-                <a href ng-click="nextPage()">Next »</a>
-            </li>
-        </ul>
+    <div class="pull-right row">
+	        <ul class="pagination">
+	            <li ng-class="{disabled: currentPage == 0}" ng-hide="arePages()">
+	                <a href ng-click="prevPage()">« Prev</a>
+	            </li>
+	            <li ng-repeat="n in range(pagedItems.length)"
+	                ng-class="{active: n == currentPage}"
+	            ng-click="setPage()">
+	                <a href ng-bind="n + 1">1</a>
+	            </li>
+	            <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="arePages()">
+	                <a href ng-click="nextPage()">Next »</a>
+	            </li>
+	        </ul>
     </div>
 </div>
