@@ -27,6 +27,19 @@
   					</a>
   				</li>
           <li class="dropdown">
+            <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;Pitos <b class="caret"></b></a>
+            <ul class="dropdown-menu sidebar-nav list-group">
+              <li class="sidebar-brand list-group-item"> Ruta desglosada
+              </li>
+              <li class ="list-group-item" > 
+                <div class="row">
+                    PITO
+                </div>
+              </li>
+            </ul>
+
+          </li>
+          <li class="dropdown">
               <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;Rutas <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#"  ui-sref="personalRoute.topRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ranking de rutas</a></li>
@@ -35,41 +48,41 @@
                 <li><a href="#" ng-show="currentUser" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Crear ruta</a></li>
               </ul>
           </li>
-        <li><a ng-click="changeLanguage('es')">
-          <img class="img-responsive language-icon"ng-src="images/castellano.png"></img>
-        </a>
-      </li>
-      <li>
-        <a ng-click="changeLanguage('en')">
-          <img class="img-responsive language-icon"ng-src="images/ingles.png"></img>
-        </a>  
-      </li>
-      <li>
-        <a ng-click="changeLanguage('eu')">
-          <img class="img-responsive language-icon" ng-src="images/euskera.png"></img>
-        </a>  
-      </li>
-          	</ul>
+          <li><a ng-click="changeLanguage('es')">
+            <img class="img-responsive language-icon"ng-src="images/castellano.png"></img>
+          </a>
+        </li>
+        <li>
+          <a ng-click="changeLanguage('en')">
+            <img class="img-responsive language-icon"ng-src="images/ingles.png"></img>
+          </a>  
+        </li>
+        <li>
+          <a ng-click="changeLanguage('eu')">
+            <img class="img-responsive language-icon" ng-src="images/euskera.png"></img>
+          </a>  
+        </li>
+      </ul>
         	<ul class="nav navbar-nav pull-right">
-    			<li ng-hide="currentUser" ng-class="{active: isActive('/login')}">
-        			<a href="#" ng-click="login()">
-        				<i class="icon fa fa-sign-in"></i> Login 
-        			</a>
-      			</li>
-      			<li ng-hide="currentUser" ng-class="{active: isActive('/signup')}">
-        			<a href="#" ng-click="signup()">
-        				<i class="icon fa fa-users"></i> Registrarse
-        			</a>
-      			</li>
-      			<li ng-show="currentUser" ng-class="{active: isActive('/myroutes')}">
-        			<a href="#"  ui-sref="myprofile">
-        				<i class="icon fa fa-user"></i> Mi Perfil
-        			</a>
-      			</li>
-      			<li ng-show="currentUser" ng-class="{active: isActive('/logout')}">
-        			<a href="#" ng-click="logout()">
-        				<i class="icon fa fa-sign-out"></i> Salir
-        			</a>
+      			<li ng-hide="currentUser" ng-class="{active: isActive('/login')}">
+          			<a href="#" ng-click="login()">
+          				<i class="icon fa fa-sign-in"></i> Login 
+          			</a>
+        			</li>
+        			<li ng-hide="currentUser" ng-class="{active: isActive('/signup')}">
+          			<a href="#" ng-click="signup()">
+          				<i class="icon fa fa-users"></i> Registrarse
+          			</a>
+        			</li>
+        			<li ng-show="currentUser" ng-class="{active: isActive('/myroutes')}">
+          			<a href="#"  ui-sref="myprofile">
+          				<i class="icon fa fa-user"></i> Mi Perfil
+          			</a>
+        			</li>
+        			<li ng-show="currentUser" ng-class="{active: isActive('/logout')}">
+          			<a href="#" ng-click="logout()">
+          				<i class="icon fa fa-sign-out"></i> Salir
+          			</a>
       			</li>
         	</ul>
 		</div>

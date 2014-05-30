@@ -2,11 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .controller('NavbarCtrl', function ($scope, Auth, $location, $modal) {
-    $scope.menu = [{
-      'title': 'Home',
-      'state': 'home',
-      'icon':  ''
-    },
+    $scope.menu = [
     {
       'title': 'Restaurantes',
       'state': 'restaurants',

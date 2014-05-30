@@ -9,9 +9,10 @@ angular.module('xploreBilbaoApp', [
   'ui.router',
   'pascalprecht.translate',
   'leaflet-directive',
-  'truncate'
+  'truncate',
+  'snap'
 ])
-  .config( function ($stateProvider, $urlRouterProvider, $translateProvider) {
+  .config( function ($stateProvider, $urlRouterProvider, $translateProvider, snapRemoteProvider) {
     $stateProvider
       .state('home', {
         url: '/',
@@ -92,7 +93,10 @@ angular.module('xploreBilbaoApp', [
     });
     $translateProvider.preferredLanguage('es');*/
     $translateProvider.useUrlLoader('language/translation.json');
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage('es');
+
+    snapRemoteProvider.globalOptions.disable = 'left';
+    snapRemoteProvider.globalOptions.minPosition = '-500';
   });
  /* .config(function ($routeProvider, $locationProvider) {
     $routeProvider
