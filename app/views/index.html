@@ -36,7 +36,24 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="fullHeight"  ui-view=""></div>
+    
+    <snap-content  ng-controller="SidebarCtrl" snap-options="opts">
+                    <div class="fullHeight"  ui-view=""></div>
+    </snap-content>
+    <snap-drawer >
+        <div>
+            <ul class=" sidebar-nav list-group">
+              <li class="sidebar-brand list-group-item"> Ruta desglosada
+              </li>
+              <li class ="list-group-item" > 
+                <div class="row">
+                    PITO
+                </div>
+              </li>
+            </ul>
+        </div>
+    </snap-drawer>
+                
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <!--<script>
@@ -95,6 +112,7 @@
     <script src="scripts/controllers/translator.js"></script>
     <script src="scripts/controllers/events.js"></script>
     <script src="scripts/controllers/route.js"></script>
+    <script src="scripts/controllers/sidebarController.js"></script>
     <script src="scripts/services/auth.js"></script>
     <script src="scripts/services/session.js"></script>
     <script src="scripts/services/pintxo.js"></script>

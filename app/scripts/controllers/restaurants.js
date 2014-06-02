@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('RestaurantsCtrl', function ($scope,Restaurant, restaurantsCategory, $filter,$translate){
+	.controller('RestaurantsCtrl', function ($rootScope,$scope,Restaurant, restaurantsCategory, $filter,$translate){
 		$scope.restaurants=Restaurant.query();
 		$scope.restaurantsCategory=restaurantsCategory.query();
 		$scope.filteredItems = [];
@@ -9,7 +9,7 @@ angular.module('xploreBilbaoApp')
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
-	   
+	   	console.log($rootScope.sidebar);
 	  	$scope.getLang=function(){
 	  		var lang=$translate.use();
 	    	return lang;
@@ -77,5 +77,5 @@ angular.module('xploreBilbaoApp')
 	    		return false;
 	    	}
 	    }
-	     $scope.filterByCategory();           
+	    $scope.filterByCategory();        
 	});

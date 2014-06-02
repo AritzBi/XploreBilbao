@@ -94,9 +94,6 @@ angular.module('xploreBilbaoApp', [
     $translateProvider.preferredLanguage('es');*/
     $translateProvider.useUrlLoader('language/translation.json');
     $translateProvider.preferredLanguage('es');
-
-    snapRemoteProvider.globalOptions.disable = 'left';
-    snapRemoteProvider.globalOptions.minPosition = '-500';
   });
  /* .config(function ($routeProvider, $locationProvider) {
     $routeProvider

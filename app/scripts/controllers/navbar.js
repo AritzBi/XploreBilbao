@@ -49,4 +49,9 @@ angular.module('xploreBilbaoApp')
     $scope.logout = function() {
       Auth.logout();
     };
+    $scope.activarCreacionRutas = function() {
+      $scope.opts.disable="none";
+    };
+
+
   });
