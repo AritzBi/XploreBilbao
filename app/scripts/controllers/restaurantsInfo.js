@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments,Auth){
+	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments,Auth, $translate){
 			    var user=Auth.currentUser();
 			    $scope.max=5;
-
 		Restaurant.get({id: $stateParams.id}).$promise.then(                                                                                              
 			function success (data) {
 				$scope.restaurant=data;
@@ -52,6 +51,11 @@ angular.module('xploreBilbaoApp')
 					}
 
 				);
+				$scope.getLang=function(){
+						var lang=$translate.use();
+					return lang;
+				};
+
 
 		    	/**
 		    	var instance=$modal.open({
