@@ -14,7 +14,21 @@ textarea { resize:none; }
 
 .fullHeight {height:100%;}
 
-
+.container-info{
+  margin-right:auto;
+  margin-left:auto;
+  padding-left:15px;
+  padding-right:15px
+}
+@media (min-width:768px){
+  .container-info{width:750px}
+}
+@media (min-width:992px){
+  .container-info{width:970px}
+}
+@media (min-width:1200px){
+  .container-info{width:1170px}
+}
 
 
 .container-map{
