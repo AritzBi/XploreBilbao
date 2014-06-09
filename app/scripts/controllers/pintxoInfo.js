@@ -32,11 +32,6 @@ angular.module('xploreBilbaoApp')
 							$scope.myComment={comment:'',note: 0};
 							$scope.isComment=false;	
 						}
-
-					    $scope.ratingStates = [
-					    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
-					    ];
-
 						$scope.createComment = function() {
 				    		HosteleryComments.save({note: $scope.myComment.note, comment: $scope.myComment.comment, hostelery_id: $scope.pintxo.id },function(comment){
 		      					$scope.myComment=comment;

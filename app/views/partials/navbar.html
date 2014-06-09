@@ -21,11 +21,31 @@
 		</div>
 		<div class="navbar-collapse collapse">  
 			<ul class="nav navbar-nav" ng-controller="TranslateController">
-  				<li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-  					<a ui-sref="{{item.state}}">
-  						<i class="icon fa fa-{item.icon}}"></i> {{item.title}}
+  				<li ng-class="{active: isActive(item.link)}">
+  					<a ui-sref="restaurants">
+  						<i class="icon fa"></i> Restaurantes
   					</a>
   				</li>
+          <li ng-class="{active: isActive(item.link)}">
+            <a ui-sref="museums">
+              <i class="icon fa"></i> Museos
+            </a>
+          </li>
+          <li ng-class="{active: isActive(item.link)}">
+            <a ui-sref="pintxos">
+              <i class="icon fa"></i> Bares de pintxos
+            </a>
+          </li>
+          <li ng-class="{active: isActive(item.link)}">
+            <a ui-sref="emblematicBuildings">
+              <i class="icon fa"></i> Edificios Emblematicos
+            </a>
+          </li>
+          <li ng-class="{active: isActive(item.link)}">
+            <a ui-sref="events">
+              <i class="icon fa"></i> Eventos
+            </a>
+          </li>
           <li class="dropdown">
               <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;Rutas <b class="caret"></b></a>
               <ul class="dropdown-menu">

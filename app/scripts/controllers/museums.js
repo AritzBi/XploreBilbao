@@ -2,19 +2,22 @@
 
 angular.module('xploreBilbaoApp')
 	.controller('MuseumsCtrl', function ($rootScope,$scope,EmblematicBuilding,$translate){
-		$scope.museums=EmblematicBuilding.getMuseums();
 	    $scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
+	    EmblematicBuilding.getMuseums().$promise.then(
+	    	function success (data) {
+	    		$scope.museums=data;
+			    // now group by pages
+			    $scope.groupToPages();
+	    	}
+	    );                                                                                             
+	    $scope.museums=EmblematicBuilding.getMuseums();
 	  	$scope.getLang=function(){
 	  		var lang=$translate.use();
 	    	return lang;
 	    };
-
-	    // now group by pages
-	    $scope.groupToPages();
-
 		// calculate page in place
 	    $scope.groupToPages = function () {
 	        $scope.pagedItems = [];

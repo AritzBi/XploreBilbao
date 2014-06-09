@@ -1,0 +1,75 @@
+<div class="container-info">
+	<div ng-include="'partials/navbar'"></div>
+		<div style="padding-top: 50px;">
+			<div class="row">
+				<div class="col-lg-5">
+					<img class="img-responsive"ng-src="images/{{museum.image_path}}">
+					<div class="row top-buffer">
+						<div class="col-lg-5">
+							<iframe width="450" height="250" frameborder="0" style="border:0" ng-src="{{url}}"></iframe>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-5">
+					{{museum['description_' + getLang()] }}
+					<div class="row">
+						<div class="col-md-2">
+						<h1><span class="label label-success"ng-class="{labelStyleRed: museum.NOTE == '0' || museum.NOTE == '1' || museum.NOTE == '2' ,labelStyleYellow: museum.NOTE == '3', labelStyleGreen: museum.NOTE=='4'|| museum.NOTE=='5' }" >{{museum.NOTE}}</span><h3>
+						</div>
+						<div class="col-md-10">
+							<rating ng-model="museum.NOTE" value="museum.NOTE" max="max" readonly="true" ng-class="{ratingStyleRed: museum.NOTE == '0' || museum.NOTE == '1' || museum.NOTE == '2' ,ratingStyleYellow: museum.NOTE == '3', ratingStyleGreen: museum.NOTE=='4'|| museum.NOTE=='5' }"></rating>
+						</div>
+					</div>
+					 <form ng-show="currentUser && !isComment" class="top-buffer" class="form" name="form" ng-submit="createComment()">
+		  				<div class="form-actions">
+			       			<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>
+							<div class="row">
+								<div class="col-md-12">
+									<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="6" placehorder="Escriba su opinión..."></textarea>
+								</div>
+							</div>
+							<div class="row top-medium-buffer">
+								<div class="col-md-12">
+									<button type="submit" class="btn btn-primary">{{'add' | translate}}</button>
+								</div>
+							</div>
+						</div>
+					</form>	
+					<form ng-show="currentUser && isComment" class="top-buffer" class="form" name="form" ng-submit="editComment()">
+		  				<div class="form-actions">
+		       				<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>		    			
+							<div class="row">
+								<div class="col-md-12">
+									<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="5" placehorder="Escriba su opinión..."></textarea>
+								</div>
+							</div>
+							<div class="row top-medium-buffer">
+								<div class="col-md-12">
+									<button type="submit" class="btn btn-primary">{{'edit' | translate}}</button>
+								</div>
+							</div>
+						</div>
+					</form>	
+				</div>
+			</div>
+			<div class="row top-buffer">
+				<div class="col-lg-5">
+				</div>
+				<div class="col-lg-2">
+
+				</div>
+				<div class="col-lg-5">
+					 <!--<button type="button" ng-show="currentUser" class="btn btn-default btn-primary"  ng-click="createComment()">
+		    			Nuevo comentario
+		  			</button>-->
+					<ul class="list-group">
+						<li  class="list-group-item"  ng-repeat="comment in comments"  >
+							{{comment.comment}}
+						</li>
+					</ul>
+				</div>
+			</div>
+	</div>
+</div>
