@@ -8,7 +8,6 @@
 					<ul class="list-group">
 						<li  class="list-group-item"  ng-repeat="museum in pagedItems[currentPage]" id="{{museum.id}}" >
 							<div class="row">
-								<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
 								<div class="col-md-6">
 									<a ui-sref="museumInfo({id: museum.id})"><h4>{{museum['denom_' + getLang()] }}</h4></a>
 								</div>

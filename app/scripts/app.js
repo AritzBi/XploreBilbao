@@ -50,7 +50,7 @@ angular.module('xploreBilbaoApp', [
         controller: 'EmblematicBuildingInfoCtrl'      
       })
       .state('events',{
-        url: '/events',
+        url: '/events/{id}',
         templateUrl: 'partials/event.html',
         controller: 'EventsCtrl'      
       })
@@ -82,12 +82,6 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/routeDetails.html',
         controller: 'RouteDetails'      
       })
-      /*
-      .state('restaurantes.restaurantesInfo',{
-        url: '/{id}',
-        templateUrl: 'partials/restaurantInfo.html',
-        controller: 'RestaurantsInfoCtrl'      
-      }) **/
       .state('signup',{
         url: '/signUp',
         templateUrl: 'partials/prueba.html',
@@ -95,31 +89,9 @@ angular.module('xploreBilbaoApp', [
       });
       
     $urlRouterProvider.otherwise('/');
-    /*$translateProvider.translations('en',{
-      test: 'test'
-    });
-    $translateProvider.translations('es',{
-      test: 'prueba'
-    });
-    $translateProvider.preferredLanguage('es');*/
     $translateProvider.useUrlLoader('language/translation.json');
     $translateProvider.preferredLanguage('es');
   });
- /* .config(function ($routeProvider, $locationProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'partials/main',
-        controller: 'MainCtrl'
-      })
-      .when('/signUp'.{
-        templateUrl: 'partials/prueba',
-        controller: 'MainCtrl'      
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-      
-    $locationProvider.html5Mode(true);
-  });*/
+
 
 

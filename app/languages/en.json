@@ -1,5 +1,12 @@
 {
 	"test": "test",
 	"add": "Add",
-	"edit": "Edit"
+	"edit": "Edit",
+	"restaurants": "Restaurants",
+	"museums": "Museums",
+	"events": "Events",
+	"pintxos": "Pintxo bars",
+	"buildings": "Emblematic buildings",
+	"routes": "Routes",
+	"logout": "Logout"
 }

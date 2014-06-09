@@ -1,5 +1,12 @@
 {
 	"test": "froga",
 	"add": "Gehitu",
-	"edit": "Editatu"
+	"edit": "Editatu",
+	"restaurants": "Jatetxeak",
+	"museums": "Museoak",
+	"events": "Ekintzak",
+	"pintxos": "Pintxoenak",
+	"buildings": "Eraikin Adierazgarriak",
+	"routes": "Ibilbideak",
+	"logout": "Irten"
 }

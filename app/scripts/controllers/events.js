@@ -1,7 +1,22 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('EventsCtrl', function ($scope,Event, eventsCategory, $filter){
+	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate){
+		console.log("hoasdada");
+		if($stateParams.id){
+			console.log("asdasdasdasadsa");
+			console.log($stateParams.id);
+			Event.getEventsByType({id2: $stateParams.id}).$promise.then(
+				function success(data){
+					$scope.events=data;
+					console.log(data);
+				}
+			);
+		}
+		else{
+
+			console.log("ASDasda");
+
 		$scope.events=Event.query();
 		$scope.eventsCategory=eventsCategory.query();
 		$scope.filteredItems = [];
@@ -9,6 +24,11 @@ angular.module('xploreBilbaoApp')
 	    $scope.itemsPerPage = 5;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
+
+	   	$scope.getLang=function(){
+	  		var lang=$translate.use();
+	    	return lang;
+	    };
 	        // init the filtered items
     	$scope.filterByCategory = function () {
 	        $scope.filteredItems = $filter('filter')($scope.events, function (item) {
@@ -65,5 +85,6 @@ angular.module('xploreBilbaoApp')
 	    $scope.setPage = function () {
 	        $scope.currentPage = this.n;
 	    }; 
-	     $scope.filterByCategory();           
+	     $scope.filterByCategory();      
+	     }     
 	});

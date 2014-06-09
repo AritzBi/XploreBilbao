@@ -23,31 +23,32 @@
 			<ul class="nav navbar-nav" ng-controller="TranslateController">
   				<li ng-class="{active: isActive(item.link)}">
   					<a ui-sref="restaurants">
-  						<i class="icon fa"></i> Restaurantes
+  						<i class="icon fa"></i> {{'restaurants' | translate}}
   					</a>
   				</li>
           <li ng-class="{active: isActive(item.link)}">
             <a ui-sref="museums">
-              <i class="icon fa"></i> Museos
+              <i class="icon fa"></i> {{'museums' | translate}}
             </a>
           </li>
           <li ng-class="{active: isActive(item.link)}">
             <a ui-sref="pintxos">
-              <i class="icon fa"></i> Bares de pintxos
+              <i class="icon fa"></i> {{'pintxos' | translate}}
             </a>
           </li>
           <li ng-class="{active: isActive(item.link)}">
             <a ui-sref="emblematicBuildings">
-              <i class="icon fa"></i> Edificios Emblematicos
+              <i class="icon fa"></i> {{'buildings' | translate}}
             </a>
           </li>
-          <li ng-class="{active: isActive(item.link)}">
-            <a ui-sref="events">
-              <i class="icon fa"></i> Eventos
-            </a>
+          <li class="dropdown" ng-class="{active: isActive(item.link)}">
+            <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;{{'events' | translate}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="category in mainCategories" ><a href="#"  ui-sref="events({id: category.id})" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;{{category['type_' + getLang()] }}</a></li>
+            </ul>
           </li>
           <li class="dropdown">
-              <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;Rutas <b class="caret"></b></a>
+              <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;{{'routes' | translate}} <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#"  ui-sref="personalRoute.topRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ranking de rutas</a></li>
                 <li><a href="#"  ui-sref="personalRoute.myRoutes" ng-show="currentUser" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Mis rutas</a></li>
@@ -89,7 +90,7 @@
         			</li>
         			<li ng-show="currentUser" ng-class="{active: isActive('/logout')}">
           			<a href="#" ng-click="logout()">
-          				<i class="icon fa fa-sign-out"></i> Salir
+          				<i class="icon fa fa-sign-out"></i> {{'logout' | translate}}
           			</a>
       			</li>
         	</ul>

@@ -1,6 +1,14 @@
 {
 	"test": "prueba",
 	"add": "Añadir",
-	"edit": "Editar"
+	"edit": "Editar",
+	"restaurants": "Restaurantes",
+	"museums": "Museos",
+	"events": "Eventos",
+	"pintxos": "De pintxos",
+	"buildings": "Edificios emblemáticos",
+	"routes": "Rutas",
+	"logout": "Salir"
+
 
 }

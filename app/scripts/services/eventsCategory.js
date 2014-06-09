@@ -8,6 +8,20 @@ angular.module('xploreBilbaoApp')
       update: {
         method: 'PUT',
         params: {}
+      },      
+      findMainCategories: {
+        method: 'GET',
+        params: {
+          id:'findMainCategories'
+        },
+        isArray: true
+      },      
+      findSubCategories: {
+        method: 'GET',
+        params: {
+          id:'findSubCategories'
+        },
+        isArray: true
       }
     });
   });
