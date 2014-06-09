@@ -15,18 +15,20 @@ angular.module('xploreBilbaoApp')
 		});
 
 		$scope.enableSidebar = function() {
+          $scope.newRoute={};
       		snapRemote.getSnapper().then(function(snapper) {
   				$cookieStore.put('sidebar',"true");
   				snapper.enable();
 			});
-			snapRemote.open('left');
+			 snapRemote.open('left');
     	};
     	$scope.disenableSidebar = function() {
+          $scope.newRoute={};
       		snapRemote.getSnapper().then(function(snapper) {
   				$cookieStore.put('sidebar',"false");
   				snapper.disable();
 			});
-			snapRemote.close('left');
+			   snapRemote.close('left');
     	};
 
     	$scope.isSidebarEnabled = function() {
@@ -35,4 +37,8 @@ angular.module('xploreBilbaoApp')
     			return true;
     		else return false;
     	};
+
+      $scope.addToNewRoute= function(){
+
+      }
 	});	

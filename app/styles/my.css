@@ -104,3 +104,17 @@ snap-content {
 .labelStyleYellow{
  background-color: yellow;
 }
+
+.sidebarButton{
+    position: absolute;
+    margin-top: 30%;
+}
+
+.relative{
+  position: relative;
+}
+
+.addRouteElement{
+  color: white;
+  background-color:blue; 
+}

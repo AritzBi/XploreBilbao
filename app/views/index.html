@@ -38,19 +38,13 @@
     <!-- Add your site or application content here -->
     
     <snap-content  ng-controller="SidebarCtrl" snap-options="opts">
-<div id="test" style="
-    position: relative;
-">
-                        <span id="a" style="
-    position: absolute;
-    height: 30px;
-    margin-top: 200px;
-    background: red;
-    width: 30px;
-    border-radius: 50%;
-">p</span>
-                    </div>
-                    <div class="fullHeight"  ui-view=""></div>
+        <div class="relative">
+             <button type="button" ng-show="isSidebarEnabled()"  class="btn btn-default btn-lg">
+                <span snap-toggle class="sidebarButton">
+                    <i class="fa fa-arrow-circle-right fa-4x"></i>
+            </button>
+        </div>
+        <div class="fullHeight"  ui-view=""></div>
     </snap-content>
     <snap-drawer >
         <div>
@@ -59,7 +53,6 @@
               </li>
               <li class ="list-group-item" > 
                 <div class="row">
-                    PITO
                 </div>
               </li>
             </ul>
