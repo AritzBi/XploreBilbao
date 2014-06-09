@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('EmblematicBuildingInfoCtrl', function ($scope,$stateParams, $sce, EmblematicBuilding, BuildingComments, Auth){
-			    var user=Auth.currentUser();
+	.controller('EmblematicBuildingInfoCtrl', function ($scope,$stateParams, $sce, EmblematicBuilding, BuildingComments, Auth, $translate){
+			   	var user=Auth.currentUser();
 			    $scope.max=5;
 
 		EmblematicBuilding.get({id: $stateParams.id}).$promise.then(                                                                                              
@@ -13,6 +13,7 @@ angular.module('xploreBilbaoApp')
 				$scope.url = $sce.trustAsResourceUrl($scope.url);
 				BuildingComments.query({id: $scope.emblematicBuilding.id}).$promise.then(
 					function success(comments){
+						console.log(comments);
 						$scope.comments = comments;
 						var commentFound=false;
 						var commentNumber=-1;
@@ -32,38 +33,25 @@ angular.module('xploreBilbaoApp')
 							$scope.myComment={comment:'',note: 0};
 							$scope.isComment=false;	
 						}
-
-					    $scope.ratingStates = [
-					    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
-					    ];
-
 						$scope.createComment = function() {
+							console.log("hola");
 				    		BuildingComments.save({note: $scope.myComment.note, comment: $scope.myComment.comment, building_id: $scope.emblematicBuilding.id },function(comment){
 		      					$scope.myComment=comment;
 		      					$scope.isComment=true;
+		      					$scope.emblematicBuilding.NOTE=comment.avg;
 		      				});
 				    	};
 				    	$scope.editComment = function() {
-				    		BuildingComments.update($scope.myComment,function(comment){
-		      					$scope.myComment=comment;
+				    		BuildingComments.update($scope.myComment,function(note){
+		      					$scope.emblematicBuilding.NOTE=note.avg;
 		      				});
 				    	};
 					}
 
 				);
-
-		    	/**
-		    	var instance=$modal.open({
-		    		templateUrl: 'partials/createComment.html',
-		    		controller: 'CreateCommentCtrl',
-		    		resolve: {
-		    			hostelery_id: function(){ return $scope.restaurant.id }
-		    		}
-		    	}).result.then(function (data){
-		    		console.log($scope.comments);
-		    		$scope.comments.push(data);
-		    	}, function(){
-
-		    	});**/
 		});
+		$scope.getLang=function(){
+				var lang=$translate.use();
+			return lang;
+		};
 	});

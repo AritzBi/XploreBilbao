@@ -1,35 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-  .controller('NavbarCtrl', function ($scope, Auth, $location, $modal) {
-    $scope.menu = [
-    {
-      'title': 'Restaurantes',
-      'state': 'restaurants',
-      'icon':  ''
-    },
-    {
-      'title': 'Museos',
-      'state': 'museos',
-      'icon':  ''
-    },
-    {
-      'title': 'Bares de pintxos',
-      'state': 'pintxos',
-      'icon':  ''
-    },
-    {
-      'title': 'Edificios emblemáticos',
-      'state': 'emblematicBuildings',
-      'icon':  ''
-    },
-    {
-      'title': 'Eventos',
-      'state': 'events',
-      'icon': ''
-    }
-    ];
-    
+  .controller('NavbarCtrl', function ($scope, Auth, $location, $modal) {    
     $scope.isActive = function(route) {
       return route === $location.path();
     };
