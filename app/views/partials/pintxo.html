@@ -6,7 +6,6 @@
 				<ul class="list-group">
 					<li  class="list-group-item"  ng-repeat="pintxo in pagedItems[currentPage]" >
 						<div class="row">
-							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
 							<div class="col-md-6">
 								<a ui-sref="pintxoInfo({id: pintxo.id})"><h4>{{pintxo['denom_' + getLang()] }}</h4></a>
 							</div>

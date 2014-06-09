@@ -1,15 +1,16 @@
+<div class="container">
 <div ng-include="'partials/navbar'"></div>
-	<div style="padding-top: 50px;"class="row">
+	<div style="padding-top: 50px;"class="row data-container">
 		<div class="col-md-9">
 			<div class="panel panel-default">
 				<ul class="list-group">
 					<li  class="list-group-item"  ng-repeat="event in pagedItems[currentPage]" >
 						<div class="row">
-							<!--<a ui-sref="events.eventInfo({id: event.id})"> {{event.denom_es}}</a>-->
-							<div class="col-md-6">
-								<a ui-sref="eventInfo({id: event.id})"><h4>{{event.title_es}}</h4></a>
+							<div class="col-md-10">
+								<a ui-sref="eventInfo({id: event.id})"><h4>{{event['title_' + getLang()] }}</h4></a>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-2">
+								<h4>{{event['subtype_' + getLang()] }}</h4>
 							</div>
 						</div>
 						<div class="row">
@@ -17,7 +18,11 @@
 								<img class="img-responsive"ng-src="images/{{event.image_path}}">
 							</div>
 							<div class="col-md-8">
-								<p>{{event.description_es}}</p>
+								<p>{{event['description_' + getLang()] }}</p>
+								<p>{{event['startdate']}}</p>
+								<p>{{event['endate']}}</p>
+								<p> {{event['starthour']}}</p>
+								<p> {{event['endhour']}}</p>
 							</div>
 						</div>
 					</li>
@@ -30,32 +35,26 @@
 				    <div class="controls">
 				        <label class="checkbox" ng-repeat="category in eventsCategory">
 				            <input type="checkbox" ng-change="filterByCategory()"ng-model="category.isActivated" defaultChecked="true">
-				            {{category.subtype_es}}
+				            {{category['first_type_' + getLang()] }}
 				        </label>     
 				    </div>
 				</div>
 			</div>
 		</div>
-	<!--	<div class="col-lg-10">
-			<div ui-view="">
-
-			</div>
-		</div>-->
 	</div>
-    <td colspan="6">
-	    <div class="pagination pull-right">
-	        <ul>
-	            <li ng-class="{disabled: currentPage == 0}">
-	                <a href ng-click="prevPage()">« Prev</a>
-	            </li>
-	            <li ng-repeat="n in range(pagedItems.length)"
-	                ng-class="{active: n == currentPage}"
-	            ng-click="setPage()">
-	                <a href ng-bind="n + 1">1</a>
-	            </li>
-	            <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
-	                <a href ng-click="nextPage()">Next »</a>
-	            </li>
-	        </ul>
-	    </div>
-	</td>
+    <div class="row pull-right">
+        <ul class="pagination">
+            <li ng-class="{disabled: currentPage == 0}" ng-hide="arePages()">
+                <a href ng-click="prevPage()">« Prev</a>
+            </li>
+            <li ng-repeat="n in range(pagedItems.length)"
+                ng-class="{active: n == currentPage}"
+            ng-click="setPage()">
+                <a href ng-bind="n + 1">1</a>
+            </li>
+            <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="arePages()">
+                <a href ng-click="nextPage()">Next »</a>
+            </li>
+        </ul>
+    </div>
+</div>

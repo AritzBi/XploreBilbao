@@ -38,13 +38,13 @@
           </li>
           <li ng-class="{active: isActive(item.link)}">
             <a ui-sref="emblematicBuildings">
-              <i class="icon fa"></i> {{'buildings' | translate}}
+              <i class="icon fa fa-institution" style="color: white"></i> {{'buildings' | translate}}
             </a>
           </li>
           <li class="dropdown" ng-class="{active: isActive(item.link)}">
-            <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;{{'events' | translate}} <b class="caret"></b></a>
+            <a class="dropdown-toggle" id="downloadDrop"  role="button" data-toggle="dropdown"><i class="fa fa-calendar" style="color: white"></i>&nbsp;&nbsp;{{'events' | translate}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li ng-repeat="category in mainCategories" ><a href="#"  ui-sref="events({id: category.id})" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;{{category['type_' + getLang()] }}</a></li>
+              <li ng-repeat="category in mainCategories" ><a ui-sref="events({id: category.id})" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;{{category['type_' + getLang()] }}</a></li>
             </ul>
           </li>
           <li class="dropdown">
