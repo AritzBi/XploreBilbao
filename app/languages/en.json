@@ -1,4 +1,5 @@
 {
 	"test": "test",
-	"description": "{{restaurant.description_en}}"
+	"add": "Add",
+	"edit": "Edit"
 }

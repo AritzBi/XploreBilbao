@@ -33,20 +33,18 @@ angular.module('xploreBilbaoApp')
 
 						}
 
-					    $scope.ratingStates = [
-					    {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
-					    ];
-
 						$scope.createComment = function() {
 				    		HosteleryComments.save({note: $scope.myComment.note, comment: $scope.myComment.comment, hostelery_id: $scope.restaurant.id },function(comment){
+		      					console.log(comment);
 		      					$scope.myComment=comment;
 		      					$scope.isComment=true;
+		      					$scope.restaurant.NOTE=comment.avg;
 		      				});
 				    	};
 				    	$scope.editComment = function() {
-				    		HosteleryComments.update($scope.myComment,function(comment){
-		      					$scope.myComment=comment;
-		      				});
+				    		HosteleryComments.update($scope.myComment, function(note){
+				    			$scope.restaurant.NOTE=note.avg;
+				    		});
 				    	};
 					}
 
@@ -55,6 +53,7 @@ angular.module('xploreBilbaoApp')
 						var lang=$translate.use();
 					return lang;
 				};
+
 
 
 		    	/**

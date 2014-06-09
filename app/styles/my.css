@@ -2,10 +2,11 @@
 .top-medium-buffer { margin-top:35px; }
 .glyphicon-star, .glyphicon-star-empty {
 	font-size: 25px;
+  padding-top: 30px;
 }
 .glyphicon-star-selected, .glyphicon-star-empty-selected {
   color:red;
-   font-size: 25px;
+  font-size: 25px;
 }
 #rating:hover i {
 	color: green;
@@ -79,4 +80,27 @@ snap-content {
   background-color: #fff;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
+}
+
+.ratingStyleGreen{
+  color: green;
+}
+
+.ratingStyleRed{
+  color: red;
+}
+
+.ratingStyleYellow{
+ color: yellow;
+}
+.labelStyleGreen{
+  background-color: green;
+}
+
+.labelStyleRed{
+  background-color: red;
+}
+
+.labelStyleYellow{
+ background-color: yellow;
 }

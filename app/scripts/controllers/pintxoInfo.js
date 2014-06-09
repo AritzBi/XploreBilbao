@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('PintxoInfoCtrl', function ($scope,$stateParams, $sce, Pintxo, HosteleryComments, Auth){
+	.controller('PintxoInfoCtrl', function ($scope,$stateParams, $sce, Pintxo, HosteleryComments, Auth, $translate){
 			    var user=Auth.currentUser();
 			    $scope.max=5;
 
@@ -41,11 +41,12 @@ angular.module('xploreBilbaoApp')
 				    		HosteleryComments.save({note: $scope.myComment.note, comment: $scope.myComment.comment, hostelery_id: $scope.pintxo.id },function(comment){
 		      					$scope.myComment=comment;
 		      					$scope.isComment=true;
+		      					$scope.pintxo.NOTE=comment.avg;
 		      				});
 				    	};
 				    	$scope.editComment = function() {
-				    		HosteleryComments.update($scope.myComment,function(comment){
-		      					$scope.myComment=comment;
+				    		HosteleryComments.update($scope.myComment,function(note){
+		      					$scope.pintxo.NOTE=note.avg;
 		      				});
 				    	};
 					}
@@ -66,4 +67,8 @@ angular.module('xploreBilbaoApp')
 
 		    	});**/
 		});
+		$scope.getLang=function(){
+				var lang=$translate.use();
+			return lang;
+		};
 	});

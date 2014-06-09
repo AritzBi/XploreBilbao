@@ -8,6 +8,13 @@ angular.module('xploreBilbaoApp')
       update: {
         method: 'PUT',
         params: {}
+      },
+      getMuseums:{
+        method: 'GET',
+        params:{
+          id:'getMuseums'
+        },
+        isArray: true
       }
 	  });
   });
