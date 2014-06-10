@@ -39,16 +39,30 @@ angular.module('xploreBilbaoApp')
 	});	
 
 angular.module('xploreBilbaoApp')
-  .controller('NewRouteCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute){
+  .controller('NewRouteCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute, Routes){
     $scope.newRoute=newRoute.getRoute();
       $scope.dropCallback = function(event, ui, title, $index) {
     };
 
     $scope.createRoute=function(){
-      var newRoute=[];
+      var newRoute='[';
       for(var i=0; i<$scope.newRoute.length;i++){
-        
+        if($scope.newRoute[i].building_type){
+          newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"EMBLEMATIC_BUILDING\"},');
+        }else{
+          if($scope.newRoute[i].hostelery_type){
+            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"HOSTELERY\"},');
+          }else{
+            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"EVENT\"},');
+          }
+        }
       }
+
+      newRoute = newRoute.substring(0, newRoute.length-1);
+      newRoute=newRoute.concat(']');
+      Routes.save({route: newRoute}, function(){
+
+      });
     };
   }); 
 

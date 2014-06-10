@@ -35,7 +35,6 @@ angular.module('xploreBilbaoApp')
 
 						$scope.createComment = function() {
 				    		HosteleryComments.save({note: $scope.myComment.note, comment: $scope.myComment.comment, hostelery_id: $scope.restaurant.id },function(comment){
-		      					console.log(comment);
 		      					$scope.myComment=comment;
 		      					$scope.isComment=true;
 		      					$scope.restaurant.NOTE=comment.avg;
