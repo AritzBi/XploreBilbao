@@ -10,7 +10,8 @@ angular.module('xploreBilbaoApp', [
   'pascalprecht.translate',
   'leaflet-directive',
   'truncate',
-  'snap'
+  'snap',
+  'ngDragDrop'
 ])
   .config( function ($stateProvider, $urlRouterProvider, $translateProvider, snapRemoteProvider) {
     $stateProvider

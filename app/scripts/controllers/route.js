@@ -336,7 +336,7 @@ angular.module('xploreBilbaoApp')
 	this.getRoute = function(){
 		return selectedRoute;
 	}
-});;
+});
 
 function hasRoute(data){
 	var found=false;

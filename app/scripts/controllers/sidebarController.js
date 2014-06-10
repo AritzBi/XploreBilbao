@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('SidebarCtrl', function ($scope,$rootScope, snapRemote, $cookieStore){
+	.controller('SidebarCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute){
 		$scope.opts = {
   			disable: 'right',
   			minPosition: -500,
@@ -15,19 +15,18 @@ angular.module('xploreBilbaoApp')
 		});
 
 		$scope.enableSidebar = function() {
-          $scope.newRoute={};
-      		snapRemote.getSnapper().then(function(snapper) {
+      snapRemote.getSnapper().then(function(snapper) {
   				$cookieStore.put('sidebar',"true");
   				snapper.enable();
 			});
 			 snapRemote.open('left');
     	};
     	$scope.disenableSidebar = function() {
-          $scope.newRoute={};
-      		snapRemote.getSnapper().then(function(snapper) {
+      	snapRemote.getSnapper().then(function(snapper) {
+          newRoute.reset();
   				$cookieStore.put('sidebar',"false");
   				snapper.disable();
-			});
+			  });
 			   snapRemote.close('left');
     	};
 
@@ -37,8 +36,27 @@ angular.module('xploreBilbaoApp')
     			return true;
     		else return false;
     	};
-
-      $scope.addToNewRoute= function(){
-
-      }
 	});	
+
+angular.module('xploreBilbaoApp')
+  .controller('NewRouteCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute){
+    $scope.newRoute=newRoute.getRoute();
+      $scope.dropCallback = function(event, ui, title, $index) {
+        console.log($scope.newRoute);
+    };
+  }); 
+
+angular.module('xploreBilbaoApp')
+.service('newRoute',function(){
+  var newRoute=[];
+  this.addLocation = function(location){
+    newRoute.push(location);
+    console.log(newRoute);
+  }
+  this.getRoute = function(){
+    return newRoute;
+  }
+  this.reset=function(){
+    newRoute=[];
+  }
+});

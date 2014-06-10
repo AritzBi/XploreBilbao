@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('RestaurantsCtrl', function ($rootScope,$scope,Restaurant, restaurantsCategory, $filter,$translate){
+	.controller('RestaurantsCtrl', function ($rootScope,$scope,Restaurant, restaurantsCategory, $filter,$translate,newRoute){
 		$scope.restaurants=Restaurant.query();
 		$scope.restaurantsCategory=restaurantsCategory.query();
 		$scope.filteredItems = [];
@@ -9,11 +9,20 @@ angular.module('xploreBilbaoApp')
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
-	   	console.log($rootScope.sidebar);
 	  	$scope.getLang=function(){
 	  		var lang=$translate.use();
 	    	return lang;
 	    };
+
+	    $scope.addLocation=function(id){
+	    	var found=false;
+	    	for(var i=0;i<$scope.filteredItems.length&&!found;i++){
+	    		if($scope.filteredItems[i].id===id){
+	    			found=true;
+					newRoute.addLocation($scope.filteredItems[i]);
+	    		}
+	    	}
+	    }
 	        // init the filtered items
     	$scope.filterByCategory = function () {
 	        $scope.filteredItems = $filter('filter')($scope.restaurants, function (item) {

@@ -20,7 +20,8 @@
     "leaflet-sidebar":"*",
     "components-font-awesome": "4.1",
     "angular-truncate": "*",
-    "angular-snap": "*"
+    "angular-snap": "*",
+    "angular-dragdrop": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",

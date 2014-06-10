@@ -47,13 +47,16 @@
         <div class="fullHeight"  ui-view=""></div>
     </snap-content>
     <snap-drawer >
-        <div>
+        <div ng-controller="NewRouteCtrl">
             <ul class=" sidebar-nav list-group">
-              <li class="sidebar-brand list-group-item"> Ruta desglosada
+              <li class="sidebar-brand list-group-item" > Ruta desglosada
               </li>
-              <li class ="list-group-item" > 
+              <li class ="list-group-item" ng-repeat="location in newRoute"  ng-model='newRoute'  data-drop="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback()'}" > 
+                <div  data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="newRoute" jqyoui-draggable="{index: {{$index}},animate:true}">
                 <div class="row">
+                    {{location.denom_es}}
                 </div>
+            </div>
               </li>
             </ul>
         </div>
@@ -92,6 +95,8 @@
     <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
     <script src="bower_components/snapjs/snap.js"></script>
     <script src="bower_components/angular-snap/angular-snap.js"></script>
+    <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
