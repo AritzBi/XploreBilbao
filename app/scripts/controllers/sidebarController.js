@@ -4,8 +4,8 @@ angular.module('xploreBilbaoApp')
 	.controller('SidebarCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute){
 		$scope.opts = {
   			disable: 'right',
-  			minPosition: -500,
-  			maxPosition: 500
+  			minPosition: -400,
+  			maxPosition: 400
 		};
 		snapRemote.getSnapper().then(function(snapper) {
 			var sidebarEnabled=$cookieStore.get('sidebar');
@@ -42,7 +42,10 @@ angular.module('xploreBilbaoApp')
   .controller('NewRouteCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute){
     $scope.newRoute=newRoute.getRoute();
       $scope.dropCallback = function(event, ui, title, $index) {
-        console.log($scope.newRoute);
+    };
+
+    $scope.createRoute=function(){
+      console.log($scope.newRoute);
     };
   }); 
 
