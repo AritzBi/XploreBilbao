@@ -21,6 +21,11 @@
 								<p>{{emblematicBuilding.description_es}}</p>
 							</div>
 						</div>
+						<div class="row">
+							<button type="button" ng-show="isSidebarEnabled()"ng-click="addLocation(emblematicBuilding.id)" class="btn btn-default btn-lg pull-right">
+  								<span class="addRouteElement glyphicon glyphicon-plus"></span>
+							</button>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -37,11 +42,6 @@
 				</div>
 			</div>
 		</div>
-	<!--	<div class="col-lg-10">
-			<div ui-view="">
-
-			</div>
-		</div>-->
 	</div>
     <div class="row pull-right">
         <ul class="pagination">

@@ -45,7 +45,10 @@ angular.module('xploreBilbaoApp')
     };
 
     $scope.createRoute=function(){
-      console.log($scope.newRoute);
+      var newRoute=[];
+      for(var i=0; i<$scope.newRoute.length;i++){
+        
+      }
     };
   }); 
 
@@ -54,12 +57,11 @@ angular.module('xploreBilbaoApp')
   var newRoute=[];
   this.addLocation = function(location){
     newRoute.push(location);
-    console.log(newRoute);
   }
   this.getRoute = function(){
     return newRoute;
   }
   this.reset=function(){
-    newRoute=[];
+    newRoute.length=0;
   }
 });

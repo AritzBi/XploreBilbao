@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('MuseumsCtrl', function ($rootScope,$scope,EmblematicBuilding,$translate){
+	.controller('MuseumsCtrl', function ($rootScope,$scope,EmblematicBuilding,$translate,newRoute){
 	    $scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
@@ -18,6 +18,15 @@ angular.module('xploreBilbaoApp')
 	  		var lang=$translate.use();
 	    	return lang;
 	    };
+	   	$scope.addLocation=function(id){
+	    	var found=false;
+	    	for(var i=0;i<$scope.museums.length&&!found;i++){
+	    		if($scope.museums[i].id===id){
+	    			found=true;
+					newRoute.addLocation($scope.museums[i]);
+	    		}
+	    	}
+	    }
 		// calculate page in place
 	    $scope.groupToPages = function () {
 	        $scope.pagedItems = [];

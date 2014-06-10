@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter,$translate){
+	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter,$translate,newRoute){
 		$scope.pintxos=Pintxo.query();
 		$scope.pintxosCategory=pintxosCategory.query();
 		$scope.filteredItems = [];
@@ -14,6 +14,16 @@ angular.module('xploreBilbaoApp')
 	  		var lang=$translate.use();
 	    	return lang;
 	    };
+
+	   	$scope.addLocation=function(id){
+	    	var found=false;
+	    	for(var i=0;i<$scope.filteredItems.length&&!found;i++){
+	    		if($scope.filteredItems[i].id===id){
+	    			found=true;
+					newRoute.addLocation($scope.filteredItems[i]);
+	    		}
+	    	}
+	    }
 	        // init the filtered items
     	$scope.filterByCategory = function () {
 	        $scope.filteredItems = $filter('filter')($scope.pintxos, function (item) {
