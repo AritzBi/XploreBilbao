@@ -32,7 +32,7 @@ angular.module('xploreBilbaoApp')
 
     	$scope.isSidebarEnabled = function() {
     		var sidebarEnabled=$cookieStore.get('sidebar');
-    		if(sidebarEnabled === "true")
+    		if(sidebarEnabled === "true" && $rootScope.currentUser)
     			return true;
     		else return false;
     	};
@@ -48,12 +48,12 @@ angular.module('xploreBilbaoApp')
       var newRoute='[';
       for(var i=0; i<$scope.newRoute.length;i++){
         if($scope.newRoute[i].building_type){
-          newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"EMBLEMATIC_BUILDING\"},');
+          newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].event_id+', \"TYPE\": \"EMBLEMATIC_BUILDING\"},');
         }else{
           if($scope.newRoute[i].hostelery_type){
-            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"HOSTELERY\"},');
+            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].event_id+', \"TYPE\": \"HOSTELERY\"},');
           }else{
-            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"EVENT\"},');
+            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].event_id+', \"TYPE\": \"EVENT\"},');
           }
         }
       }
@@ -61,9 +61,12 @@ angular.module('xploreBilbaoApp')
       newRoute = newRoute.substring(0, newRoute.length-1);
       newRoute=newRoute.concat(']');
       Routes.save({route: newRoute}, function(){
-
       });
     };
+
+    $scope.deleteItem=function(){
+      console.log("holis");
+    }
   }); 
 
 angular.module('xploreBilbaoApp')

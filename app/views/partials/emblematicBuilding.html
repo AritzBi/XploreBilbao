@@ -8,7 +8,7 @@
 						<div class="row">
 							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
 							<div class="col-md-6">
-								<a ui-sref="buildingInfo({id: emblematicBuilding.id})"><h4>{{emblematicBuilding.denom_es}}</h4></a>
+								<a ui-sref="buildingInfo({id: emblematicBuilding.id})"><h4>{{emblematicBuilding['denom_' + getLang()] }}</h4></a>
 							</div>
 							<div class="col-md-6">
 							</div>
@@ -18,7 +18,7 @@
 								<img class="img-responsive"ng-src="images/{{emblematicBuilding.image_path}}">
 							</div>
 							<div class="col-md-8">
-								<p>{{emblematicBuilding.description_es}}</p>
+								<p>{{emblematicBuilding['description_' + getLang()] }}</p>
 							</div>
 						</div>
 						<div class="row">
@@ -36,7 +36,7 @@
 				    <div class="controls">
 				        <label class="checkbox" ng-repeat="category in buildingsCategory">
 				            <input type="checkbox" ng-change="filterByCategory()"ng-model="category.isActivated" defaultChecked="true">
-				            {{category.type_denom_es}}
+				            {{category['type_denom_' + getLang()] }}
 				        </label>     
 				    </div>
 				</div>

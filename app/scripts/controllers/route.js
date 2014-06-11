@@ -91,11 +91,9 @@ angular.module('xploreBilbaoApp')
 
 angular.module('xploreBilbaoApp')
 .controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
-	console.log("hola");
 	Routes.getTopRoutes().$promise.then(
 		function success(data){
 			$scope.topRoutes=data;
-			console.log(data);
 		}
 	);
 
@@ -124,7 +122,6 @@ angular.module('xploreBilbaoApp')
 		    				}
 		    			}
 		    		}
-		    		console.log($scope.topRoutes[i-1]);
 		    		$scope.geoJsonLayer = L.geoJson($scope.topRoutes[i-1],{
 						style: style
 					});
