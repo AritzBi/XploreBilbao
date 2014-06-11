@@ -234,7 +234,7 @@ angular.module('xploreBilbaoApp')
 		    				}
 		    			}
 		    		}
-		    		$scope.geoJsonLayer = L.geoJson($scope.topRoutes[i-1],{
+		    		$scope.geoJsonLayer = L.geoJson($scope.myRoutes[i-1],{
 						style: style
 					});
 					$scope.geoJsonLayer.addTo(map);

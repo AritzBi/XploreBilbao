@@ -48,10 +48,10 @@ angular.module('xploreBilbaoApp')
       var newRoute='[';
       for(var i=0; i<$scope.newRoute.length;i++){
         if($scope.newRoute[i].building_type){
-          newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].event_id+', \"TYPE\": \"EMBLEMATIC_BUILDING\"},');
+          newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"EMBLEMATIC_BUILDING\"},');
         }else{
           if($scope.newRoute[i].hostelery_type){
-            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].event_id+', \"TYPE\": \"HOSTELERY\"},');
+            newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].id+', \"TYPE\": \"HOSTELERY\"},');
           }else{
             newRoute=newRoute.concat('{\"ID\": '+$scope.newRoute[i].event_id+', \"TYPE\": \"EVENT\"},');
           }
