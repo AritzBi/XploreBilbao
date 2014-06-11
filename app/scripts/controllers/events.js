@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate){	    
+	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate,newRoute){	    
 	   	$scope.range = function (start, end) {
 	        var ret = [];
 	        if (!end) {
@@ -45,7 +45,6 @@ angular.module('xploreBilbaoApp')
 				    $scope.currentPage = 0;
 				    // now group by pages
 		        	$scope.groupToPages();
-		        	console.log(data);
 				}
 			);
 			// calculate page in place
@@ -59,6 +58,18 @@ angular.module('xploreBilbaoApp')
 		            }
 		        }
 		    };
+
+			$scope.addLocation=function(id){
+				console.log(id);
+		    	var found=false;
+		    	for(var i=0;i<$scope.events.length&&!found;i++){
+		    		if($scope.events[i].event_id===id){
+		    			found=true;
+		    			console.log($scope.events[i]);
+						newRoute.addLocation($scope.events[i]);
+		    		}
+		    	}
+		    }
 		}
 		else{
 			$scope.events=Event.query();
@@ -85,6 +96,15 @@ angular.module('xploreBilbaoApp')
 		        // now group by pages
 		        $scope.groupToPages();
 	    	};
-		     $scope.filterByCategory();      
+		    $scope.addLocation=function(id){
+		    	var found=false;
+		    	for(var i=0;i<$scope.filteredItems.length&&!found;i++){
+		    		if($scope.filteredItems[i].event_id===id){
+		    			found=true;
+						newRoute.addLocation($scope.filteredItems[i]);
+		    		}
+		    	}
+		    }
+			 $scope.filterByCategory();      
 	    }
 	});

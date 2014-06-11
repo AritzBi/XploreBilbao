@@ -150,7 +150,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('RouteDetails',["$scope","selectedRoute","leafletData","$stateParams", "$sce", "Auth", "Routes",function ($scope,selectedRoute,leafletData,$stateParams,$sce,Auth, Routes){
+.controller('RouteDetails',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes",function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
 	var style={
                 fillColor: "green",
                 weight: 5,
@@ -205,7 +205,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('MyRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
+.controller('MyRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
 	Routes.getMyRoutes().$promise.then(
 		function success(data){
 			$scope.myRoutes=data;
@@ -261,62 +261,6 @@ angular.module('xploreBilbaoApp')
 	}
 }]);
 
-angular.module('xploreBilbaoApp')
-.controller('MyRoutesCtrl',["$scope","leafletData","$stateParams", "$sce", "Auth", "Routes", function ($scope,leafletData,$stateParams,$sce,Auth, Routes){
-	Routes.getMyRoutes().$promise.then(
-		function success(data){
-			$scope.myRoutes=data;
-		}
-	);
-
-	$scope.showInMap= function(routeId){
-		var style={
-                fillColor: "green",
-                weight: 5,
-                opacity: 1,
-                color: 'green',
-                dashArray: '9',
-                fillOpacity: 0.7
-	        	};
-	    Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
-	    	function success(data){
-	    		leafletData.getMap().then(function(map){
-	    			if($scope.geoJsonLayer){
-		    			map.removeLayer($scope.geoJsonLayer);
-		    		}
-		    		var found=false;
-		    		for(var i=0;i<$scope.myRoutes.length&&!found;i++){
-		    			if($scope.myRoutes[i].properties.id===routeId){
-		    				found=true;
-
-		    				for(var j=0;j<data.features.length;j++){
-		    					$scope.myRoutes[i].features.push(data.features[j]);
-		    				}
-		    			}
-		    		}
-		    		$scope.geoJsonLayer = L.geoJson($scope.topRoutes[i-1],{
-						style: style
-					});
-					$scope.geoJsonLayer.addTo(map);
-	    		});
-	    	}
-	    );
-	}
-	$scope.showDetails= function(routeId){
-		var found=false;
-		var route;
-		for(var i=0;i<$scope.myRoutes.length;i++){
- 			if($scope.myRoutes[i].properties.id === routeId){
- 				found=true;
- 				route=$scope.myRoutes[i];
- 			}
-		}
-		if(found){
-			selectedRoute.setRoute(route);
-			$state.go('personalRoute.routeDetails', {hasWalkingPath: hasRoute(route), origin: 2 });
-		}
-	}
-}]);
 angular.module('xploreBilbaoApp')
 .controller('ScrollCtrl',function ($scope,$location, $anchorScroll){
 	$scope.gotoBottom = function (){

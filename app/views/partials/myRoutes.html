@@ -2,7 +2,7 @@
 	<li class="sidebar-brand list-group-item">Mis Rutas
 	</li>
 	<div id="scrollArea" ng-controller="ScrollCtrl">
-		<li class ="list-group-item"  ng-repeat="route in topRoutes" > 
+		<li class ="list-group-item"  ng-repeat="route in myRoutes" > 
 			<a  ui-sref="personalRoute.myRoutes" >
 			{{route.properties.name_es}}</a><p>{{route.properties.description_es}}</p>
 			<button class="btn btn-primary" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
