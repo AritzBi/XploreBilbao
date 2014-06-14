@@ -8,5 +8,6 @@
 	"pintxos": "Pintxo bars",
 	"buildings": "Emblematic buildings",
 	"routes": "Routes",
-	"logout": "Logout"
+	"logout": "Logout",
+	"filter": "Filter"
 }

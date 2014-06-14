@@ -3,15 +3,21 @@
 
 	<div style="padding-top: 50px;" >
 		<div class="row data-container">
+			<div class="row">
+				<div class="col-md-9 col-lg-9">
+					<h2>{{'museums' | translate}}</h2>
+				</div>
+			</div>
 			<div class="col-md-9 col-lg-9">
 				<div class="panel panel-default">
 					<ul class="list-group">
 						<li  class="list-group-item"  ng-repeat="museum in pagedItems[currentPage]" id="{{museum.id}}" >
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-9">
 									<a ui-sref="museumInfo({id: museum.id})"><h4>{{museum['denom_' + getLang()] }}</h4></a>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-3 pull-right">
+									<h5>{{'museums' | translate}}</h5>
 								</div>
 							</div>
 							<div class="row">
@@ -19,7 +25,7 @@
 									<img class="img-responsive"ng-src="images/{{museum.image_path}}">
 								</div>
 								<div class="col-md-8">
-									<p>{{museum['description_' + getLang()] }}</p>
+									<p class="justify">{{museum['description_' + getLang()] }}</p>
 								</div>
 							</div>
 							<div class="row">

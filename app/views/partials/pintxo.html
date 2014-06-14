@@ -1,15 +1,24 @@
 <div class="container">
 <div ng-include="'partials/navbar'"></div>
 	<div style="padding-top: 50px;"class="row data-container">
+		<div class="row">
+			<div class="col-md-9 col-lg-9">
+				<h2>{{'pintxos' | translate}}</h2>
+			</div>
+			<div class="col-md-3 col-lg-3">
+				<h3>{{'filter' | translate}}</h3>
+			</div>
+		</div>
 		<div class="col-md-9">
 			<div class="panel panel-default">
 				<ul class="list-group">
 					<li  class="list-group-item"  ng-repeat="pintxo in pagedItems[currentPage]" >
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-9">
 								<a ui-sref="pintxoInfo({id: pintxo.id})"><h4>{{pintxo['denom_' + getLang()] }}</h4></a>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-3 pull-right">
+								<h5>{{pintxo['first_type_' + getLang()] }}</h5>
 							</div>
 						</div>
 						<div class="row">
@@ -17,7 +26,7 @@
 								<img class="img-responsive"ng-src="images/{{pintxo.image_path}}">
 							</div>
 							<div class="col-md-8">
-								<p>{{pintxo['description_' + getLang()] }}</p>
+								<p class="justify">{{pintxo['description_' + getLang()] }}</p>
 							</div>
 						</div>
 						<div class="row">

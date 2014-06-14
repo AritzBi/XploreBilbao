@@ -1,16 +1,25 @@
 <div class="container">
 <div ng-include="'partials/navbar'"></div>
 	<div style="padding-top: 50px;"class="row data-container">
+		<div class="row">
+			<div class="col-md-9 col-lg-9">
+				<h2>{{'pintxos' | translate}}</h2>
+			</div>
+			<div class="col-md-3 col-lg-3">
+				<h3>{{'filter' | translate}}</h3>
+			</div>
+		</div>
 		<div class="col-md-9">
 			<div class="panel panel-default">
 				<ul class="list-group">
 					<li  class="list-group-item"  ng-repeat="emblematicBuilding in pagedItems[currentPage]" >
 						<div class="row">
 							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
-							<div class="col-md-6">
+							<div class="col-md-8">
 								<a ui-sref="buildingInfo({id: emblematicBuilding.id})"><h4>{{emblematicBuilding['denom_' + getLang()] }}</h4></a>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4 pull-right">
+								<h5>{{'buildings' | translate}}</h5>
 							</div>
 						</div>
 						<div class="row">
@@ -18,7 +27,7 @@
 								<img class="img-responsive"ng-src="images/{{emblematicBuilding.image_path}}">
 							</div>
 							<div class="col-md-8">
-								<p>{{emblematicBuilding['description_' + getLang()] }}</p>
+								<p class="justify">{{emblematicBuilding['description_' + getLang()] }}</p>
 							</div>
 						</div>
 						<div class="row">

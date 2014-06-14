@@ -118,3 +118,7 @@ snap-content {
   color: white;
   background-color:blue; 
 }
+
+.justify{
+  text-align: justify;
+}
