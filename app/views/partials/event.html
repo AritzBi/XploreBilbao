@@ -18,11 +18,35 @@
 								<img class="img-responsive"ng-src="images/{{event.image_path}}">
 							</div>
 							<div class="col-md-8">
-								<p>{{event['description_' + getLang()] }}</p>
-								<p>{{event['startdate']}}</p>
-								<p>{{event['endate']}}</p>
-								<p> {{event['starthour']}}</p>
-								<p> {{event['endhour']}}</p>
+								<div class="row">
+									<div class="col-md-12">
+										<p>{{event['description_' + getLang()] }}</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8"> 
+										<p>
+											<span class="date-format">{{event['startdate'] | date:("date"|translate)}}</span>
+											<span class="date-format" ng-show="{{event.showEndDate}}">/ {{event['endate'] | date:'yyyy-MM-dd'}}</span>
+										</p>
+										<p>
+											<span class="date-format">{{event['starthour']}}</span> - 
+											<span class="date-format">{{event['endhour']}}</span>
+										</p>
+									</div>
+									<div class="col-md-4">
+										<div ng-if="event.price == '0'">
+											<span class="label label-success date-format">{{"free" | translate}}</span>
+										</div>
+										<div ng-if="event.price != '0' && event.price !='-1'">
+											<span class="label label-info date-format">{{event['price']}}€</span>
+										</div>
+										<div ng-if="event.price =='-1'">
+											<span class="label label-danger date-format">{{"toDefine" | translate}}</span>
+										</div>
+
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="row">

@@ -36,6 +36,7 @@ angular.module('xploreBilbaoApp')
 	    };
 
 		if($stateParams.id){
+			console.log("aqui no");
 			Event.getEventsByType({id2: $stateParams.id}).$promise.then(
 				function success(data){
 					$scope.events=data;
@@ -45,6 +46,15 @@ angular.module('xploreBilbaoApp')
 				    $scope.currentPage = 0;
 				    // now group by pages
 		        	$scope.groupToPages();
+		        	for(var i=0; i<$scope.events.length; i++){
+		        		console.log($scope.events[i].startDate);
+		        		console.log($scope.events[i].endate);
+		        		if($scope.events[i].startdate === $scope.events[i].endate){
+		        			$scope.events[i].showEndDate=false;
+		        		}else{
+		        			$scope.events[i].showEndDate=true;
+		        		}
+		        	}
 				}
 			);
 			// calculate page in place
@@ -60,7 +70,6 @@ angular.module('xploreBilbaoApp')
 		    };
 
 			$scope.addLocation=function(id){
-				console.log(id);
 		    	var found=false;
 		    	for(var i=0;i<$scope.events.length&&!found;i++){
 		    		if($scope.events[i].event_id===id){

@@ -9,5 +9,7 @@
 	"buildings": "Eraikin Adierazgarriak",
 	"routes": "Ibilbideak",
 	"logout": "Irten",
-	"filter": "Filtratu"
+	"filter": "Filtratu",
+	"date":"yyyy-MM-dd",
+	"free": "Doan"
 }

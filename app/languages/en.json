@@ -9,5 +9,8 @@
 	"buildings": "Emblematic buildings",
 	"routes": "Routes",
 	"logout": "Logout",
-	"filter": "Filter"
+	"filter": "Filter",
+	"date":"yyyy-MM-dd",
+	"free": "Free",
+	"toDefine": "Yet to define"
 }

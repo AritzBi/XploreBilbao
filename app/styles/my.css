@@ -122,3 +122,8 @@ snap-content {
 .justify{
   text-align: justify;
 }
+
+.date-format{
+  font-weight:bold;
+  font-size:15px;
+}

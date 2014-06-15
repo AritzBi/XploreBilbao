@@ -9,7 +9,10 @@
 	"buildings": "Edificios emblemáticos",
 	"routes": "Rutas",
 	"logout": "Salir",
-	"filter": "Filtrar"
+	"filter": "Filtrar",
+	"date":"dd-MM-yyyy",
+	"free": "Gratis",
+	"toDefine": "Por definir"
 
 
 }
