@@ -36,7 +36,7 @@ angular.module('xploreBilbaoApp')
 	    };
 
 		if($stateParams.id){
-			console.log("aqui no");
+			$scope.priceSlider=5;
 			Event.getEventsByType({id2: $stateParams.id}).$promise.then(
 				function success(data){
 					$scope.events=data;
@@ -47,8 +47,6 @@ angular.module('xploreBilbaoApp')
 				    // now group by pages
 		        	$scope.groupToPages();
 		        	for(var i=0; i<$scope.events.length; i++){
-		        		console.log($scope.events[i].startDate);
-		        		console.log($scope.events[i].endate);
 		        		if($scope.events[i].startdate === $scope.events[i].endate){
 		        			$scope.events[i].showEndDate=false;
 		        		}else{
@@ -74,11 +72,12 @@ angular.module('xploreBilbaoApp')
 		    	for(var i=0;i<$scope.events.length&&!found;i++){
 		    		if($scope.events[i].event_id===id){
 		    			found=true;
-		    			console.log($scope.events[i]);
 						newRoute.addLocation($scope.events[i]);
 		    		}
 		    	}
 		    }
+		    $scope.currencyFormatting = function(value) { return value.toString() + " $" }
+
 		}
 		else{
 			$scope.events=Event.query();

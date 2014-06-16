@@ -62,10 +62,13 @@
 			<div class="well well-lg">
 				<div class="control-group">
 				    <div class="controls">
-				        <label class="checkbox" ng-repeat="category in eventsCategory">
-				            <input type="checkbox" ng-change="filterByCategory()"ng-model="category.isActivated" defaultChecked="true">
-				            {{category['first_type_' + getLang()] }}
-				        </label>     
+				    		<slider
+						    ng-model="priceSilder"
+						    floor="0"
+						    ceiling="100">
+						</slider>
+
+						<input type="date"/>
 				    </div>
 				</div>
 			</div>

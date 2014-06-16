@@ -5,13 +5,16 @@ angular.module('xploreBilbaoApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
+  'datePicker',
   'ui.bootstrap',
   'ui.router',
   'pascalprecht.translate',
   'leaflet-directive',
   'truncate',
   'snap',
-  'ngDragDrop'
+  'ngDragDrop',
+  'vr.directives.slider'
+
 ])
   .config( function ($stateProvider, $urlRouterProvider, $translateProvider, snapRemoteProvider) {
     $stateProvider
