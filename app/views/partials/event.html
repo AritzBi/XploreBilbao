@@ -62,13 +62,24 @@
 			<div class="well well-lg">
 				<div class="control-group">
 				    <div class="controls">
-				    		<slider
-						    ng-model="priceSilder"
-						    floor="0"
-						    ceiling="100">
-						</slider>
-
-						<input type="date"/>
+				    	<div class="row filter-format filter-margin">Price</div>
+				    	<div class="row">
+					    	<slider
+							    ng-model="priceSilder.low"
+							    floor="0"
+							    ceiling="100"
+							    ng-model-range="priceSlider.high">
+							</slider>
+						</div>
+						<div class="row filter-format">Fecha de inicio</div>
+						<div class="row"><input type="date" ng-model="startDate"/></div>
+						<div class="row filter-format">Fecha de fin</div>
+						<div class="row"><input type="date" ng-model="endDate"/></div>
+						<div class="row filter-format">Rango de horas</div>
+						<div class="row filter-margin"><input type="time" ng-model="startHour"/><input type="time" ng-model="endHour"/></div>
+						<div class="row">
+							<button class="btn btn-primary" ng-click="filterEvent()" type="submit">Filtrar</button>
+						</div>
 				    </div>
 				</div>
 			</div>

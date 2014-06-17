@@ -30,16 +30,18 @@ slider {
 
 	slider span.pointer {
 		cursor:           pointer;
-		width:            15px;
+		width:            10px;
 		top:              0;
 		bottom:           0;
-		background-color: #00a;
+		background-color: #3498db;
 	}
 
 	slider span.pointer:hover {
+		cursor:pointer;
 	}
 
 	slider span.pointer.active {
+		cursor:pointer;
 	}
 
 	slider span.bubble {

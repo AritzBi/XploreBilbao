@@ -35,8 +35,46 @@ angular.module('xploreBilbaoApp')
 	    	return lang;
 	    };
 
+    	$scope.filterEvent = function () {
+	        $scope.filteredItems = $filter('filter')($scope.events, function (item) {
+	        	var found=true;
+	        	var number;
+	        	if(item.price.indexOf('-') === -1){
+	        		number=parseFloat(item.price);
+	        		if($scope.priceSlider.low>=number || $scope.priceSlider.high<=number){
+	        			found=false;
+	        		}
+	        	}else{
+	        		if(item.price === '-1'){
+	        			found=false;
+	        		}else{
+	        			number=parseFloat(item.price.replace(',','.'));
+	        			if($scope.priceSlider.low>=number || $scope.priceSlider.high<=number){
+	        				found=false;
+	        			}
+	        		}
+	        	}
+	            return found;
+	        });
+	        $scope.currentPage = 0;
+	        // now group by pages
+	        $scope.groupToPages();
+    	};
+
+	    var now = new Date();
+    	var month = (now.getMonth() + 1);               
+    	var day = now.getDate();
+    	if(month < 10) 
+        	month = "0" + month;
+    	if(day < 10) 
+       		day = "0" + day;
+    	var today = now.getFullYear() + '-' + month + '-' + day;
+		$scope.priceSlider={};
+		$scope.priceSlider.low=0;
+		$scope.priceSlider.high=30;
+		$scope.startDate=today;
+		$scope.endDate=today;
 		if($stateParams.id){
-			$scope.priceSlider=5;
 			Event.getEventsByType({id2: $stateParams.id}).$promise.then(
 				function success(data){
 					$scope.events=data;
@@ -44,8 +82,6 @@ angular.module('xploreBilbaoApp')
 				    $scope.itemsPerPage = 4;
 				    $scope.pagedItems = [];
 				    $scope.currentPage = 0;
-				    // now group by pages
-		        	$scope.groupToPages();
 		        	for(var i=0; i<$scope.events.length; i++){
 		        		if($scope.events[i].startdate === $scope.events[i].endate){
 		        			$scope.events[i].showEndDate=false;
@@ -53,26 +89,28 @@ angular.module('xploreBilbaoApp')
 		        			$scope.events[i].showEndDate=true;
 		        		}
 		        	}
+		        	$scope.filteredItems=$scope.events;
+		        	$scope.groupToPages();
 				}
 			);
 			// calculate page in place
 		    $scope.groupToPages = function () {
 		        $scope.pagedItems = [];
-		        for (var i = 0; i < $scope.events.length; i++) {
+		        for (var i = 0; i < $scope.filteredItems.length; i++) {
 		            if (i % $scope.itemsPerPage === 0) {
-		                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [$scope.events[i] ];
+		                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)] = [$scope.filteredItems[i] ];
 		            } else {
-		                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.events[i]);
+		                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
 		            }
 		        }
 		    };
 
 			$scope.addLocation=function(id){
 		    	var found=false;
-		    	for(var i=0;i<$scope.events.length&&!found;i++){
-		    		if($scope.events[i].event_id===id){
+		    	for(var i=0;i<$scope.filteredItems.length&&!found;i++){
+		    		if($scope.filteredItems[i].event_id===id){
 		    			found=true;
-						newRoute.addLocation($scope.events[i]);
+						newRoute.addLocation($scope.filteredItems[i]);
 		    		}
 		    	}
 		    }

@@ -127,3 +127,12 @@ snap-content {
   font-weight:bold;
   font-size:15px;
 }
+
+.filter-format{
+  font-weight:bold;
+  font-size:15px; 
+}
+
+.filter-margin{
+  margin-bottom: 15px;
+}
