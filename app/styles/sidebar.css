@@ -16,10 +16,13 @@
 .sidebar-nav {
   position: absolute;
   top: 0;
-  width: 400px;
+  /*width: 400px;*/
   list-style: none;
   margin: 0;
   padding: 0;
+  height: 100%;
+  padding-left: 25px;
+  padding-right: 5px;
 }
 
 .sidebar-nav li {
