@@ -37,24 +37,33 @@ angular.module('xploreBilbaoApp')
 
     	$scope.filterEvent = function () {
 	        $scope.filteredItems = $filter('filter')($scope.events, function (item) {
-	        	var found=true;
 	        	var number;
-	        	if(item.price.indexOf('-') === -1){
-	        		number=parseFloat(item.price);
-	        		if($scope.priceSlider.low>=number || $scope.priceSlider.high<=number){
-	        			found=false;
-	        		}
-	        	}else{
-	        		if(item.price === '-1'){
+	        	var found=true;
+	        	if(item.range_prices){
+	        		number=parseFloat(item.lowprice);
+	        		if($scope.priceSlider.price<=number){
 	        			found=false;
 	        		}else{
-	        			number=parseFloat(item.price.replace(',','.'));
-	        			if($scope.priceSlider.low>=number || $scope.priceSlider.high<=number){
+	        			found=true;
+	        		}
+	        	}else{
+	        		console.log(item.lowprice);
+	        		if(item.lowprice === -1){
+	        			found=false;
+	        		}else{
+	        			number=parseFloat(item.lowprice);
+	        			if($scope.priceSlider.price<=number){
 	        				found=false;
+	        			}else{
+	        				found=true;
 	        			}
 	        		}
 	        	}
-	            return found;
+	            if(!found){
+	            	return false;
+	            }else{
+	            	return true;
+	            }
 	        });
 	        $scope.currentPage = 0;
 	        // now group by pages
@@ -70,8 +79,7 @@ angular.module('xploreBilbaoApp')
        		day = "0" + day;
     	var today = now.getFullYear() + '-' + month + '-' + day;
 		$scope.priceSlider={};
-		$scope.priceSlider.low=0;
-		$scope.priceSlider.high=30;
+		$scope.priceSlider.price=30;
 		$scope.startDate=today;
 		$scope.endDate=today;
 		if($stateParams.id){
@@ -83,10 +91,18 @@ angular.module('xploreBilbaoApp')
 				    $scope.pagedItems = [];
 				    $scope.currentPage = 0;
 		        	for(var i=0; i<$scope.events.length; i++){
-		        		if($scope.events[i].startdate === $scope.events[i].endate){
+		        		var pos=$scope.events[i].startdate.indexOf('T');
+		        		var startDate=$scope.events[i].startdate.substr(0,pos);
+		        		var endDate=$scope.events[i].endate.substr(0,pos);
+		        		if(startDate === endDate){
 		        			$scope.events[i].showEndDate=false;
 		        		}else{
 		        			$scope.events[i].showEndDate=true;
+		        		}
+		        		if($scope.events[i].range_prices){
+		        			$scope.events[i].price=$scope.events[i].lowprice+"€-"+$scope.events[i].highprice;
+		        		}else{
+		        			$scope.events[i].price=$scope.events[i].lowprice;	
 		        		}
 		        	}
 		        	$scope.filteredItems=$scope.events;

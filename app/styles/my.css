@@ -13,7 +13,11 @@
 }
 textarea { resize:none; }
 
-.fullHeight {height:100%;}
+.fullHeight {
+  height:100%;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
 
 .container-info{
   margin-right:auto;
@@ -44,8 +48,12 @@ html,body {
     height:100%; 
 }
 .data-container{
-  height: 780px;
-  overflow-y: auto;
+  height: 820px;
+    overflow-y: auto;
+  overflow-x:hidden;
+}
+.data-container-overflow{
+
 }
 
 
