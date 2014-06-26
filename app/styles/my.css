@@ -40,7 +40,7 @@ textarea { resize:none; }
 /*padding-left: 25px;*/
 padding-top: 28px;
 padding-right: 25px;
-height: 800px;
+height: 100%;
 padding-bottom: 50px;
 }
 
@@ -48,7 +48,7 @@ html,body {
     height:100%; 
 }
 .data-container{
-  height: 820px;
+  position:relative;
   overflow-y: auto;
   overflow-x:hidden;
 }
@@ -60,7 +60,7 @@ html,body {
 .angular-leaflet-map{height:100%;}
 
 #scrollArea {
-  height: 630px;
+  height: relative;
   overflow-y: auto;
   overflow-x: auto;
 }
@@ -143,4 +143,9 @@ snap-content {
 
 .filter-margin{
   margin-bottom: 15px;
+}
+
+.popUpSize{
+  height: 100px;
+  width: 100%;
 }
