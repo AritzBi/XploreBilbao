@@ -47,7 +47,6 @@ angular.module('xploreBilbaoApp')
 	        			found=true;
 	        		}
 	        	}else{
-	        		console.log(item.lowprice);
 	        		if(item.lowprice === -1){
 	        			found=false;
 	        		}else{
@@ -60,9 +59,49 @@ angular.module('xploreBilbaoApp')
 	        		}
 	        	}
 	            if(!found){
-	            	return false;
+	            	return found;
 	            }else{
-	            	return true;
+	            	var startDateSplit=$scope.startDate.split('-');
+	            	startDateSplit=new Date (startDateSplit[0],startDateSplit[1]-1,startDateSplit[2]).getTime();
+	            	var endDateSplit=$scope.endDate.split('-');
+	            	endDateSplit=new Date(endDateSplit[0],endDateSplit[1]-1,endDateSplit[2]).getTime();
+	            	var startDateComparable=new Date(item.startdate).getTime();
+	            	var endDateComparable=new Date(item.endate).getTime();
+	            	if((startDateComparable>=startDateSplit && startDateComparable<=endDateSplit)|| (endDateComparable>=startDateSplit && endDateComparable<=endDateSplit)){
+	            		found=true;
+	            	}else{
+	            		found=false;
+	            	}
+	            	if(!found){
+	            		return found;
+	            	}else{
+	            		console.log("hola");
+	            		var startHour=item.starthour;
+	            		var endHour=item.endhour;
+	            		var startHourFilter=$scope.startHour;
+	            		var endHourFilter=$scope.endHour;
+	            		console.log(parseInt(startHour.substr(0,2)));
+	            		console.log(parseInt(startHourFilter.substr(0,2)));
+	            		if(parseInt(startHour.substr(0,2))>=parseInt(startHourFilter.substr(0,2))){
+	            			if(parseInt(startHour.substr(0,2))==parseInt(startHourFilter.substr(0,2))){
+	            				if(parseInt(startHour.substr(3,4))<parseInt(startHourFilter.substr(3,4)))
+	            					return false;
+	            			}
+	            			if(parseInt(endHour.substr(0,2))<=parseInt(endHourFilter.substr(0,2))){
+	            				if(parseInt(endHour.substr(0,2))==parseInt(endHourFilter.substr(0,2))){
+	            					if(parseInt(endHour.substr(3,4))>parseInt(endHourFilter.substr(3,4)))
+	            						return false;
+	            				}
+	            				return true;
+	            			}else{
+	            				return false;
+	            			}
+	            		}else{
+	            			return false;
+	            		}
+	            		//SI EL START HOUR ES MENOR AL DEL FILTRO
+	            		//SI EL EN HOUR ES MAYOR O IGUAL AL DEL FILTRO
+	            	}
 	            }
 	        });
 	        $scope.currentPage = 0;
@@ -91,10 +130,10 @@ angular.module('xploreBilbaoApp')
 				    $scope.pagedItems = [];
 				    $scope.currentPage = 0;
 		        	for(var i=0; i<$scope.events.length; i++){
-		        		var pos=$scope.events[i].startdate.indexOf('T');
+		        		/*var pos=$scope.events[i].startdate.indexOf('T');
 		        		var startDate=$scope.events[i].startdate.substr(0,pos);
-		        		var endDate=$scope.events[i].endate.substr(0,pos);
-		        		if(startDate === endDate){
+		        		var endDate=$scope.events[i].endate.substr(0,pos);*/
+		        		if($scope.events[i].sdate === $scope.events[i].edate){
 		        			$scope.events[i].showEndDate=false;
 		        		}else{
 		        			$scope.events[i].showEndDate=true;
