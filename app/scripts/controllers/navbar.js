@@ -2,14 +2,6 @@
 
 angular.module('xploreBilbaoApp')
   .controller('NavbarCtrl', function ($scope, Auth, $location, $modal,eventsCategory, $translate) {
-
-    /*$scope.eventsCategory=eventsCategory.query().$promise.then(
-      function success(categories){
-        console.log("hola");
-        console.log(categories);
-      }
-
-    );  */
     $scope.getLang=function(){
       var lang=$translate.use();
       return lang;

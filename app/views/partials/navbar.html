@@ -17,28 +17,28 @@
           		<span class="icon-bar"></span>
           		<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">XploreBilbao</a>
+			<a class="navbar-brand" style="color: white" href="#">XploreBilbao</a>
 		</div>
 		<div class="navbar-collapse collapse">  
 			<ul class="nav navbar-nav" ng-controller="TranslateController">
   				<li ng-class="{active: isActive(item.link)}">
   					<a ui-sref="restaurants">
-  						<i class="icon fa"></i> {{'restaurants' | translate}}
+  						<i class="icon fa fa-cutlery" style="color: white"></i> {{'restaurants' | translate}}
   					</a>
   				</li>
           <li ng-class="{active: isActive(item.link)}">
             <a ui-sref="museums">
-              <i class="icon fa"></i> {{'museums' | translate}}
+              <i class="icon fa fa-institution" style="color: white"></i> {{'museums' | translate}}
             </a>
           </li>
           <li ng-class="{active: isActive(item.link)}">
             <a ui-sref="pintxos">
-              <i class="icon fa"></i> {{'pintxos' | translate}}
+              <i class="icon fa fa-beer" style="color: white"></i> {{'pintxos' | translate}}
             </a>
           </li>
           <li ng-class="{active: isActive(item.link)}">
             <a ui-sref="emblematicBuildings">
-              <i class="icon fa fa-institution" style="color: white"></i> {{'buildings' | translate}}
+              <i class="icon fa fa-camera" style="color: white"></i> {{'buildings' | translate}}
             </a>
           </li>
           <li class="dropdown" ng-class="{active: isActive(item.link)}">

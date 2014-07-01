@@ -33,28 +33,28 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-include="'partials/navbar'"></div>
 
-   <!-- <snap-content  ng-controller="SidebarCtrl" snap-options="opts">
-        <div class="relative">
-             <button type="button" ng-show="isSidebarEnabled()"  class="btn btn-default btn-lg">
+   <snap-content  ng-controller="SidebarCtrl" snap-options="opts">
+        <div class="relative arrow">
+             <button type="button" ng-show="isSidebarEnabled()"  class="btn btn-default btn-lg ">
                 <span snap-toggle class="sidebarButton">
                     <i class="fa fa-arrow-circle-right fa-4x"></i>
                 </span>
             </button>
-        </div>-->
+        </div>
+        <div ng-include="'partials/navbar'"></div>
         <div class="fullHeight"  ui-view=""></div>
-    <!--</snap-content>
-    <snap-drawer >
+    </snap-content>
+    <snap-drawer style="width: 390px" >
         <div ng-controller="NewRouteCtrl">
             <ul class=" sidebar-nav list-group">
               <li class="sidebar-brand list-group-item" > 
                 <div class="row">
                     <div class="col-md-10">
-                        Ruta desglosada
+                        <h4>Ruta desglosada</h4>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" ng-click="createRoute()" class="btn btn-default btn-lg pull-right">Crear</button>
+                        <button type="button" ng-click="createRoute()" class="btn btn-success btn-lg pull-right">Crear</button>
                     </div>
                 </div>
               </li>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <img class="img-responsive"ng-src="images/{{location.image_path}}"></img>
+                            <img class="img-responsive" style="padding-left: 5px" ng-src="images/{{location.image_path}}"></img>
                         </div>  
                         <div class="col-md-6">
                             <p class="locations-list">{{location.description_es | characters: 125}}</p>
@@ -84,7 +84,7 @@
               </li>
             </ul>
         </div>
-    </snap-drawer>-->
+    </snap-drawer>
                 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

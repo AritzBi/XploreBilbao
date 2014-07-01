@@ -9,6 +9,8 @@ angular.module('xploreBilbaoApp')
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
+	    $scope.predicate="";
+	    var orderBy = $filter('orderBy');
 	  	$scope.getLang=function(){
 	  		var lang=$translate.use();
 	    	return lang;
@@ -38,7 +40,9 @@ angular.module('xploreBilbaoApp')
 	        });
 	        $scope.currentPage = 0;
 	        // now group by pages
-	        $scope.groupToPages();
+	        //$scope.groupToPages();
+	        $scope.order();
+
     	};
 		    // calculate page in place
 	    $scope.groupToPages = function () {
@@ -51,6 +55,15 @@ angular.module('xploreBilbaoApp')
 	            }
 	        }
 	    };
+
+	   	$scope.order = function () {
+	   		$scope.filteredItems = orderBy($scope.filteredItems, $scope.predicate, false);
+	   		$scope.currentPage = 0;
+	        // now group by pages
+	        $scope.groupToPages();
+	    };
+
+
 	    
 	    $scope.range = function (start, end) {
 	        var ret = [];

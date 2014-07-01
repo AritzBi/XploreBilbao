@@ -35,7 +35,6 @@ textarea { resize:none; }
   .container-info{width:1170px}
 }
 
-
 .container-map{
 /*padding-left: 25px;*/
 padding-top: 28px;
@@ -80,6 +79,13 @@ html,body {
   height: auto;
   width: 20px;
 }
+.language-icon-homepage{
+  height: auto;
+  width: 40px;
+}
+.borderRadius{
+   border-radius: 50%;
+}
 a:hover {
  cursor:pointer;
 }
@@ -117,6 +123,10 @@ snap-content {
     position: absolute;
     margin-top: 30%;
 }
+@media screen and (max-width:768px){
+  .sidebarButton{visibility: hidden; display:none;}
+}
+
 
 .relative{
   position: relative;

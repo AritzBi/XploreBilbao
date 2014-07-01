@@ -75,7 +75,6 @@ angular.module('xploreBilbaoApp')
 	            	if(!found){
 	            		return found;
 	            	}else{
-	            		console.log("hola");
 	            		var startHour=item.starthour;
 	            		var endHour=item.endhour;
 	            		var startHourFilter=$scope.startHour;

@@ -15,6 +15,7 @@ angular.module('xploreBilbaoApp')
 		});
 
 		$scope.enableSidebar = function() {
+      console.log("holasdfsfsdfds");
       snapRemote.getSnapper().then(function(snapper) {
   				$cookieStore.put('sidebar',"true");
   				snapper.enable();

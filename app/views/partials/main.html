@@ -1,21 +1,48 @@
 <div ng-include="'partials/navbar'"></div>
 
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    {{'test' | translate}}
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
-</div>
+  <h1>XploreBilbao</h1>
+  <div class="row" ng-controller="TranslateController">
+        <div class="col-md-4">
 
-<div class="row marketing">
-  <div ng-repeat="thing in awesomeThings">
-      <h4>{{thing.name}}</h4>
-      <p>{{thing.info}}</p>
+    </div>
+        <div class="col-md-4">
+  <p class="lead">
+    <img src="images/homepage.jpg" class="img-responsive borderRadius"><br>
+    ¡Disfruta de Bilbao al máximo!
+  </p>
+    </div>
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+        <ul class="list-inline">
+          <li><a ng-click="changeLanguage('es')">
+            <img class="img-responsive language-icon-homepage"ng-src="images/castellano.png"></img>
+          </a>
+        </li>
+        <li>
+          <a ng-click="changeLanguage('en')">
+            <img class="img-responsive language-icon-homepage"ng-src="images/ingles.png"></img>
+          </a>  
+        </li>
+        <li>
+          <a ng-click="changeLanguage('eu')">
+            <img class="img-responsive language-icon-homepage" ng-src="images/euskera.png"></img>
+          </a>  
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+
+    </div>
   </div>
 </div>
 
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
-</div>
+

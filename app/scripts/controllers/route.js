@@ -102,8 +102,7 @@ angular.module('xploreBilbaoApp')
                 fillColor: "green",
                 weight: 5,
                 opacity: 1,
-                color: 'green',
-                dashArray: '9',
+                color: 'blue',
                 fillOpacity: 0.7
 	        	};
 	    Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
@@ -126,16 +125,14 @@ angular.module('xploreBilbaoApp')
 						style: style
 					, onEachFeature: function(feature, layer){
 						if(feature.properties){
-							console.log(feature);
 							var html;
 							//var html="<h4>"+feature.properties.denom_es+"</h4><div class='row'><div class='col-md-12'><img class='img-responsive'ng-src='images/"+feature.properties.image_path+"'></div></div>";
 							if(feature.properties.second_type_en){
-								console.log(feature.properties.denom_es);
-								html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.second_type_en+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
+								html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.second_type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
 							}else{
 								if(feature.properties.building_type){
 									console.log(feature.properties.denom_es);
-									html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.type_denom_en+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
+									html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.type_denom_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
 								}else{
 									html="<h4>"+feature.properties.title_es+"</h4><h5>"+feature.properties.type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
 								}
@@ -146,10 +143,6 @@ angular.module('xploreBilbaoApp')
 
 					});
 					$scope.geoJsonLayer.addTo(map);
-						    		var popup = L.popup()
-    			.setLatLng(L.latLng(43.263163,-2.935047))
-    			.setContent('<p>Hello world!<br />This is a nice popup.</p>')
-    			.openOn(map);
 	    		});
 
 	    	}
@@ -174,10 +167,10 @@ angular.module('xploreBilbaoApp')
 angular.module('xploreBilbaoApp')
 .controller('RouteDetails',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes",function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
 	var style={
-                fillColor: "green",
+                fillColor: "blue",
                 weight: 5,
                 opacity: 1,
-                color: 'green',
+                color: 'blue',
                 dashArray: '9',
                 fillOpacity: 0.7
 	};
