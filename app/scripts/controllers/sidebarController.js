@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('SidebarCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute){
+	.controller('SidebarCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute,$timeout){
 		if(window.innerWidth<=768){
         $scope.opts = {
         disable: 'right',
@@ -48,7 +48,9 @@ angular.module('xploreBilbaoApp')
   				$cookieStore.put('sidebar',"true");
   				snapper.enable();
           snapper.settings($scope.opts);
-          snapper.open('left',100);
+          $timeout( function(){
+            snapper.open('left');
+          } );
 			});        
 
     	};
