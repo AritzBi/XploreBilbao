@@ -12,7 +12,11 @@
 	"filter": "Filtrar",
 	"date":"dd-MM-yyyy",
 	"free": "Gratis",
-	"toDefine": "Por definir"
+	"toDefine": "Por definir",
+	"lema": "¡Disfruta de Bilbao al máximo!",
+	"nothing": "Nada",
+	"note": "Nota",
+	"category": "Categoría"
 
 
 }

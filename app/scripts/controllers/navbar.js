@@ -23,8 +23,7 @@ angular.module('xploreBilbaoApp')
     };
     $scope.signup = function signup(){
       var instance=$modal.open({
-        templateUrl: 'partials/signup.html',
-        controller: 'SignupCtrl',
+        templateUrl: 'partials/signup.html'
       });
     };
     $scope.logout = function() {

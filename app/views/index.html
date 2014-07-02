@@ -33,7 +33,7 @@
 
     <!-- Add your site or application content here -->
 
-   <snap-content  ng-controller="SidebarCtrl" snap-options="opts">
+   <snap-content class="noOverflow" ng-controller="SidebarCtrl" snap-options="opts">
         <div class="relative arrow">
              <button type="button" ng-show="isSidebarEnabled()"  class="btn btn-default btn-lg ">
                 <span snap-toggle class="sidebarButton">
@@ -49,10 +49,10 @@
             <ul class=" sidebar-nav list-group">
               <li class="sidebar-brand list-group-item" > 
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-10 col-sm-12">
                         <h4>Ruta desglosada</h4>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-sm-12">
                         <button type="button" ng-click="createRoute()" class="btn btn-success btn-lg pull-right">Crear</button>
                     </div>
                 </div>
@@ -60,22 +60,22 @@
               <li class ="list-group-item" ng-repeat="location in newRoute"  ng-model='newRoute'  data-drop="true" data-jqyoui-options="{revert: 'invalid'}" jqyoui-droppable="{index: {{$index}}, onDrop:'dropCallback()'}" data-drag="true" jqyoui-draggable="{index: {{$index}},animate:true}"> 
                 <div class="row">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-xs-10">
                             <h4>{{location.denom_es}}</h4>
                         </div>
-                        <div class="col-md-2">
-                            <button type="button" class="pull-right btn btn-default btn-lg" >
-                                                <span ng-click="deleteItem()">
-                                <i class="fa fa-times fa-1x"></i>
-                            </span>
+                        <div class="col-md-2 col-xs-2">
+                            <button type="button" class="pull-right btn btn-default btn-lg buttonNoBorder" >
+                                <span ng-click="deleteItem($index)">
+                                    <i class="fa fa-times fa-1x"></i>
+                                </span>
                             </button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                             <img class="img-responsive" style="padding-left: 5px" ng-src="images/{{location.image_path}}"></img>
                         </div>  
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-xs-6">
                             <p class="locations-list">{{location.description_es | characters: 125}}</p>
                         </div>
                     </div>

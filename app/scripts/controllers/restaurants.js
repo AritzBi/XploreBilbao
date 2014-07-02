@@ -5,7 +5,6 @@ angular.module('xploreBilbaoApp')
 		Restaurant.query().$promise.then(
 	    	function success (data) {
 	    		$scope.restaurants=data;
-	    		console.log($scope.restaurants);
 	    		for(var i = 0; i < $scope.restaurants.length; i++){
 	    			if($scope.restaurants[i].note === null){
 	    				$scope.restaurants[i].note=0;

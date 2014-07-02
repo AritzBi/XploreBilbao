@@ -12,5 +12,9 @@
 	"filter": "Filter",
 	"date":"yyyy-MM-dd",
 	"free": "Free",
-	"toDefine": "Yet to define"
+	"toDefine": "Yet to define",
+	"lema": "Enjoy Bilbao to the maximum!",
+	"nothing": "Nothing",
+	"note": "Note",
+	"category": "Category"
 }

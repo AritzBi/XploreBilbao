@@ -15,11 +15,11 @@
 				    	<div class="controls">
 				    		<label class="radio" >
 				            	<input type="radio" ng-model="predicate" value="" ng-change="order()">
-				            	Nothing
+				            	{{'nothing' | translate}}
 				        	</label>  
 				        	<label class="radio" >
 				            	<input type="radio" ng-model="predicate" value="-note" ng-change="order()">
-				            	Nota
+				            	{{'note' | translate}}
 				        	</label> 
 				    	</div>
 					</div>
@@ -47,7 +47,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<button type="button" ng-show="isSidebarEnabled()"ng-click="addLocation(museum.id)" class="btn btn-default btn-lg pull-right">
+								<button type="button" ng-show="isSidebarEnabled()"ng-click="addLocation(museum.id)" class="btn btn-default btn-lg pull-right buttonNoBorder">
 	  								<span class="addRouteElement glyphicon glyphicon-plus"></span>
 								</button>
 							</div>
@@ -62,16 +62,16 @@
 					<ul class="list-group">
 						<li  class="list-group-item"  ng-repeat="museum in museums" id="{{museum.id}}" >
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-7">
 									<a ui-sref="museumInfo({id: museum.id})"><h4>{{museum['denom_' + getLang()] }}</h4></a>
 								</div>
-								<div class="col-md-1"><h4><span class="label label-success"ng-class="{labelStyleRed: museum.note == '0' || museum.note == '1' || museum.note == '2' ,labelStyleYellow: museum.note == '3', labelStyleGreen: museum.note=='4'|| museum.note=='5' }" >{{museum.note}}</span></h4></div>
-								<div class="col-md-3 pull-right">
+								<div class="col-md-2"><h4><span class="label label-success"ng-class="{labelStyleRed: museum.note == '0' || museum.note == '1' || museum.note == '2' ,labelStyleYellow: museum.note == '3', labelStyleGreen: museum.note=='4'|| museum.note=='5' }" >{{museum.note}}</span></h4></div>
+								<div class="col-md-3 ">
 									<h5>{{'museums' | translate}}</h5>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-4 stackMargin">
 									<img class="img-responsive"ng-src="images/{{museum.image_path}}">
 								</div>
 								<div class="col-md-8">
@@ -79,7 +79,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<button type="button" ng-show="isSidebarEnabled()"ng-click="addLocation(museum.id)" class="btn btn-default btn-lg pull-right">
+								<button type="button" ng-show="isSidebarEnabled()"ng-click="addLocation(museum.id)" class="btn btn-default btn-lg pull-right buttonNoBorder">
 	  								<span class="addRouteElement glyphicon glyphicon-plus"></span>
 								</button>
 							</div>

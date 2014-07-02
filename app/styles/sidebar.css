@@ -40,7 +40,7 @@
 }
 
 .sidebar-nav li a {
-  color: #999999;
+  /*color: #999999;*/
   display: block;
   text-decoration: none;
 }
@@ -63,7 +63,7 @@
 }
 
 .sidebar-nav > .sidebar-brand a {
-  color: #999999;
+  /*color: #999999;*/
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
@@ -113,4 +113,18 @@
   padding: 15px;
 }
 
+}
+
+
+.customSidebar{
+  padding-left: 25px;
+  width:auto !important;
+}
+
+.pagination{
+  padding-bottom: 25px;
+}
+
+.noOverflow{
+  overflow-y:hidden;
 }

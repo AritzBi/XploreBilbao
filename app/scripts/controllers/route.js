@@ -165,7 +165,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('RouteDetails',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes",function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
+.controller('RouteDetails',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","$translate",function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,$translate){
 	var style={
                 fillColor: "blue",
                 weight: 5,
@@ -173,6 +173,10 @@ angular.module('xploreBilbaoApp')
                 color: 'blue',
                 dashArray: '9',
                 fillOpacity: 0.7
+	};
+	$scope.getLang=function(){
+	  	var lang=$translate.use();
+	    return lang;
 	};
 	var route=selectedRoute.getRoute();
 	var routeId=route.properties.id;
@@ -194,6 +198,7 @@ angular.module('xploreBilbaoApp')
 				$scope.routeDetailsInfo=new Array();
 				for(var i=0;i<data.features.length;i++){
 					route.features.push(data.features[i]);
+					console.log(data.features[i]);
 					$scope.routeDetailsInfo.push(data.features[i]);
 				}
 				if(hasWalkingPath === true){

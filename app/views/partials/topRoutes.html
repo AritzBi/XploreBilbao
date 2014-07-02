@@ -1,16 +1,29 @@
-<ul class="sidebar-nav list-group">
-	<li class="sidebar-brand list-group-item">Top Rutas
+<ul class="sidebar-nav list-group customSidebar">
+	<li class="sidebar-brand list-group-item ">
+		<h3>Ranking de Rutas</h3>
 	</li>
 	<div id="scrollArea" >
 		<li class ="list-group-item"  ng-repeat="route in topRoutes" >
 			<div class="row">
-				<h4>{{route.properties.name_es}}</h4>
 				<div class="col-md-12">
-					<p class="locations-list">{{route.properties.description_es| characters: 125}}</p>
+					<h3 class="noIdent">{{route.properties.name_es}}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p class="locations-list noIdent">{{route.properties.description_es| characters: 125}}</p>
 				</div>
 			</div> 
-			<button class="btn btn-primary" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
-			<button class="btn btn-primary" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
+			<div class="row">
+				<div class="col-md-12">
+					<button class="btn btn-primary custom-button noIdent" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button class="btn btn-primary" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
+				</div>
+			</div>
 		</li>
 	</div>
 </ul>

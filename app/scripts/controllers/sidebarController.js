@@ -34,16 +34,13 @@ angular.module('xploreBilbaoApp')
       });
 
     };
-    console.log(window.innerWidth);
 		snapRemote.getSnapper().then(function(snapper) {
 			var sidebarEnabled=$cookieStore.get('sidebar');
-			console.log(sidebarEnabled);
   			if(sidebarEnabled != "true")
   				snapper.disable();
 		});
 
 		$scope.enableSidebar = function() {
-      console.log("holasdfsfsdfds");
       snapRemote.getSnapper().then(function(snapper) {
   				$cookieStore.put('sidebar',"true");
   				snapper.enable();
@@ -72,7 +69,7 @@ angular.module('xploreBilbaoApp')
 	});	
 
 angular.module('xploreBilbaoApp')
-  .controller('NewRouteCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute, Routes){
+  .controller('NewRouteCtrl', function ($scope,$rootScope, snapRemote,$modal, $cookieStore, newRoute, Routes){
     $scope.newRoute=newRoute.getRoute();
       $scope.dropCallback = function(event, ui, title, $index) {
     };
@@ -93,13 +90,45 @@ angular.module('xploreBilbaoApp')
 
       newRoute = newRoute.substring(0, newRoute.length-1);
       newRoute=newRoute.concat(']');
-      Routes.save({route: newRoute}, function(){
+      var instance=$modal.open({
+        templateUrl: 'partials/createRoute.html',
+        controller: 'CreateRouteCtrl'
       });
+      instance.result.then(function(data){
+        Routes.save({name: data.name,description: data.description, route: newRoute}).$promise.then( function(success){
+          $scope.disenableSidebar();
+        });
+      });
+
     };
 
-    $scope.deleteItem=function(){
-      console.log("holis");
+      $scope.disenableSidebar = function() {
+        snapRemote.getSnapper().then(function(snapper) {
+          newRoute.reset();
+          $cookieStore.put('sidebar',"false");
+          snapper.close('left');
+          snapper.disable();
+        });
+      };
+
+    $scope.deleteItem=function(number){
+      $scope.newRoute.splice(number, 1);
     }
+  }); 
+
+angular.module('xploreBilbaoApp')
+  .controller('CreateRouteCtrl', function ($scope,$rootScope, snapRemote,$modalInstance, $cookieStore){
+    $scope.route={};
+    $scope.createRoute=function(form){
+      $scope.submitted = true;
+            if(form.$valid){
+              $modalInstance.close($scope.route);
+            }
+    };
+
+    $scope.cancel=function(){
+      $modalInstance.dismiss();
+    };
   }); 
 
 angular.module('xploreBilbaoApp')
