@@ -16,7 +16,7 @@
 					{{restaurant['description_' + getLang()] }}
 					<div class="row">
 						<div class="col-md-2">
-						<h1><span class="label label-success"ng-class="{labelStyleRed: restaurant.NOTE == '0' || restaurant.NOTE == '1' || restaurant.NOTE == '2' ,labelStyleYellow: restaurant.NOTE == '3', labelStyleGreen: restaurant.NOTE=='4'|| restaurant.NOTE=='5' }" >{{restaurant.NOTE}}</span><h3>
+						<h1><span class="label label-success"ng-class="{labelStyleRed: restaurant.NOTE == '0' || restaurant.NOTE == '1' || restaurant.NOTE == '2' ,labelStyleYellow: restaurant.NOTE == '3', labelStyleGreen: restaurant.NOTE=='4'|| restaurant.NOTE=='5' }" >{{restaurant.NOTE}}</span></h1>
 						</div>
 						<div class="col-md-10">
 							<rating ng-model="restaurant.NOTE" value="restaurant.NOTE" max="max" readonly="true" ng-class="{ratingStyleRed: restaurant.NOTE == '0' || restaurant.NOTE == '1' || restaurant.NOTE == '2' ,ratingStyleYellow: restaurant.NOTE == '3', ratingStyleGreen: restaurant.NOTE=='4'|| restaurant.NOTE=='5' }"></rating>

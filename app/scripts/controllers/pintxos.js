@@ -2,15 +2,26 @@
 
 angular.module('xploreBilbaoApp')
 	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter,$translate,newRoute){
-		$scope.pintxos=Pintxo.query();
-		$scope.pintxosCategory=pintxosCategory.query();
-		$scope.filteredItems = [];
-	    $scope.groupedItems = [];
+		Pintxo.query().$promise.then(
+	    	function success (data) {
+	    		$scope.pintxos=data;
+	    		for(var i = 0; i < $scope.pintxos.length; i++){
+	    			if($scope.pintxos[i].note === null){
+	    				$scope.pintxos[i].note=0;
+	    			}
+	    		}
+	    		$scope.pintxosCategory=pintxosCategory.query();
+	    		$scope.filterByCategory();
+
+	    	}
+	    );
+	    $scope.filteredItems = [];
+	   	$scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
-	   	$scope.predicate="";
-	    var orderBy = $filter('orderBy');
+	    $scope.predicate=""; 
+		var orderBy = $filter('orderBy');
 	   	$scope.getLang=function(){
 	  		var lang=$translate.use();
 	    	return lang;
@@ -95,5 +106,4 @@ angular.module('xploreBilbaoApp')
 	    		return false;
 	    	}
 	    }
-	     $scope.filterByCategory();           
 	});

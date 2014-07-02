@@ -127,14 +127,26 @@ snap-content {
   .sidebarButton{visibility: hidden; display:none;}
 }
 
+@media (max-width:768px){
+  .desktop{visibility: hidden; display:none;}
+  .mobile{visibility: visible;}
+
+}
+@media (min-width:768px){
+  .mobile{visibility: hidden; display:none;}
+  .desktop{visibility: visible;}
+}
 
 .relative{
   position: relative;
 }
 
 .addRouteElement{
-  color: white;
-  background-color:blue; 
+  /*color: white;
+  background-color:blue; */
+}
+.buttonNoBorder{
+  border-color: transparent;
 }
 
 .justify{
@@ -145,7 +157,9 @@ snap-content {
   font-weight:bold;
   font-size:15px;
 }
-
+.filter-background{
+  border-color: #000000;
+}
 .filter-format{
   font-weight:bold;
   font-size:15px; 
@@ -158,4 +172,10 @@ snap-content {
 .popUpSize{
   height: 100px;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .stackMargin{
+    margin-bottom: 15px;
+  }
 }

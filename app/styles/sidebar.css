@@ -21,8 +21,17 @@
   margin: 0;
   padding: 0;
   position: relative;
-  padding-left: 25px;
+  padding-left: 5px;
   padding-right: 5px;
+}
+@media (min-width:768px){
+  .sidebar-nav {width:265px}
+}
+@media (min-width:992px){
+  .sidebar-nav {width:350px}
+}
+@media (min-width:1200px){
+  .sidebar-nav {width:350px}
 }
 
 .sidebar-nav li {

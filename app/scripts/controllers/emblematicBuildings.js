@@ -2,13 +2,26 @@
 
 angular.module('xploreBilbaoApp')
 	.controller('EmblematicBuildingsCtrl', function ($scope,EmblematicBuilding, buildingsCategory, $filter, $translate, newRoute){
-		$scope.emblematicBuildings=EmblematicBuilding.query();
-		$scope.buildingsCategory=buildingsCategory.query();
-		$scope.filteredItems = [];
-	    $scope.groupedItems = [];
+		EmblematicBuilding.query().$promise.then(
+	    	function success (data) {
+	    		$scope.emblematicBuildings=data;
+	    		for(var i = 0; i < $scope.emblematicBuildings.length; i++){
+	    			if($scope.emblematicBuildings[i].note === null){
+	    				$scope.emblematicBuildings[i].note=0;
+	    			}
+	    		}
+	    		$scope.buildingsCategory=buildingsCategory.query();
+	    		$scope.filterByCategory();
+
+	    	}
+	    );
+	    $scope.filteredItems = [];
+	   	$scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
 	    $scope.currentPage = 0;
+	    $scope.predicate=""; 
+		var orderBy = $filter('orderBy');
 
 	   	$scope.getLang=function(){
 	  		var lang=$translate.use();
@@ -52,7 +65,12 @@ angular.module('xploreBilbaoApp')
 	            }
 	        }
 	    };
-	    
+	   	$scope.order = function () {
+	   		$scope.filteredItems = orderBy($scope.filteredItems, $scope.predicate, false);
+	   		$scope.currentPage = 0;
+	        // now group by pages
+	        $scope.groupToPages();
+	    };
 	    $scope.range = function (start, end) {
 	        var ret = [];
 	        if (!end) {
@@ -80,7 +98,6 @@ angular.module('xploreBilbaoApp')
 	    $scope.setPage = function () {
 	        $scope.currentPage = this.n;
 	    }; 
-	    $scope.filterByCategory();
 	     	   	$scope.arePages = function(){
 	    	if($scope.filteredItems.length === 0){
 	    		return true;

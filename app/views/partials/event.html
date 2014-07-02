@@ -1,8 +1,35 @@
 <div class="container">
-	<div class="col-md-12 col-lg-12">
+	<div style="padding-top: 50px;" class="col-md-12 col-lg-12">
 		<h1>{{'events' | translate}}</h1>
 	</div>
 	<div sclass="row data-container">
+		<div class="col-md-3">
+			<div class="row"> <div class="col-md-12"><h3>{{'filter' | translate}}</h3></div></div>
+			<div class="well well-lg filter-background">
+				<div class="control-group">
+				    <div class="controls">
+				    	<div class="row filter-format filter-margin">Precio</div>
+				    	<div class="row">
+					    	<slider
+							    ng-model="priceSlider.price"
+							    floor="0"
+							    ceiling="100"
+							    >
+							</slider>
+						</div>
+						<div class="row filter-format">Fecha de inicio</div>
+						<div class="row"><input type="date" ng-model="startDate"/></div>
+						<div class="row filter-format">Fecha de fin</div>
+						<div class="row"><input type="date" ng-model="endDate"/></div>
+						<div class="row filter-format">Rango de horas</div>
+						<div class="row filter-margin"><input type="time" ng-model="startHour"/><input type="time" ng-model="endHour"/></div>
+						<div class="row">
+							<button class="btn btn-primary" ng-click="filterEvent()" type="submit">Filtrar</button>
+						</div>
+				    </div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-9">
 			<div class="panel panel-default">
 				<ul class="list-group">
@@ -58,33 +85,6 @@
 						</div>
 					</li>
 				</ul>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="row"> <div class="col-md-12"><h3>{{'filter' | translate}}</h3></div></div>
-			<div class="well well-lg">
-				<div class="control-group">
-				    <div class="controls">
-				    	<div class="row filter-format filter-margin">Precio</div>
-				    	<div class="row">
-					    	<slider
-							    ng-model="priceSlider.price"
-							    floor="0"
-							    ceiling="100"
-							    >
-							</slider>
-						</div>
-						<div class="row filter-format">Fecha de inicio</div>
-						<div class="row"><input type="date" ng-model="startDate"/></div>
-						<div class="row filter-format">Fecha de fin</div>
-						<div class="row"><input type="date" ng-model="endDate"/></div>
-						<div class="row filter-format">Rango de horas</div>
-						<div class="row filter-margin"><input type="time" ng-model="startHour"/><input type="time" ng-model="endHour"/></div>
-						<div class="row">
-							<button class="btn btn-primary" ng-click="filterEvent()" type="submit">Filtrar</button>
-						</div>
-				    </div>
-				</div>
 			</div>
 		</div>
 	</div>
