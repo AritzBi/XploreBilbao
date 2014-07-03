@@ -13,7 +13,8 @@ angular.module('xploreBilbaoApp', [
   'truncate',
   'snap',
   'ngDragDrop',
-  'vr.directives.slider'
+  'vr.directives.slider',
+  'tmh.dynamicLocale'
 
 ])
   .config( function ($stateProvider, $urlRouterProvider, $translateProvider, snapRemoteProvider) {

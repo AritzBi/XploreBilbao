@@ -191,6 +191,11 @@ snap-content {
   width: 100%;
 }
 
+
+.form-control{
+   font-size: 13px;
+}
+
 .btn-green {
  background-color: hsl(133, 57%, 31%) !important;
  background-repeat: repeat-x;
@@ -225,4 +230,16 @@ snap-content {
  -webkit-font-smoothing: antialiased;
 }
 
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+}
 

@@ -9,7 +9,6 @@ angular.module('xploreBilbaoApp')
 	        zoom: 17
 	    }
 	});
-	$scope.geoJsonLayer={};
 	
 	var mapquestOSM=L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
 		attribution: 'Mapas por <a href="http://arcgisonline.com" target="blank">ArcGIS Online</a>'
@@ -245,10 +244,20 @@ angular.module('xploreBilbaoApp')
 .controller('MyRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
 	Routes.getMyRoutes().$promise.then(
 		function success(data){
+			$scope.myCreations=[];
+			$scope.following=[];
 			$scope.myRoutes=data;
+			for(var i=0;i<data.length;i++){
+				if(data[i].properties.createdby===true){
+					$scope.myCreations.push(data[i]);
+				}else{
+					$scope.following.push(data[i]);
+				}
+			}
 		}
 	);
-
+	$scope.createdByTab={};
+	$scope.followingTab={};
 	$scope.showInMap= function(routeId){
 		var style={
                 fillColor: "green",

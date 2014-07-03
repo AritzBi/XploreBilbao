@@ -23,7 +23,8 @@
     "angular-snap": "*",
     "angular-dragdrop": "*",
     "venturocket-angular-slider": "*",
-    "angular-datepicker": "*"
+    "angular-datepicker": "*",
+    "angular-dynamic-locale":"*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",

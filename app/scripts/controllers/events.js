@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate,newRoute){	    
+	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate,newRoute,datepickerPopupConfig,$locale){	    
 	   	$scope.range = function (start, end) {
 	        var ret = [];
 	        if (!end) {
@@ -32,6 +32,7 @@ angular.module('xploreBilbaoApp')
 
 	   	$scope.getLang=function(){
 	  		var lang=$translate.use();
+	  		//$scope.startDate=new Date($scope.startDate).getTime();
 	    	return lang;
 	    };
 
@@ -61,12 +62,16 @@ angular.module('xploreBilbaoApp')
 	            if(!found){
 	            	return found;
 	            }else{
-	            	var startDateSplit=$scope.startDate.split('-');
+	            	/*var startDateSplit=$scope.startDate.split('-');
 	            	startDateSplit=new Date (startDateSplit[0],startDateSplit[1]-1,startDateSplit[2]).getTime();
+	            	console.log($scope.endDate);
 	            	var endDateSplit=$scope.endDate.split('-');
-	            	endDateSplit=new Date(endDateSplit[0],endDateSplit[1]-1,endDateSplit[2]).getTime();
+	            	endDateSplit=new Date(endDateSplit[0],endDateSplit[1]-1,endDateSplit[2]).getTime();*/
+	            	var startDateSplit=$scope.startDate.getTime();
+	            	var endDateSplit=$scope.endDate.getTime();
 	            	var startDateComparable=new Date(item.startdate).getTime();
 	            	var endDateComparable=new Date(item.endate).getTime();
+
 	            	if((startDateComparable>=startDateSplit && startDateComparable<=endDateSplit)|| (endDateComparable>=startDateSplit && endDateComparable<=endDateSplit)){
 	            		found=true;
 	            	}else{
@@ -79,8 +84,6 @@ angular.module('xploreBilbaoApp')
 	            		var endHour=item.endhour;
 	            		var startHourFilter=$scope.startHour;
 	            		var endHourFilter=$scope.endHour;
-	            		console.log(parseInt(startHour.substr(0,2)));
-	            		console.log(parseInt(startHourFilter.substr(0,2)));
 	            		if(parseInt(startHour.substr(0,2))>=parseInt(startHourFilter.substr(0,2))){
 	            			if(parseInt(startHour.substr(0,2))==parseInt(startHourFilter.substr(0,2))){
 	            				if(parseInt(startHour.substr(3,4))<parseInt(startHourFilter.substr(3,4)))
@@ -107,6 +110,25 @@ angular.module('xploreBilbaoApp')
 	        // now group by pages
 	        $scope.groupToPages();
     	};
+    	$scope.open = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.opened = true;
+  		};
+  		$scope.open2 = function($event) {
+		    $event.preventDefault();
+		    $event.stopPropagation();
+		    $scope.opened2 = true;
+  		};
+
+  		 $scope.dateOptions = {
+    		formatYear: 'yy',
+    		startingDay: 1
+  		};
+  		$scope.hstep = 1;
+  		$scope.mstep = 15;
+  		$scope.startHour=1404374400000;
+  		$scope.endHour=1404421200000
 
 	    var now = new Date();
     	var month = (now.getMonth() + 1);               
@@ -118,8 +140,8 @@ angular.module('xploreBilbaoApp')
     	var today = now.getFullYear() + '-' + month + '-' + day;
 		$scope.priceSlider={};
 		$scope.priceSlider.price=30;
-		$scope.startDate=today;
-		$scope.endDate=today;
+		$scope.startDate=new Date();
+		$scope.endDate=new Date();
 		if($stateParams.id){
 			Event.getEventsByType({id2: $stateParams.id}).$promise.then(
 				function success(data){

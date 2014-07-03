@@ -22,6 +22,7 @@ angular.module('xploreBilbaoApp')
 	    $scope.currentPage = 0;
 	    $scope.predicate=""; 
 		var orderBy = $filter('orderBy');
+		$scope.searchText = "";
 
 	  	$scope.getLang=function(){
 	  		var lang=$translate.use();
@@ -51,9 +52,15 @@ angular.module('xploreBilbaoApp')
 	                return found;
 	        });
 	        $scope.currentPage = 0;
-	        // now group by pages
-	        //$scope.groupToPages();
 	        $scope.order();
+
+    	};
+    	$scope.filterByName = function () {
+    		console.log("llamo");
+	        $filter('filter')($scope.filteredItems, $scope.searchText, 'denom_es');
+	        $scope.currentPage = 0;
+	        $scope.groupToPages();
+	        //$scope.order();
 
     	};
 		    // calculate page in place

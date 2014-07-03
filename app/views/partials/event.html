@@ -4,25 +4,63 @@
 	</div>
 	<div sclass="row data-container">
 		<div class="col-md-3">
-			<div class="row"> <div class="col-md-12"><h3>{{'filter' | translate}}</h3></div></div>
+			<div class="row"> 
+				<div class="col-md-12"><h3>{{'filter' | translate}}</h3></div>
+			</div>
 			<div class="well well-lg filter-background">
 				<div class="control-group">
 				    <div class="controls">
-				    	<div class="row filter-format filter-margin">Precio</div>
+				    	<div class="row filter-format filter-margin">
+				    		<div class="col-md-12 filter-format">Precio</div> 
+				    	</div>
 				    	<div class="row">
-					    	<slider
+				    		<div class="col-md-12">
+				    			<slider
 							    ng-model="priceSlider.price"
 							    floor="0"
 							    ceiling="100"
 							    >
-							</slider>
+								</slider>
+				    		</div> 
+	
 						</div>
-						<div class="row filter-format">Fecha de inicio</div>
+						<!--<div class="row filter-format">Fecha de inicio</div>
 						<div class="row"><input type="date" ng-model="startDate"/></div>
 						<div class="row filter-format">Fecha de fin</div>
 						<div class="row"><input type="date" ng-model="endDate"/></div>
 						<div class="row filter-format">Rango de horas</div>
-						<div class="row filter-margin"><input type="time" ng-model="startHour"/><input type="time" ng-model="endHour"/></div>
+						<div class="row filter-margin"><input type="time" ng-model="startHour"/><input type="time" ng-model="endHour"/></div>-->
+						<div class="row"><div class="col-md-12 filter-format">Fecha de inicio</div> </div>
+						<div class="row">
+        					<div class="col-md-12">
+            					<p class="input-group">
+              						<input type="text" class="form-control" datepicker-popup={{("date"|translate)}} ng-model="startDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              						<span class="input-group-btn">
+                						<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              						</span>
+            					</p>
+        					</div>
+    					</div>
+    					<div class="row"><div class="col-md-12 filter-format">Fecha de fin</div> </div>
+    					<div class="row">
+        					<div class="col-md-12">
+            					<p class="input-group">
+              						<input type="text" class="form-control" datepicker-popup={{("date"|translate)}} ng-model="endDate" is-open="opened2" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" toggle-weeks-text="prueba"current-text="la gran mierda" clear-text="MIERDISIMA"close-text="Mierda" />
+              						<span class="input-group-btn">
+                						<button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              						</span>
+            					</p>
+        					</div>
+    					</div>
+    					<div class="row"><div class="col-md-12 filter-format">Rango de horas</div> </div>
+						<div class="row filter-margin">
+							<div class="col-md-6">
+								<timepicker class="timeFontSize" ng-model="startHour"  hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+							</div>
+							<div class="col-md-6">
+								<timepicker class="timeFontSize" ng-model="endHour"  hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+							</div>
+						</div>
 						<div class="row">
 							<button class="btn btn-primary" ng-click="filterEvent()" type="submit">Filtrar</button>
 						</div>
@@ -57,6 +95,7 @@
 										<p>
 											<span class="date-format">{{event['startdate'] | date:("date"|translate)}}</span>
 											<span class="date-format" ng-show="{{event.showEndDate}}">/ {{event['endate'] | date:("date"|translate)}}</span>
+											<!--<span class="date-format" ng-show="{{event.showEndDate}}">/ {{event['endate']}}</span>-->
 										</p>
 										<p>
 											<span class="date-format">{{event['starthour']}}</span> - 

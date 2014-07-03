@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('TranslateController', function ($scope, $translate) {
+	.controller('TranslateController', function ($scope, $translate, $locale,tmhDynamicLocale) {
   $scope.changeLanguage = function (langKey) {
-    $translate.use(langKey);
+    tmhDynamicLocale.set(langKey).then(function(success){$translate.use(langKey);});
   };
+  tmhDynamicLocale.set('es').then(function(success){});
 });
