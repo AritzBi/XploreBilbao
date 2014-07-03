@@ -1,13 +1,38 @@
 <ul class="sidebar-nav list-group customSidebar">
-	<li class="sidebar-brand list-group-item">Mis Rutas
+	<li class="sidebar-brand list-group-item ">
+		<div class="row">
+			<!--<div class="col-md-6"><h4>Creadas</h4></div>
+			<div class="col-md-6"><h4>Siguiendo</h4></div>-->
+			<div class="cold-md-12">
+				<tabset justified="true">
+					<tab ><tab-heading>Creadas</tab-heading></tab>
+					<tab ><tab-heading>Siguiendo</tab-heading></tab>
+				</tabset>
+			</div>
+		</div>
 	</li>
-	<div id="scrollArea" ng-controller="ScrollCtrl">
-		<li class ="list-group-item"  ng-repeat="route in myRoutes" > 
-			<a  ui-sref="personalRoute.myRoutes" >
-			{{route.properties.name_es}}</a><p>{{route.properties.description_es}}</p>
-			<button class="btn btn-primary" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
-			<button class="btn btn-primary" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
-			<!--<button class="btn btn-primary" ui-sref="personalRoute.routeDetails({id: route.properties.id })" type="submit">Desglosar</button>-->
+	<div id="scrollArea" >
+		<li class ="list-group-item"  ng-repeat="route in myRoutes" >
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="noIdent">{{route.properties.name_es}}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p class="locations-list noIdent">{{route.properties.description_es| characters: 125}}</p>
+				</div>
+			</div> 
+			<div class="row">
+				<span class="col-md-12">
+					<button class="btn btn-lg btn-block btn-green" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
+				</span>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button class="btn btn-lg btn-block btn-blue" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
+				</div>
+			</div>
 		</li>
 	</div>
 </ul>

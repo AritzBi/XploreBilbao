@@ -9,6 +9,7 @@ angular.module('xploreBilbaoApp')
 	        zoom: 17
 	    }
 	});
+	$scope.geoJsonLayer={};
 	
 	var mapquestOSM=L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
 		attribution: 'Mapas por <a href="http://arcgisonline.com" target="blank">ArcGIS Online</a>'
@@ -25,20 +26,22 @@ angular.module('xploreBilbaoApp')
 		"SubwayLines": subwayLines,
 		"SubwayEntrances": subwayEntrances,
 		"TramLines": tramLines,
-		"TramStops": tramStops,
-		"Test": test,
-		"Test2": test2,
-		"Test3": test3
+		"TramStops": tramStops
 	};
+	var metroIcon = L.icon({
+	    iconUrl: 'images/metro-bilbao.png'
+	});
+	var tramIcon=L.icon({
+	    iconUrl: 'images/tram-bilbao.png'
+	});
 	$scope.selectedRoute="pito";
 	Routes.getSubwayLines().$promise.then(
 		function success(data){
 				var style={
 	                    fillColor: "green",
-	                    weight: 2,
+	                    weight: 5,
 	                    opacity: 1,
 	                    color: 'red',
-	                    dashArray: '3',
 	                    fillOpacity: 0.7
 	        	};
 				subwayLines.addLayer(L.geoJson(data[0].row_to_json,{style: style}));
@@ -54,17 +57,18 @@ angular.module('xploreBilbaoApp')
 	                    dashArray: '3',
 	                    fillOpacity: 0.7
 	        	};
-				subwayEntrances.addLayer(L.geoJson(data[0].row_to_json,{style: style}));
+				subwayEntrances.addLayer(L.geoJson(data[0].row_to_json,{style: style, pointToLayer: function(feature, coordinates){
+					return new L.marker([coordinates.lat, coordinates.lng], {icon: metroIcon});
+				}}));
         }
 	);
 	Routes.getTramLines().$promise.then(
 		function success(data){
 				var style={
 	                    fillColor: "green",
-	                    weight: 2,
+	                    weight: 5,
 	                    opacity: 1,
 	                    color: 'green',
-	                    dashArray: '3',
 	                    fillOpacity: 0.7
 	        	};
 				tramLines.addLayer(L.geoJson(data[0].row_to_json,{style:style}));
@@ -80,7 +84,9 @@ angular.module('xploreBilbaoApp')
 	                    dashArray: '3',
 	                    fillOpacity: 0.7
 	        	};
-				tramStops.addLayer(L.geoJson(data[0].row_to_json,{style: style}));
+				tramStops.addLayer(L.geoJson(data[0].row_to_json,{style: style, pointToLayer: function(feature, coordinates){
+					return new L.marker([coordinates.lat, coordinates.lng], {icon: tramIcon});
+				}}));
         }
 	);
 	leafletData.getMap().then(function(map){
@@ -90,7 +96,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
+.controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
 	Routes.getTopRoutes().$promise.then(
 		function success(data){
 			$scope.topRoutes=data;
@@ -108,8 +114,8 @@ angular.module('xploreBilbaoApp')
 	    Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
 	    	function success(data){
 	    		leafletData.getMap().then(function(map){
-	    			if($scope.geoJsonLayer){
-		    			map.removeLayer($scope.geoJsonLayer);
+	    			if(geoJSON.getJSON()){
+		    			map.removeLayer(geoJSON.getJSON());
 		    		}
 		    		var found=false;
 		    		for(var i=0;i<$scope.topRoutes.length&&!found;i++){
@@ -121,7 +127,7 @@ angular.module('xploreBilbaoApp')
 		    				}
 		    			}
 		    		}
-		    		$scope.geoJsonLayer = L.geoJson($scope.topRoutes[i-1],{
+		    		geoJSON.setJSON(L.geoJson($scope.topRoutes[i-1],{
 						style: style
 					, onEachFeature: function(feature, layer){
 						if(feature.properties){
@@ -141,8 +147,16 @@ angular.module('xploreBilbaoApp')
 						}
 					}
 
-					});
-					$scope.geoJsonLayer.addTo(map);
+					}));
+					var firstPoint;
+					for (var property in geoJSON.getJSON()._layers) {
+					    if (geoJSON.getJSON()._layers.hasOwnProperty(property)) {
+					        firstPoint = geoJSON.getJSON()._layers[property];
+					        break;
+					    }
+					}
+					map.setView(firstPoint._latlng);
+					geoJSON.getJSON().addTo(map);
 	    		});
 
 	    	}
@@ -165,7 +179,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('RouteDetails',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","$translate",function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,$translate){
+.controller('RouteDetails',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","$translate","geoJSON",function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,$translate,geoJSON){
 	var style={
                 fillColor: "blue",
                 weight: 5,
@@ -190,42 +204,45 @@ angular.module('xploreBilbaoApp')
 		}
 	}	    		
 	leafletData.getMap().then(function(map){
-		if($scope.geoJsonLayer){
-		    map.removeLayer($scope.geoJsonLayer);
+		if(geoJSON.getJSON()){
+			map.removeLayer(geoJSON.getJSON());
 		}
 		Routes.getRouteDetails({id2: routeId}).$promise.then(
 			function success(data){
 				$scope.routeDetailsInfo=new Array();
 				for(var i=0;i<data.features.length;i++){
 					route.features.push(data.features[i]);
-					console.log(data.features[i]);
 					$scope.routeDetailsInfo.push(data.features[i]);
 				}
 				if(hasWalkingPath === true){
-					$scope.geoJsonLayer = L.geoJson(route,{
+					geoJSON.setJSON(L.geoJson(route,{
 						style: style
-					});
-					$scope.geoJsonLayer.addTo(map);
+					}));
+					geoJSON.getJSON().addTo(map);
 				}else{
 					Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
 						function success(data){
+			    			if(geoJSON.getJSON()){
+				    			map.removeLayer(geoJSON.getJSON());
+				    		}
 							for(var i=0;i<data.features.length;i++){
     							route.features.push(data.features[i]);
     						}
-    						$scope.geoJsonLayer = L.geoJson(route,{
+    						geoJSON.setJSON(L.geoJson(route,{
 								style: style
-							});
-							$scope.geoJsonLayer.addTo(map);
+							}));
+							geoJSON.getJSON().addTo(map);
 						}
 					);
 				}
+				//console.log(map.locate({setView: true}));
 			}
 		);
 	});
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('MyRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes){
+.controller('MyRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
 	Routes.getMyRoutes().$promise.then(
 		function success(data){
 			$scope.myRoutes=data;
@@ -245,7 +262,9 @@ angular.module('xploreBilbaoApp')
 	    	function success(data){
 	    		leafletData.getMap().then(function(map){
 	    			if($scope.geoJsonLayer){
+	    				console.log("Paso por MyRoutes");
 		    			map.removeLayer($scope.geoJsonLayer);
+		    			$scope.geoJsonLayer={};
 		    		}
 		    		var found=false;
 		    		for(var i=0;i<$scope.myRoutes.length&&!found;i++){
@@ -304,6 +323,16 @@ angular.module('xploreBilbaoApp')
 	}
 });
 
+angular.module('xploreBilbaoApp')
+.service('geoJSON',function(){
+	var geoJsonLayer={};
+	this.setJSON = function(route){
+		geoJsonLayer=route;
+	}
+	this.getJSON = function(){
+		return geoJsonLayer;
+	}
+});
 function hasRoute(data){
 	var found=false;
 	for(var i=0;i<data.features.length&&!found;i++){
