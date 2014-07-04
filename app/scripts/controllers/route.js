@@ -95,7 +95,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
+.controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON","$translate", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON,$translate){
 	$scope.username=Auth.currentUserId();
 	$scope.user=Auth.currentUser();
 	if($scope.username){
@@ -144,7 +144,10 @@ angular.module('xploreBilbaoApp')
 			}
 		);
 	};
-
+	$scope.getLang=function(){
+	  	var lang=$translate.use();
+	    return lang;
+	};
 	$scope.showInMap= function(routeId){
 		var style={
                 fillColor: "green",
@@ -170,24 +173,47 @@ angular.module('xploreBilbaoApp')
 		    			}
 		    		}
 		    		geoJSON.setJSON(L.geoJson($scope.topRoutes[i-1],{
-						style: style
-					, onEachFeature: function(feature, layer){
-						if(feature.properties){
-							var html;
-							//var html="<h4>"+feature.properties.denom_es+"</h4><div class='row'><div class='col-md-12'><img class='img-responsive'ng-src='images/"+feature.properties.image_path+"'></div></div>";
-							if(feature.properties.second_type_en){
-								html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.second_type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
-							}else{
-								if(feature.properties.building_type){
-									html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.type_denom_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
-								}else{
-									html="<h4>"+feature.properties.title_es+"</h4><h5>"+feature.properties.type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
+						style: style,
+							onEachFeature: function(feature, layer){
+								if(feature.properties){
+									var html;
+									if($scope.getLang()==='es'){
+										if(feature.properties.first_type_es){
+											html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.second_type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+										}else{
+											if(feature.properties.building_type){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+
+											}else{
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_es+"</h4></div><div class='row'><h5>"+feature.properties.type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}
+										}
+									}else{
+										if($scope.getLang()==='en'){
+											if(feature.properties.first_type_en){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.second_type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_en+"</h4></div><div class='row'><h5>"+feature.properties.type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}									
+										}else{
+											if(feature.properties.first_type_eu){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.second_type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}
+										}
+									}
+									layer.bindPopup(html);
 								}
 							}
-							layer.bindPopup(html);
-						}
-					}
-
 					}));
 					var firstPoint;
 					for (var property in geoJSON.getJSON()._layers) {
@@ -237,6 +263,10 @@ angular.module('xploreBilbaoApp')
 	var hasWalkingPath=$stateParams.hasWalkingPath;
 	if($stateParams.origin === '1' ){
 		$scope.origin="personalRoute.topRoutes";
+	}else{
+		if($stateParams.origin==='2'){
+			$scope.origin="personalRoute.myRoutes";
+		}
 	}
 	for(var i=0;i<route.features.length;i++){
 		if(route.features[i].geometry.type === "Point"){
@@ -252,6 +282,9 @@ angular.module('xploreBilbaoApp')
 				$scope.routeDetailsInfo=new Array();
 				for(var i=data.features.length-1;i>=0;i--){
 					route.features.push(data.features[i]);
+				}
+				for(var i=0;i<data.features.length;i++){
+					console.log(data.features[i]);
 					$scope.routeDetailsInfo.push(data.features[i]);
 				}
 				if(hasWalkingPath === "true"){
@@ -276,22 +309,45 @@ angular.module('xploreBilbaoApp')
     						geoJSON.setJSON(L.geoJson(route,{
 								style: style,
 								onEachFeature: function(feature, layer){
-								if(feature.properties){
-									console.log(feature);
-							var html;
-							//var html="<h4>"+feature.properties.denom_es+"</h4><div class='row'><div class='col-md-12'><img class='img-responsive'ng-src='images/"+feature.properties.image_path+"'></div></div>";
-							if(feature.properties.hostelery_type){
-								html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.second_type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
-							}else{
-								if(feature.properties.building_type){
-									html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.type_denom_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
-								}else{
-									html="<h4>"+feature.properties.title_es+"</h4><h5>"+feature.properties.type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
+									if(feature.properties){
+										var html;
+										if($scope.getLang()==='es'){
+											if(feature.properties.first_type_es){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.second_type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_es+"</h4></div><div class='row'><h5>"+feature.properties.type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}
+										}else{
+											if($scope.getLang()==='en'){
+												if(feature.properties.first_type_en){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.second_type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													if(feature.properties.building_type){
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}else{
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_en+"</h4></div><div class='row'><h5>"+feature.properties.type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}
+												}									
+											}else{
+												if(feature.properties.first_type_eu){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.second_type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													if(feature.properties.building_type){
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}else{
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}
+												}
+											}
+										}
+										layer.bindPopup(html);
+									}
 								}
-							}
-							layer.bindPopup(html);
-						}
-							}
 							}));
 							var firstPoint;
 							for (var property in geoJSON.getJSON()._layers) {
@@ -310,7 +366,7 @@ angular.module('xploreBilbaoApp')
 }]);
 
 angular.module('xploreBilbaoApp')
-.controller('MyRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
+.controller('MyRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON","$translate", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON,$translate){
 	$scope.user=Auth.currentUser();
 	Routes.getMyRoutes().$promise.then(
 		function success(data){
@@ -326,6 +382,10 @@ angular.module('xploreBilbaoApp')
 			}
 		}
 	);
+	$scope.getLang=function(){
+	  	var lang=$translate.use();
+	    return lang;
+	};
 	$scope.createdByTab={};
 	$scope.followingTab={};
 	$scope.showInMap= function(routeId){
@@ -333,16 +393,14 @@ angular.module('xploreBilbaoApp')
                 fillColor: "green",
                 weight: 5,
                 opacity: 1,
-                color: 'green',
-                dashArray: '9',
+                color: 'blue',
                 fillOpacity: 0.7
 	        	};
 	    Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
 	    	function success(data){
 	    		leafletData.getMap().then(function(map){
-	    			if($scope.geoJsonLayer){
-		    			map.removeLayer($scope.geoJsonLayer);
-		    			$scope.geoJsonLayer={};
+	    			if(geoJSON.getJSON()){
+		    			map.removeLayer(geoJSON.getJSON());
 		    		}
 		    		var found=false;
 		    		for(var i=0;i<$scope.myRoutes.length&&!found;i++){
@@ -354,11 +412,60 @@ angular.module('xploreBilbaoApp')
 		    				}
 		    			}
 		    		}
-		    		$scope.geoJsonLayer = L.geoJson($scope.myRoutes[i-1],{
-						style: style
-					});
-					$scope.geoJsonLayer.addTo(map);
+		    		geoJSON.setJSON(L.geoJson($scope.myRoutes[i-1],{
+						style: style,
+							onEachFeature: function(feature, layer){
+								if(feature.properties){
+									var html;
+									if($scope.getLang()==='es'){
+										if(feature.properties.first_type_es){
+											html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.second_type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+										}else{
+											if(feature.properties.building_type){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+
+											}else{
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_es+"</h4></div><div class='row'><h5>"+feature.properties.type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}
+										}
+									}else{
+										if($scope.getLang()==='en'){
+											if(feature.properties.first_type_en){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.second_type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_en+"</h4></div><div class='row'><h5>"+feature.properties.type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}									
+										}else{
+											if(feature.properties.first_type_eu){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.second_type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}
+										}
+									}
+									layer.bindPopup(html);
+								}
+							}
+					}));
+					var firstPoint;
+					for (var property in geoJSON.getJSON()._layers) {
+					    if (geoJSON.getJSON()._layers.hasOwnProperty(property)) {
+					        firstPoint = geoJSON.getJSON()._layers[property];
+					        break;
+					    }
+					}
+					map.setView(firstPoint._latlng);
+					geoJSON.getJSON().addTo(map);
 	    		});
+
 	    	}
 	    );
 	}

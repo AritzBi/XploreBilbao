@@ -1,5 +1,16 @@
 <ul class="sidebar-nav list-group customSidebar">
-	<li class="sidebar-brand list-group-item"><a ui-sref="{{origin}}"><i class="fa pull-left fa-arrow-left"></i></a>	Ruta desglosada
+	<li class="sidebar-brand list-group-item">
+		<div class="row">
+			<div class="col-md-2">
+                <button type="button" ui-sref="{{origin}}"  class="btn btn-default buttonNoBorder" >
+                    <span >
+                        <i class="fa fa-arrow-left fa-2x pull-left"></i>
+                    </span>
+                </button>
+				<!--<a ui-sref="{{origin}}"><i class="fa fa-arrow-left"></i></a>-->
+			</div>
+			<div class="col-md-10"><h3>Ranking de Rutas</h3></div>
+		</div>
 	</li>
 	<li class ="list-group-item"  ng-repeat="location in routeDetailsInfo" > 
 		<div class="row">
