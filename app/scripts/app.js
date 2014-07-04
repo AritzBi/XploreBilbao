@@ -70,17 +70,19 @@ angular.module('xploreBilbaoApp', [
         controller: 'MuseumInfoCtrl'      
       })
       .state('personalRoute',{
-        url: '/personalRoute',
+        url: '/route',
         templateUrl: 'partials/route.html',
         controller: 'RouteCtrl'      
       })      
       .state('personalRoute.topRoutes',{
+        url: '/route/topRoutes',
         templateUrl: 'partials/topRoutes.html',
-        controller: 'TopRoutesCtrl'      
+        controller: 'TopRoutesCtrl'     
       })
       .state('personalRoute.myRoutes',{
+        url: '/route/myRoutes',
         templateUrl: 'partials/myRoutes.html',
-        controller: 'MyRoutesCtrl'      
+        controller: 'MyRoutesCtrl'     
       })
       .state('personalRoute.routeDetails',{
         url: '/routeDetails/:hasWalkingPath/:origin',

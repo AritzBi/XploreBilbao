@@ -96,17 +96,51 @@ angular.module('xploreBilbaoApp')
 
 angular.module('xploreBilbaoApp')
 .controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
+	$scope.username=Auth.currentUserId();
 	$scope.user=Auth.currentUser();
-	Routes.getTopRoutes().$promise.then(
-		function success(data){
-			$scope.topRoutes=data;
-		}
-	);
+	if($scope.username){
+		Routes.getFollowingRoutes().$promise.then(
+			function(followingRoutes){
+				Routes.getTopRoutes().$promise.then(
+					function(data){
+						for(var i=0;i<data.length;i++){
+							var found=false;
+							for(var j=0;j<followingRoutes.length && !found;j++){
+								if(data[i].properties.id === followingRoutes[j].route_id){
+									found=true;
+								}
+							}
+							if(found){
+								data[i].following=true;
+							}else{
+								data[i].following=false;
+							}
+						}
+						$scope.topRoutes=data;
+					}
+				);
+			}
+		);
+	}else{
+		Routes.getTopRoutes().$promise.then(
+			function(data){
+				$scope.topRoutes=data;
+			}
+		);
+	}
 	$scope.followRoute=function(index){
 		var routeId=$scope.topRoutes[index].properties.id;
 		Routes.followRoute({id2:routeId}).$promise.then(
 			function(success){
-				console.log("hehco");
+				$scope.topRoutes[index].following=true;
+			}
+		);
+	};
+	$scope.unfollowRoute=function(index){
+		var routeId=$scope.topRoutes[index].properties.id;
+		Routes.unfollowRoute({id2:routeId}).$promise.then(
+			function(success){
+				$scope.topRoutes[index].following=false;
 			}
 		);
 	};
@@ -251,13 +285,14 @@ angular.module('xploreBilbaoApp')
 
 angular.module('xploreBilbaoApp')
 .controller('MyRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
+	$scope.user=Auth.currentUser();
 	Routes.getMyRoutes().$promise.then(
 		function success(data){
 			$scope.myCreations=[];
 			$scope.following=[];
 			$scope.myRoutes=data;
 			for(var i=0;i<data.length;i++){
-				if(data[i].properties.createdby===true){
+				if(data[i].properties.createdby===$scope.user.id){
 					$scope.myCreations.push(data[i]);
 				}else{
 					$scope.following.push(data[i]);

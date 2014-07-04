@@ -5,24 +5,20 @@
 	<div id="scrollArea" >
 		<div ng-repeat="route in topRoutes">
 		<li class ="list-group-item" ng-show="user.id!=route.properties.createdby" >
-			{{user.id}}
-			<!--<div class="row" ng-show="currentUser">
-				<div class="col-md-12 pull-right">
-				    <button type="button" class="pull-right btn btn-default btn-lg buttonNoBorder" >
-                        <span ng-click="followRoute($index)">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </span>
-                    </button>
-				</div>
-			</div>-->
+			{{userId}}
 			<div class="row">
 				<div class="col-md-10">
 					<h3 class="noIdent">{{route.properties.name_es}}</h3>
 				</div>
 				<div class="col-md-2">
-					<button type="button" ng-show="currentUser" class="pull-right btn btn-default btn-lg buttonNoBorder" >
-                        <span ng-click="followRoute($index)" class="pull-right">
+					<button type="button" ng-click="followRoute($index)" ng-show="currentUser && !route.following" class="pull-right btn btn-default buttonNoBorder" >
+                        <span  class="pull-right">
                             <i class="glyphicon glyphicon-plus"></i>
+                        </span>
+                    </button>
+                    <button type="button" ng-click="unfollowRoute($index)" ng-show="currentUser && route.following" class="pull-right btn btn-default buttonNoBorder" >
+                        <span  class="pull-right">
+                            <i class="glyphicon glyphicon-minus"></i>
                         </span>
                     </button>
 				</div>

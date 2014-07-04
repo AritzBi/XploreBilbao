@@ -22,6 +22,7 @@ angular.module('xploreBilbaoApp')
           username: user.username,
           password: user.password
         }, function(user) {
+          console.log(user);
           $rootScope.currentUser = user;
           return cb();
         }, function(err) {
@@ -58,6 +59,7 @@ angular.module('xploreBilbaoApp')
         var cb = callback || angular.noop;
         return User.save(user,
           function(user) {
+            console.log(user);
             $rootScope.currentUser = user;
             return cb(user);
           },
@@ -93,7 +95,6 @@ angular.module('xploreBilbaoApp')
        * @return {Object} user
        */
       currentUser: function() {
-        console.log("paso por aqui");
         return User.get();
       },
 

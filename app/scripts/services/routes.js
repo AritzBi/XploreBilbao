@@ -69,6 +69,13 @@ angular.module('xploreBilbaoApp')
           id:'getRouteDetails'
         }
       },
+      getFollowingRoutes:{
+        method: 'GET',
+        params:{
+          id:'getFollowingRoutes'
+        },
+        isArray:true
+      },
       getMyRoutes:{
         method: 'GET',
         params:{
@@ -79,6 +86,10 @@ angular.module('xploreBilbaoApp')
       followRoute:{
         method:'POST',
         params: {id:'followRoute'}
+      },
+      unfollowRoute:{
+        method:'POST',
+        params: {id:'unfollowRoute'}
       }
     });
   });

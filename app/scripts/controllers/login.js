@@ -11,6 +11,7 @@ angular.module('xploreBilbaoApp')
 					password: $scope.user.password
 				})
 				.then(function(data){
+					console.log(data);
 					$modalInstance.close();
 				},function(err){
 					err=err.data;	
