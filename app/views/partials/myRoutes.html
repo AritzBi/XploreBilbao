@@ -34,8 +34,15 @@
 		</li>
 		<li ng-if="followingTab.active" class="list-group-item"  ng-repeat="route in following" >
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-10">
 					<h3 class="noIdent">{{route.properties.name_es}}</h3>
+				</div>
+				<div class="cold-md-2">
+                    <button type="button" ng-click="unfollowRoute($index)" ng-show="currentUser" class="pull-right btn btn-default buttonNoBorder" >
+                        <span  class="pull-right">
+                            <i class="glyphicon glyphicon-minus"></i>
+                        </span>
+                    </button>
 				</div>
 			</div>
 			<div class="row">

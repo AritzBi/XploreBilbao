@@ -179,7 +179,6 @@ angular.module('xploreBilbaoApp')
 								html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.second_type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
 							}else{
 								if(feature.properties.building_type){
-									console.log(feature.properties.denom_es);
 									html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.type_denom_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
 								}else{
 									html="<h4>"+feature.properties.title_es+"</h4><h5>"+feature.properties.type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
@@ -222,14 +221,13 @@ angular.module('xploreBilbaoApp')
 
 angular.module('xploreBilbaoApp')
 .controller('RouteDetails',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","$translate","geoJSON",function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,$translate,geoJSON){
-	var style={
-                fillColor: "blue",
+		var style={
+                fillColor: "green",
                 weight: 5,
                 opacity: 1,
                 color: 'blue',
-                dashArray: '9',
                 fillOpacity: 0.7
-	};
+	        	};
 	$scope.getLang=function(){
 	  	var lang=$translate.use();
 	    return lang;
@@ -244,7 +242,7 @@ angular.module('xploreBilbaoApp')
 		if(route.features[i].geometry.type === "Point"){
 			route.features.splice(i,1);
 		}
-	}	    		
+	}  		
 	leafletData.getMap().then(function(map){
 		if(geoJSON.getJSON()){
 			map.removeLayer(geoJSON.getJSON());
@@ -252,14 +250,21 @@ angular.module('xploreBilbaoApp')
 		Routes.getRouteDetails({id2: routeId}).$promise.then(
 			function success(data){
 				$scope.routeDetailsInfo=new Array();
-				for(var i=0;i<data.features.length;i++){
+				for(var i=data.features.length-1;i>=0;i--){
 					route.features.push(data.features[i]);
 					$scope.routeDetailsInfo.push(data.features[i]);
 				}
-				if(hasWalkingPath === true){
+				if(hasWalkingPath === "true"){
 					geoJSON.setJSON(L.geoJson(route,{
 						style: style
 					}));
+					var firstPoint;
+					for (var property in geoJSON.getJSON()._layers) {
+			    		if (geoJSON.getJSON()._layers.hasOwnProperty(property)) {
+			        		firstPoint = geoJSON.getJSON()._layers[property];
+			    		}
+					}
+					map.setView(firstPoint._latlng);
 					geoJSON.getJSON().addTo(map);
 				}else{
 					Routes.getWalkingPathByRouteId({id2: routeId}).$promise.then(
@@ -267,17 +272,38 @@ angular.module('xploreBilbaoApp')
 			    			if(geoJSON.getJSON()){
 				    			map.removeLayer(geoJSON.getJSON());
 				    		}
-							for(var i=0;i<data.features.length;i++){
-    							route.features.push(data.features[i]);
-    						}
+    						route=data.features.concat(route.features);
     						geoJSON.setJSON(L.geoJson(route,{
-								style: style
+								style: style,
+								onEachFeature: function(feature, layer){
+								if(feature.properties){
+									console.log(feature);
+							var html;
+							//var html="<h4>"+feature.properties.denom_es+"</h4><div class='row'><div class='col-md-12'><img class='img-responsive'ng-src='images/"+feature.properties.image_path+"'></div></div>";
+							if(feature.properties.hostelery_type){
+								html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.second_type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+							}else{
+								if(feature.properties.building_type){
+									html="<h4>"+feature.properties.denom_es+"</h4><h5>"+feature.properties.type_denom_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
+								}else{
+									html="<h4>"+feature.properties.title_es+"</h4><h5>"+feature.properties.type_es+"</h5><div class='row popUpSize'><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div>";
+								}
+							}
+							layer.bindPopup(html);
+						}
+							}
 							}));
+							var firstPoint;
+							for (var property in geoJSON.getJSON()._layers) {
+					    		if (geoJSON.getJSON()._layers.hasOwnProperty(property)) {
+					        		firstPoint = geoJSON.getJSON()._layers[property];
+					    		}
+							}
+							map.setView(firstPoint._latlng);
 							geoJSON.getJSON().addTo(map);
 						}
 					);
 				}
-				//console.log(map.locate({setView: true}));
 			}
 		);
 	});
@@ -315,7 +341,6 @@ angular.module('xploreBilbaoApp')
 	    	function success(data){
 	    		leafletData.getMap().then(function(map){
 	    			if($scope.geoJsonLayer){
-	    				console.log("Paso por MyRoutes");
 		    			map.removeLayer($scope.geoJsonLayer);
 		    			$scope.geoJsonLayer={};
 		    		}
@@ -337,6 +362,14 @@ angular.module('xploreBilbaoApp')
 	    	}
 	    );
 	}
+	$scope.unfollowRoute=function(index){
+		var routeId=$scope.following[index].properties.id;
+		Routes.unfollowRoute({id2:routeId}).$promise.then(
+			function(success){
+				$scope.following.splice(index, 1);
+			}
+		);
+	};
 	$scope.showDetails= function(routeId){
 		var found=false;
 		var route;

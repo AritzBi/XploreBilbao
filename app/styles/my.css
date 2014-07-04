@@ -243,3 +243,18 @@ snap-content {
     pointer-events: none;
 }
 
+.container-leaflet{
+  margin-right:auto;
+  margin-left:auto;
+  padding-left:15px;
+  padding-right:15px
+}
+@media (min-width:768px){
+  .container-leaflet{width:150px}
+}
+@media (min-width:992px){
+  .container-leaflet{width:200px}
+}
+@media (min-width:1200px){
+  .container-leaflet{width:200px}
+}
