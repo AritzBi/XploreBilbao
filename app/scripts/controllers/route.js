@@ -96,11 +96,20 @@ angular.module('xploreBilbaoApp')
 
 angular.module('xploreBilbaoApp')
 .controller('TopRoutesCtrl',["$scope","selectedRoute","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","geoJSON", function ($scope,selectedRoute,leafletData,$state,$stateParams,$sce,Auth, Routes,geoJSON){
+	$scope.user=Auth.currentUser();
 	Routes.getTopRoutes().$promise.then(
 		function success(data){
 			$scope.topRoutes=data;
 		}
 	);
+	$scope.followRoute=function(index){
+		var routeId=$scope.topRoutes[index].properties.id;
+		Routes.followRoute({id2:routeId}).$promise.then(
+			function(success){
+				console.log("hehco");
+			}
+		);
+	};
 
 	$scope.showInMap= function(routeId){
 		var style={

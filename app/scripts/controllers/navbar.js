@@ -18,12 +18,13 @@ angular.module('xploreBilbaoApp')
     $scope.login = function login(){
     	var instance=$modal.open({
     		templateUrl: 'partials/login.html',
-    		controller: 'LoginCtrl',
+    		controller: 'LoginCtrl'
     	});
     };
     $scope.signup = function signup(){
       var instance=$modal.open({
-        templateUrl: 'partials/signup.html'
+        templateUrl: 'partials/signup.html',
+        controller: 'SignupCtrl'
       });
     };
     $scope.logout = function() {

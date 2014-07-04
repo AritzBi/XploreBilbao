@@ -16,10 +16,10 @@ angular.module('xploreBilbaoApp')
 	    	}
 	    );
 	    $scope.filteredItems = [];
-	   	$scope.groupedItems = [];
+	   	/*$scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
-	    $scope.currentPage = 0;
+	    $scope.currentPage = 0;*/
 	    $scope.predicate=""; 
 		var orderBy = $filter('orderBy');
 		$scope.searchText = "";
@@ -51,15 +51,14 @@ angular.module('xploreBilbaoApp')
 	                });
 	                return found;
 	        });
-	        $scope.currentPage = 0;
+	        //$scope.currentPage = 0;
 	        $scope.order();
 
     	};
     	$scope.filterByName = function () {
-    		console.log("llamo");
 	        $filter('filter')($scope.filteredItems, $scope.searchText, 'denom_es');
-	        $scope.currentPage = 0;
-	        $scope.groupToPages();
+	        //$scope.currentPage = 0;
+	        //$scope.groupToPages();
 	        //$scope.order();
 
     	};
@@ -77,14 +76,14 @@ angular.module('xploreBilbaoApp')
 
 	   	$scope.order = function () {
 	   		$scope.filteredItems = orderBy($scope.filteredItems, $scope.predicate, false);
-	   		$scope.currentPage = 0;
+	   		//$scope.currentPage = 0;
 	        // now group by pages
-	        $scope.groupToPages();
+	        //$scope.groupToPages();
 	    };
 
 
 	    
-	    $scope.range = function (start, end) {
+	    /*$scope.range = function (start, end) {
 	        var ret = [];
 	        if (!end) {
 	            end = start;
@@ -117,5 +116,5 @@ angular.module('xploreBilbaoApp')
 	    	}else{
 	    		return false;
 	    	}
-	    }
+	    }*/
 	});

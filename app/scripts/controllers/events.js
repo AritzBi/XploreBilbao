@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
 	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate,newRoute,datepickerPopupConfig,$locale){	    
-	   	$scope.range = function (start, end) {
+	   	/*$scope.range = function (start, end) {
 	        var ret = [];
 	        if (!end) {
 	            end = start;
@@ -28,7 +28,7 @@ angular.module('xploreBilbaoApp')
 	    
 	    $scope.setPage = function () {
 	        $scope.currentPage = this.n;
-	    }; 
+	    }; */
 
 	   	$scope.getLang=function(){
 	  		var lang=$translate.use();
@@ -106,9 +106,9 @@ angular.module('xploreBilbaoApp')
 	            	}
 	            }
 	        });
-	        $scope.currentPage = 0;
+	        //$scope.currentPage = 0;
 	        // now group by pages
-	        $scope.groupToPages();
+	        //$scope.groupToPages();
     	};
     	$scope.open = function($event) {
 		    $event.preventDefault();
@@ -166,11 +166,11 @@ angular.module('xploreBilbaoApp')
 		        		}
 		        	}
 		        	$scope.filteredItems=$scope.events;
-		        	$scope.groupToPages();
+		        	//$scope.groupToPages();
 				}
 			);
 			// calculate page in place
-		    $scope.groupToPages = function () {
+		   /* $scope.groupToPages = function () {
 		        $scope.pagedItems = [];
 		        for (var i = 0; i < $scope.filteredItems.length; i++) {
 		            if (i % $scope.itemsPerPage === 0) {
@@ -179,7 +179,7 @@ angular.module('xploreBilbaoApp')
 		                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
 		            }
 		        }
-		    };
+		    };*/
 
 			$scope.addLocation=function(id){
 		    	var found=false;
@@ -197,10 +197,10 @@ angular.module('xploreBilbaoApp')
 			$scope.events=Event.query();
 			$scope.eventsCategory=eventsCategory.query();
 			$scope.filteredItems = [];
-		    $scope.groupedItems = [];
+		    /*$scope.groupedItems = [];
 		    $scope.itemsPerPage = 5;
 		    $scope.pagedItems = [];
-		    $scope.currentPage = 0;
+		    $scope.currentPage = 0;*/
 		    // init the filtered items
 	    	$scope.filterByCategory = function () {
 		        $scope.filteredItems = $filter('filter')($scope.events, function (item) {
@@ -214,9 +214,9 @@ angular.module('xploreBilbaoApp')
 		                });
 		                return found;
 		        });
-		        $scope.currentPage = 0;
+		        //$scope.currentPage = 0;
 		        // now group by pages
-		        $scope.groupToPages();
+		        //$scope.groupToPages();
 	    	};
 		    $scope.addLocation=function(id){
 		    	var found=false;

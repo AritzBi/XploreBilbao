@@ -4,7 +4,21 @@
 			<div class="col-md-3 col-lg-3">
 			</div>
 			<div class="col-md-9 col-lg-9">
-				<h1 style="padding-top: 50px;">{{'pintxos' | translate}}</h1>
+				<div class="row">
+					<div class="col-md-9">
+						<h1 style="padding-top:50px;">{{'pintxos' | translate}}</h1>
+					</div>
+					<div class="col-md-3">
+						<div class="right-inner-addon"style="padding-top:75px;">
+	        				<i class="glyphicon glyphicon-search" style="padding-top:80px;"></i>
+	        				<input type="search"
+	               			class="form-control" 
+	               			placeholder="Search"
+	               			ng-model="searchText"
+	               			 />
+	    				</div>
+    				</div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -41,7 +55,7 @@
 				            	{{'category' | translate}}
 				        	</label>     
 				        	<label class="radio" >
-				            	<input type="radio" ng-model="predicate" value="+note" ng-change="order()">
+				            	<input type="radio" ng-model="predicate" value="-note" ng-change="order()">
 				            	{{'note' | translate}}
 				        	</label> 
 				    	</div>
@@ -51,14 +65,14 @@
 			<div class="col-md-9 col-lg-9 data-container desktop">
 				<div class="panel panel-default">
 					<ul class="list-group">
-						<li  class="list-group-item"  ng-repeat="pintxo in pagedItems[currentPage]" id="{{pintxo.id}}" >
+						<li  class="list-group-item"  ng-repeat="pintxo in filteredItems | filter:searchText" id="{{pintxo.id}}" >
 							<div class="row">
 							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
-								<div class="col-md-8">
+								<div class="col-md-7">
 									<a ui-sref="pintxoInfo({id: pintxo.id})"><h4>{{pintxo['denom_' + getLang()] }}</h4></a>
 								</div>
-								<div class="col-md-1"><h4><span class="label label-success"ng-class="{labelStyleRed: pintxo.note == '0' || pintxo.note == '1' || pintxo.note == '2' ,labelStyleYellow: pintxo.note == '3', labelStyleGreen: pintxo.note=='4'|| pintxo.note=='5' }" >{{pintxo.note}}</span></h4></div>
-								<div class="col-md-3 pull-right">
+								<div class="col-md-2"><h4><span class="label label-success"ng-class="{labelStyleRed: pintxo.note == '0' || pintxo.note == '1' || pintxo.note == '2' ,labelStyleYellow: pintxo.note == '3', labelStyleGreen: pintxo.note=='4'|| pintxo.note=='5' }" >{{pintxo.note}}</span></h4></div>
+								<div class="col-md-3 ">
 									<h5>{{pintxo['first_type_' + getLang()] }}</h5>
 								</div>
 							</div>
@@ -79,12 +93,12 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-9 col-lg-9 data-container mobile">
+			<!--<div class="col-md-9 col-lg-9 data-container mobile">
 				<div class="panel panel-default">
 					<ul class="list-group">
 						<li  class="list-group-item"  ng-repeat="pintxo in filteredItems" id="{{pintxo.id}}" >
 							<div class="row">
-							<!--<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>-->
+								<a ui-sref="pintxos.pintxoInfo({id: pintxo.id})"> {{pintxo.denom_es}}</a>
 								<div class="col-md-7">
 									<a ui-sref="pintxoInfo({id: pintxo.id})"><h4>{{pintxo['denom_' + getLang()] }}</h4></a>
 								</div>
@@ -109,9 +123,9 @@
 						</li>
 					</ul>
 				</div>
-			</div>
+			</div>-->
 		</div>
-    <div class="pull-right row desktop">
+    <!--<div class="pull-right row desktop">
 	    <ul class="pagination">
 	        <li ng-class="{disabled: currentPage == 0}" ng-hide="arePages()">
 	            <a href ng-click="prevPage()">« Prev</a>
@@ -125,5 +139,5 @@
 	            <a href ng-click="nextPage()">Next »</a>
 	        </li>
 	    </ul>
-    </div>
+    </div>->
 </div>

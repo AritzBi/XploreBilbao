@@ -16,11 +16,12 @@ angular.module('xploreBilbaoApp')
 	    	}
 	    );
 	    $scope.filteredItems = [];
-	   	$scope.groupedItems = [];
+	   	/*$scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
-	    $scope.currentPage = 0;
+	    $scope.currentPage = 0;*/
 	    $scope.predicate=""; 
+	    $scope.searchText = "";
 		var orderBy = $filter('orderBy');
 
 	   	$scope.getLang=function(){
@@ -50,12 +51,12 @@ angular.module('xploreBilbaoApp')
 	                });
 	                return found;
 	        });
-	        $scope.currentPage = 0;
+	        //$scope.currentPage = 0;
 	        // now group by pages
-	        $scope.groupToPages();
+	        //$scope.groupToPages();
     	};
 		    // calculate page in place
-	    $scope.groupToPages = function () {
+	    /*$scope.groupToPages = function () {
 	        $scope.pagedItems = [];
 	        for (var i = 0; i < $scope.filteredItems.length; i++) {
 	            if (i % $scope.itemsPerPage === 0) {
@@ -64,14 +65,14 @@ angular.module('xploreBilbaoApp')
 	                $scope.pagedItems[Math.floor(i / $scope.itemsPerPage)].push($scope.filteredItems[i]);
 	            }
 	        }
-	    };
+	    };*/
 	   	$scope.order = function () {
 	   		$scope.filteredItems = orderBy($scope.filteredItems, $scope.predicate, false);
-	   		$scope.currentPage = 0;
+	   		//$scope.currentPage = 0;
 	        // now group by pages
-	        $scope.groupToPages();
+	        //$scope.groupToPages();
 	    };
-	    $scope.range = function (start, end) {
+	    /*$scope.range = function (start, end) {
 	        var ret = [];
 	        if (!end) {
 	            end = start;
@@ -104,5 +105,5 @@ angular.module('xploreBilbaoApp')
 	    	}else{
 	    		return false;
 	    	}
-	    }          
+	    }*/         
 	});

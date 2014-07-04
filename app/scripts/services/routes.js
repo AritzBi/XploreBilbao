@@ -75,6 +75,10 @@ angular.module('xploreBilbaoApp')
           id:'getMyRoutes'
         },
         isArray:true
+      },
+      followRoute:{
+        method:'POST',
+        params: {id:'followRoute'}
       }
     });
   });

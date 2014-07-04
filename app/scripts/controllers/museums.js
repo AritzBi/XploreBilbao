@@ -2,11 +2,12 @@
 
 angular.module('xploreBilbaoApp')
 	.controller('MuseumsCtrl', function ($rootScope,$scope,EmblematicBuilding,$filter,$translate,newRoute){
-	    $scope.groupedItems = [];
+	    /*$scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;
 	    $scope.pagedItems = [];
-	    $scope.currentPage = 0;
+	    $scope.currentPage = 0;*/
 	   	$scope.predicate="";
+	   	$scope.searchText = "";
 	    var orderBy = $filter('orderBy');
 	    EmblematicBuilding.getMuseums().$promise.then(
 	    	function success (data) {
@@ -17,7 +18,7 @@ angular.module('xploreBilbaoApp')
 	    			}
 	    		}
 			    // now group by pages
-			    $scope.groupToPages();
+			    //$scope.groupToPages();
 	    	}
 	    );                                                                                             
 	  	$scope.getLang=function(){
@@ -34,15 +35,13 @@ angular.module('xploreBilbaoApp')
 	    	}
 	    }
 	    $scope.order = function () {
-	    	console.log($scope.museums);
 	   		$scope.museums = orderBy($scope.museums, $scope.predicate, false);
-	   		console.log($scope.museums);
-	   		$scope.currentPage = 0;
+	   		/*$scope.currentPage = 0;
 	        // now group by pages
-	        $scope.groupToPages();
+	        $scope.groupToPages();*/
 	    };
 		// calculate page in place
-	    $scope.groupToPages = function () {
+	    /*$scope.groupToPages = function () {
 	        $scope.pagedItems = [];
 	        for (var i = 0; i < $scope.museums.length; i++) {
 	            if (i % $scope.itemsPerPage === 0) {
@@ -86,5 +85,5 @@ angular.module('xploreBilbaoApp')
 	    	}else{
 	    		return false;
 	    	}
-	    }
+	    }*/
 	});

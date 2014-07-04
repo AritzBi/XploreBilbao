@@ -6,6 +6,7 @@ angular.module('xploreBilbaoApp')
     $scope.errors = {};
 
     $scope.register = function(form) {
+      console.log("llego aqui");
       $scope.submitted = true;
   
       if(form.$valid) {
