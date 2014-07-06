@@ -80,12 +80,12 @@
         			</li>
         			<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-hide="currentUser" ng-class="{active: isActive('/signup')}">
           			<a href="#" ng-click="signup()">
-          				<i class="icon fa fa-users"></i> Registrarse
+          				<i class="icon fa fa-users"></i> {{'register' | translate}}
           			</a>
         			</li>
         			<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="currentUser" ng-class="{active: isActive('/myroutes')}">
           			<a href="#"  ui-sref="myprofile">
-          				<i class="icon fa fa-user"></i> Mi Perfil
+          				<i class="icon fa fa-user"></i> {{'myProfile' | translate}}
           			</a>
         			</li>
         			<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="currentUser" ng-class="{active: isActive('/logout')}">

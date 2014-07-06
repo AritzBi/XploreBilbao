@@ -92,50 +92,6 @@
 					</ul>
 				</div>
 			</div>
-			<!--<div class="col-md-9 col-lg-9 data-container">
-				<div class="panel panel-default">
-					<ul class="list-group">
-						<li  class="list-group-item"  ng-repeat="restaurant in filteredItems |  filter:searchText" id="{{restaurant.id}}" >
-							<div class="row">
-								<div class="col-md-7">
-									<a ui-sref="restaurantInfo({id: restaurant.id})"><h4>{{restaurant['denom_' + getLang()] }}</h4></a>
-								</div>
-								<div class="col-md-2 "><h4><span class="label label-success"ng-class="{labelStyleRed: restaurant.note == '0' || restaurant.note == '1' || restaurant.note == '2' ,labelStyleYellow: restaurant.note == '3', labelStyleGreen: restaurant.note=='4'|| restaurant.note=='5' }" >{{restaurant.note}}</span></h4></div>
-								<div class="col-md-3  ">
-									<h4>{{restaurant['first_type_' + getLang()] }}</h4>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 stackMargin">
-									<img class="img-responsive"ng-src="images/{{restaurant.image_path}}">
-								</div>
-								<div class="col-md-8 ">
-									<p class="justify">{{restaurant['description_' + getLang()] }}</p>
-								</div>
-							</div>
-							<div class="row">
-								<button type="button" ng-show="isSidebarEnabled()"ng-click="addLocation(restaurant.id)" class="btn btn-default btn-lg pull-right buttonNoBorder">
-  									<span class="addRouteElement glyphicon glyphicon-plus"></span>
-								</button>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>-->
-    <!--<div class="pull-right row mobile">
-	    <ul class="pagination">
-	        <li ng-class="{disabled: currentPage == 0}" ng-hide="arePages()">
-	            <a href ng-click="prevPage()">« Prev</a>
-	        </li>
-	        <li ng-repeat="n in range(pagedItems.length)"
-	            ng-class="{active: n == currentPage}"
-	            ng-click="setPage()">
-	            <a href ng-bind="n + 1">1</a>
-	        </li>
-	        <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="arePages()">
-	            <a href ng-click="nextPage()">Next »</a>
-	        </li>
-	    </ul>
-    </div>-->
+</div>
+<div class="row top-buffer"></div>
 </div>

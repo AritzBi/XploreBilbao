@@ -59,6 +59,11 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/event.html',
         controller: 'EventsCtrl'      
       })
+        .state('eventInfo',{
+        url: '/eventsDetails/{id}',
+        templateUrl: 'partials/eventInfo.html',
+        controller: 'EventInfoCtrl'      
+      })
       .state('museums',{
         url: '/museums',
         templateUrl: 'partials/museum.html',

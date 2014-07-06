@@ -16,7 +16,27 @@
 	"lema": "¡Disfruta de Bilbao al máximo!",
 	"nothing": "Nada",
 	"note": "Nota",
-	"category": "Categoría"
+	"category": "Categoría",
+	"loginError": "Este usuario no está registrado",
+	"passwordError": "Contraseña incorrecta.",
+	"missing": "Faltan datos. ",
+	"register": "Regístrate",
+	"cancel": "Cancelar",
+	"name": "Nombre",
+	"surname": "Apellido",
+	"password": "Contraseña",
+	"username": "Nombre de usuario",
+	"registerError": "El nombre de usuario o email están en uso.",
+	"myProfile": "Mi Perfil",
+	"comments": "Comentarios",
+	"weeks": "Semanas",
+	"today": "Hoy",
+	"clear": "Limpiar",
+	"exit": "Cerrar",
+	"price": "Precio",
+	"startDate": "Fecha de inicio",
+	"endDate": "Fecha de fin",
+	"rangeHours": "Rango de horas"
 
 
 }

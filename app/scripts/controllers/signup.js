@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+  .controller('SignupCtrl', function ($scope, Auth, $location,$modalInstance) {
     $scope.user = {};
-    $scope.errors = {};
+    $scope.errors = false;
 
     $scope.register = function(form) {
       console.log("llego aqui");
       $scope.submitted = true;
-  
+      $scope.errors = false;
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
@@ -22,9 +22,13 @@ angular.module('xploreBilbaoApp')
           $location.path('/');
         })
         .catch( function(err) {
+          console.log(err);
           err = err.data;
-          $scope.errors = {};
+          $scope.errors = true;
         });
       }
+    };
+    $scope.cancel=function(){
+      $modalInstance.dismiss();
     };
   });

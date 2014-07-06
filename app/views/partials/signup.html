@@ -1,12 +1,15 @@
 
   <div class="modal-header">
-    <h3>Registro</h3>
+    <h3>{{'register'|translate}}</h3>
   </div>
   <div class="modal-body">
     <form class="form" name="form" ng-submit="register(form)" novalidate>
+      <p class="alert alert-danger" ng-show="errors">
+        {{'registerError' | translate}}
+      </p>
       <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                           'has-error': form.name.$invalid && submitted }">
-        <label>Nombre</label>
+        <label>{{'name'|translate}}</label>
         <input type="text" name="name" class="form-control" ng-model="user.name"
                required/>
         <p class="help-block" ng-show="form.name.$error.required && submitted">
@@ -15,7 +18,7 @@
       </div>   
       <div class="form-group" ng-class="{ 'has-success': form.surname.$valid && submitted,
                                           'has-error': form.surname.$invalid && submitted }">
-        <label>Apellido</label>
+        <label>{{'surname'|translate}}</label>
         <input type="text" name="surname" class="form-control" ng-model="user.surname"
                required/>
         <p class="help-block" ng-show="form.surname.$error.required && submitted">
@@ -24,7 +27,7 @@
       </div>  
       <div class="form-group" ng-class="{ 'has-success': form.username.$valid && submitted,
                                           'has-error': form.username.$invalid && submitted }">
-        <label>Username</label>
+        <label>{{'username'| translate}}</label>
         <input type="text" name="username" class="form-control" ng-model="user.username"
                required/>
         <p class="help-block" ng-show="form.username.$error.required && submitted">
@@ -45,7 +48,7 @@
       </div>
       <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                           'has-error': form.password.$invalid && submitted }">
-        <label>Password</label>
+        <label>{{'password'| translate}}</label>
         <input type="password" name="password" class="form-control" ng-model="user.password"
                ng-minlength="3"
                required/>
@@ -55,11 +58,14 @@
         </p>
       </div>
 
-      <button class="btn btn-lg btn-primary" type="submit">Registrar</button>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary"> {{'register'| translate}} </button>
+        <button class="btn btn-warning" ng-click="cancel()">{{'cancel'| translate}}</button>
+      </div>
     </form>
   </div>
 </div>
 
-<div class="modal-footer">
+<!--<div class="modal-footer">
     Tienes una cuenta? <a href="/login" class="text-center new-account">Log in.</a>
-</div>
+</div>-->

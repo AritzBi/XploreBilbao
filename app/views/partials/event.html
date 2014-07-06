@@ -1,26 +1,26 @@
 <div class="container">
-		<div class="row">
-			<div class="col-md-3 col-lg-3">
-			</div>
-			<div class="col-md-9 col-lg-9">
-				<div class="row">
-					<div class="col-md-9">
-						<h1 style="padding-top:50px;">{{'events' | translate}}</h1>
-					</div>
-					<div class="col-md-3">
-						<div class="right-inner-addon"style="padding-top:75px;">
-	        				<i class="glyphicon glyphicon-search" style="padding-top:80px;"></i>
-	        				<input type="search"
-	               			class="form-control" 
-	               			placeholder="Search"
-	               			ng-model="searchText"
-	               			 />
-	    				</div>
+	<div class="row">
+		<div class="col-md-3 col-lg-3">
+		</div>
+		<div class="col-md-9 col-lg-9">
+			<div class="row">
+				<div class="col-md-9">
+					<h1 style="padding-top:50px;">{{'events' | translate}}</h1>
+				</div>
+				<div class="col-md-3">
+					<div class="right-inner-addon"style="padding-top:75px;">
+        				<i class="glyphicon glyphicon-search" style="padding-top:80px;"></i>
+        				<input type="search"
+               			class="form-control" 
+               			placeholder="Search"
+               			ng-model="searchText"
+               			 />
     				</div>
 				</div>
 			</div>
 		</div>
-	<div sclass="row data-container">
+	</div>
+	<div class="row data-container">
 		<div class="col-md-3">
 			<div class="row"> 
 				<div class="col-md-12"><h3>{{'filter' | translate}}</h3></div>
@@ -29,7 +29,7 @@
 				<div class="control-group">
 				    <div class="controls">
 				    	<div class="row filter-format filter-margin">
-				    		<div class="col-md-12 filter-format">Precio</div> 
+				    		<div class="col-md-12 filter-format">{{'price'| translate}}</div> 
 				    	</div>
 				    	<div class="row">
 				    		<div class="col-md-12">
@@ -42,35 +42,29 @@
 				    		</div> 
 	
 						</div>
-						<!--<div class="row filter-format">Fecha de inicio</div>
-						<div class="row"><input type="date" ng-model="startDate"/></div>
-						<div class="row filter-format">Fecha de fin</div>
-						<div class="row"><input type="date" ng-model="endDate"/></div>
-						<div class="row filter-format">Rango de horas</div>
-						<div class="row filter-margin"><input type="time" ng-model="startHour"/><input type="time" ng-model="endHour"/></div>-->
-						<div class="row"><div class="col-md-12 filter-format">Fecha de inicio</div> </div>
+						<div class="row"><div class="col-md-12 filter-format">{{'startDate'| translate}}</div> </div>
 						<div class="row">
         					<div class="col-md-12">
             					<p class="input-group">
-              						<input type="text" class="form-control" datepicker-popup={{("date"|translate)}} ng-model="startDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              						<input type="text" class="form-control" datepicker-popup={{("date"|translate)}} ng-model="startDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions"toggle-weeks-text="{{'weeks'| translate}}"current-text="{{'today'| translate}}" clear-text="{{'clear'| translate}}"close-text="{{'exit'| translate}}" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
               						<span class="input-group-btn">
                 						<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               						</span>
             					</p>
         					</div>
     					</div>
-    					<div class="row"><div class="col-md-12 filter-format">Fecha de fin</div> </div>
+    					<div class="row"><div class="col-md-12 filter-format">{{'endDate'| translate}}</div> </div>
     					<div class="row">
         					<div class="col-md-12">
             					<p class="input-group">
-              						<input type="text" class="form-control" datepicker-popup={{("date"|translate)}} ng-model="endDate" is-open="opened2" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" toggle-weeks-text="prueba"current-text="la gran mierda" clear-text="MIERDISIMA"close-text="Mierda" />
+              						<input type="text" class="form-control" datepicker-popup={{("date"|translate)}} ng-model="endDate" is-open="opened2" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" toggle-weeks-text="{{'weeks'| translate}}"current-text="{{'today'| translate}}" clear-text="{{'clear'| translate}}"close-text="{{'exit'| translate}}" />
               						<span class="input-group-btn">
                 						<button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               						</span>
             					</p>
         					</div>
     					</div>
-    					<div class="row"><div class="col-md-12 filter-format">Rango de horas</div> </div>
+    					<div class="row"><div class="col-md-12 filter-format">{{'rangeHours'|translate}}</div> </div>
 						<div class="row filter-margin">
 							<div class="col-md-6">
 								<timepicker class="timeFontSize" ng-model="startHour"  hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
@@ -80,7 +74,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<button class="btn btn-primary" ng-click="filterEvent()" type="submit">Filtrar</button>
+							<button class="btn btn-primary" ng-click="filterEvent()" type="submit">{{'filter' | translate}}</button>
 						</div>
 				    </div>
 				</div>
@@ -92,7 +86,7 @@
 					<li  class="list-group-item"  ng-repeat="event in filteredItems | filter:searchText" >
 						<div class="row">
 							<div class="col-md-10">
-								<a ui-sref="eventInfo({id: event.id})"><h4>{{event['title_' + getLang()] }}</h4></a>
+								<a ui-sref="eventInfo({id: event.event_id})"><h4>{{event['title_' + getLang()] }}</h4></a>
 							</div>
 							<div class="col-md-2">
 								<h4>{{event['subtype_' + getLang()] }}</h4>
@@ -145,19 +139,5 @@
 			</div>
 		</div>
 	</div>
-    <!--<div class="row pull-right">
-        <ul class="pagination">
-            <li ng-class="{disabled: currentPage == 0}" ng-hide="arePages()">
-                <a href ng-click="prevPage()">« Prev</a>
-            </li>
-            <li ng-repeat="n in range(pagedItems.length)"
-                ng-class="{active: n == currentPage}"
-            ng-click="setPage()">
-                <a href ng-bind="n + 1">1</a>
-            </li>
-            <li ng-class="{disabled: currentPage == pagedItems.length - 1}" ng-hide="arePages()">
-                <a href ng-click="nextPage()">Next »</a>
-            </li>
-        </ul>
-    </div>-->
+	<div class="row top-buffer"></div>
 </div>

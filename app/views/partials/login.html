@@ -3,9 +3,18 @@
 </div>
 <div class="modal-body">
 	<form class="form" name="form" ng-submit="login(form)">
-		<p class="alert alert-danger" ng-show="erros.other">
+		<p class="alert alert-danger" ng-show="errors.other">
 			{{errors.other}}
 		</p>		
+		<p class="alert alert-danger" ng-show="errors.loginError">
+			{{'loginError' | translate}}
+		</p>
+		<p class="alert alert-danger" ng-show="errors.passwordError">
+			{{'passwordError' | translate}}
+		</p>
+		<p class="alert alert-danger" ng-show="errors.missing">
+			{{'missing' | translate}}
+		</p>	
 		<div class="form-group ">
 			<input class="form-control input-lg" name="username" type="text" ng-model="user.username">
 		</div>
@@ -17,14 +26,14 @@
         	<input class="form-control input-lg" name="password" type="password" ng-model="user.password">
         </div>
         <div class="form-actions">
-        	<button type="submit" class="btn btn-primary"> Sign in </button>
-        	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        	<button type="submit" class="btn btn-primary"> Login</button>
+        	<button class="btn btn-warning" ng-click="cancel()">{{'cancel'| translate}}</button>
         </div>
 	</form>
 </div>
-<div class="modal-footer">
+<!--<div class="modal-footer">
 	<p class="pull-right">
 		¿No tienes una cuenta todavía?
 		<a ui-sref="signup" ng-click="cancel()"> ¡Regístrate!</a>
 	</p>
-</div>
+</div>-->

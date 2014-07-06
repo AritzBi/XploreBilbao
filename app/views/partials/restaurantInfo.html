@@ -1,75 +1,75 @@
 <div class="container-info">
-	<div ng-include="'partials/navbar'"></div>
-			<h1>{{restaurant.denom_es}}</h1>
+	<div class="row">
+		<div class="col-md-12">			
+			<h1 style="padding-top:50px;">{{restaurant['denom_' + getLang()] }}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-5">
+			<img class="img-responsive"ng-src="images/{{restaurant.image_path}}">
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-5">
+			{{restaurant['description_' + getLang()] }}
 			<div class="row">
-				<div class="col-lg-5">
-					<img class="img-responsive"ng-src="images/{{restaurant.image_path}}">
-					<div class="row top-buffer">
-						<div class="col-lg-5">
-							<iframe width="450" height="250" frameborder="0" style="border:0" ng-src="{{url}}"></iframe>
-						</div>
-					</div>
+				<div class="col-md-2">
+				<h1><span class="label label-success"ng-class="{labelStyleRed: restaurant.NOTE == '0' || restaurant.NOTE == '1' || restaurant.NOTE == '2' ,labelStyleYellow: restaurant.NOTE == '3', labelStyleGreen: restaurant.NOTE=='4'|| restaurant.NOTE=='5' }" >{{restaurant.NOTE}}</span></h1>
 				</div>
-				<div class="col-lg-2">
-				</div>
-				<div class="col-lg-5">
-					{{restaurant['description_' + getLang()] }}
-					<div class="row">
-						<div class="col-md-2">
-						<h1><span class="label label-success"ng-class="{labelStyleRed: restaurant.NOTE == '0' || restaurant.NOTE == '1' || restaurant.NOTE == '2' ,labelStyleYellow: restaurant.NOTE == '3', labelStyleGreen: restaurant.NOTE=='4'|| restaurant.NOTE=='5' }" >{{restaurant.NOTE}}</span></h1>
-						</div>
-						<div class="col-md-10">
-							<rating ng-model="restaurant.NOTE" value="restaurant.NOTE" max="max" readonly="true" ng-class="{ratingStyleRed: restaurant.NOTE == '0' || restaurant.NOTE == '1' || restaurant.NOTE == '2' ,ratingStyleYellow: restaurant.NOTE == '3', ratingStyleGreen: restaurant.NOTE=='4'|| restaurant.NOTE=='5' }"></rating>
-						</div>
-					</div>
-					 <form ng-show="currentUser && !isComment" class="top-buffer" class="form" name="form" ng-submit="createComment()">
-		  				<div class="form-actions">
-			       			<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>
-							<div class="row">
-								<div class="col-md-12">
-									<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="6" placehorder="Escriba su opinión..."></textarea>
-								</div>
-							</div>
-							<div class="row top-medium-buffer">
-								<div class="col-md-12">
-									<button type="submit" class="btn btn-primary">{{'add' | translate}}</button>
-								</div>
-							</div>
-						</div>
-					</form>	
-					<form ng-show="currentUser && isComment" class="top-buffer" class="form" name="form" ng-submit="editComment()">
-		  				<div class="form-actions">
-		       				<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>		    			
-							<div class="row">
-								<div class="col-md-12">
-									<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="5" placehorder="Escriba su opinión..."></textarea>
-								</div>
-							</div>
-							<div class="row top-medium-buffer">
-								<div class="col-md-12">
-									<button type="submit" class="btn btn-primary">{{'edit' | translate}}</button>
-								</div>
-							</div>
-						</div>
-					</form>	
+				<div class="col-md-10">
+					<rating ng-model="restaurant.NOTE" value="restaurant.NOTE" max="max" readonly="true" ng-class="{ratingStyleRed: restaurant.NOTE == '0' || restaurant.NOTE == '1' || restaurant.NOTE == '2' ,ratingStyleYellow: restaurant.NOTE == '3', ratingStyleGreen: restaurant.NOTE=='4'|| restaurant.NOTE=='5' }"></rating>
 				</div>
 			</div>
-			<div class="row ">
-				<div class="col-lg-5">
-				</div>
-				<div class="col-lg-2">
+		</div>
+	</div>
+	<div class="row top-buffer">
+		<div class="col-md-5">
+			<div class="flex-video widescreen">
+				<iframe  frameborder="0" style="border:0" ng-src="{{url}}"></iframe>
+			</div>
+		</div>
+		<div class="col-md-2">
 
+		</div>
+		<div class="col-md-5">
+			<ul class="list-group" ng-show="comments.length>0">
+				<h4>{{'comments'| translate}}</h4>
+				<li  class="list-group-item"  ng-repeat="comment in comments"  >
+					{{comment.comment}}
+				</li>
+			</ul>
+			<form ng-show="currentUser && !isComment"  class="form" name="form" ng-submit="createComment()">
+  				<div class="form-actions">
+	       			<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>
+					<div class="row">
+						<div class="col-md-12">
+							<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="6" placehorder="Escriba su opinión..."></textarea>
+						</div>
+					</div>
+					<div class="row top-medium-buffer">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-primary">{{'add' | translate}}</button>
+						</div>
+					</div>
 				</div>
-				<div class="col-lg-5">
-					 <!--<button type="button" ng-show="currentUser" class="btn btn-default btn-primary"  ng-click="createComment()">
-		    			Nuevo comentario
-		  			</button>-->
-					<ul class="list-group">
-						<h4>Comentarios</h4>
-						<li  class="list-group-item"  ng-repeat="comment in comments"  >
-							{{comment.comment}}
-						</li>
-					</ul>
+			</form>	
+			<form ng-show="currentUser && isComment"  class="form" name="form" ng-submit="editComment()">
+  				<div class="form-actions">
+       				<rating ng-model="myComment.note" value="myComment.note" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" ng-style="{color:'red'}" on-leave="hoveringLeave(value)" id="rating"></rating>		    			
+					<div class="row">
+						<div class="col-md-12">
+							<textarea class="form-control" name="comment" ng-model="myComment.comment" rows="5" placehorder="Escriba su opinión..."></textarea>
+						</div>
+					</div>
+					<div class="row top-medium-buffer">
+						<div class="col-md-12">
+							<button type="submit" class="btn btn-primary">{{'edit' | translate}}</button>
+						</div>
+					</div>
 				</div>
-			</div>
+			</form>	
+		</div>
+	</div>
+	<div class="row top-buffer">
+	</div>
 </div>
