@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('SidebarCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute,$timeout){
+	.controller('SidebarCtrl', function ($scope,$rootScope, snapRemote, $cookieStore, newRoute,$timeout, inRoute){
 		if(window.innerWidth<=768){
         $scope.opts = {
         disable: 'right',
@@ -14,9 +14,15 @@ angular.module('xploreBilbaoApp')
         minPosition: -350,
         maxPosition: 350
 		};}
-
+    console.log("Llamo antes");
+    $scope.inRoute=function(){
+      console.log("llamo");
+      var enabled=inRoute.getInRoute();
+      console.log(enabled);
+      return enabled;
+    }
     window.onresize = function(event) {
-      snapRemote.getSnapper().then(function(snapper) {
+      snapRemote.getSnapper('route').then(function(snapper) {
         if(window.innerWidth<=768){
          $scope.opts = {
          disable: 'right',
@@ -34,14 +40,14 @@ angular.module('xploreBilbaoApp')
       });
 
     };
-		snapRemote.getSnapper().then(function(snapper) {
+		snapRemote.getSnapper('route').then(function(snapper) {
 			var sidebarEnabled=$cookieStore.get('sidebar');
   			if(sidebarEnabled != "true")
   				snapper.disable();
 		});
 
 		$scope.enableSidebar = function() {
-      snapRemote.getSnapper().then(function(snapper) {
+      snapRemote.getSnapper('route').then(function(snapper) {
   				$cookieStore.put('sidebar',"true");
   				snapper.enable();
           snapper.settings($scope.opts);
@@ -52,7 +58,7 @@ angular.module('xploreBilbaoApp')
 
     	};
     	$scope.disenableSidebar = function() {
-      	snapRemote.getSnapper().then(function(snapper) {
+      	snapRemote.getSnapper('route').then(function(snapper) {
           newRoute.reset();
   				$cookieStore.put('sidebar',"false");
   				snapper.disable();
@@ -66,6 +72,12 @@ angular.module('xploreBilbaoApp')
     			return true;
     		else return false;
     	};
+      $scope.isArrowEnabled = function() {
+        var sidebarEnabled=$cookieStore.get('sidebar');
+        if(sidebarEnabled === "true" && $rootScope.currentUser)
+          return true && !inRoute.getInRoute();
+        else return !inRoute.getInRoute() && false;
+      };
 	});	
 
 angular.module('xploreBilbaoApp')
@@ -103,7 +115,7 @@ angular.module('xploreBilbaoApp')
     };
 
       $scope.disenableSidebar = function() {
-        snapRemote.getSnapper().then(function(snapper) {
+        snapRemote.getSnapper('route').then(function(snapper) {
           newRoute.reset();
           $cookieStore.put('sidebar',"false");
           snapper.close('left');
@@ -142,5 +154,17 @@ angular.module('xploreBilbaoApp')
   }
   this.reset=function(){
     newRoute.length=0;
+  }
+});
+
+angular.module('xploreBilbaoApp')
+.service('inRoute',function(){
+  var inRoute=false;
+  this.setInRoute = function(state){
+    inRoute=state;
+    console.log(inRoute);
+  }
+  this.getInRoute = function(){
+    return inRoute;
   }
 });

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate,newRoute,datepickerPopupConfig,$locale){	    
-
+	.controller('EventsCtrl', function ($scope,$stateParams,Event, eventsCategory, $filter, $translate,newRoute,datepickerPopupConfig,$locale,inRoute){	    
+		inRoute.setInRoute(false);
 	   	$scope.getLang=function(){
 	  		var lang=$translate.use();
 	    	return lang;

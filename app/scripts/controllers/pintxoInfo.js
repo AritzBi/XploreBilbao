@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('PintxoInfoCtrl', function ($scope,$stateParams, $sce, Pintxo, HosteleryComments, Auth, $translate){
+	.controller('PintxoInfoCtrl', function ($scope,$stateParams, $sce, Pintxo, HosteleryComments, Auth, $translate,inRoute){
 			    var user=Auth.currentUser();
 			    $scope.max=5;
-
+			    inRoute.setInRoute(false);
 		Pintxo.get({id: $stateParams.id}).$promise.then(                                                                                              
 			function success (data) {
 				$scope.pintxo=data;

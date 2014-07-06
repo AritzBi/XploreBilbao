@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments,Auth, $translate){
+	.controller('RestaurantsInfoCtrl', function ($scope,$stateParams, $sce, Restaurant,HosteleryComments,Auth, $translate,inRoute){
 			    var user=Auth.currentUser();
 			    $scope.max=5;
+			    inRoute.setInRoute(false);
 		Restaurant.get({id: $stateParams.id}).$promise.then(                                                                                              
 			function success (data) {
 				$scope.restaurant=data;

@@ -11,4 +11,13 @@
 			</div>
 		</div>
 </div>
+<div ng-if="!desktop" >
+	<div snap-drawer="right" class="top-medium-buffer">
+			<div ui-view >
+            </div>	
+	</div>
 
+	  <snap-content class="fullHeight leafletMobile" snap-id="'leaflet'" snap-options="optsLeaflet">
+            <leaflet center="center" width="100%"></leaflet>
+	  </snap-content>
+</div>

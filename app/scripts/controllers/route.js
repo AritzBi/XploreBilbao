@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-.controller('RouteCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes",  function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes){
+.controller('RouteCtrl',["$scope","leafletData","$state","$stateParams", "$sce", "Auth", "Routes","snapRemote","newRoute","$cookieStore", "inRoute", function ($scope,leafletData,$state,$stateParams,$sce,Auth, Routes,snapRemote,newRoute,$cookieStore,inRoute){
 	angular.extend($scope, {
 	    center: {
 	        lat: 43.263163,
@@ -10,6 +10,30 @@ angular.module('xploreBilbaoApp')
 	    }
 	});
 	$scope.desktop=!(window.mobilecheck());
+	console.log("paso por aqui");
+	console.log($scope.desktop);
+	if(!$scope.desktop){
+		console.log("no llamo aqui");
+		$scope.disenableSidebar = function() {
+	      	snapRemote.getSnapper('route').then(function(snapper) {
+	  			snapper.disable();
+			});
+	    };
+	    $scope.disenableSidebar();
+	    $scope.optsLeaflet = {
+	        disable: 'left',
+	         minPosition: -265,
+	         maxPosition: 265
+	    };
+	    $scope.enableSidebar = function() {
+	      snapRemote.getSnapper('leaflet').then(function(snapper) {
+		  		snapper.enable();
+		        snapper.settings($scope.optsLeaflet);
+			});
+		}
+		$scope.enableSidebar();  
+	}
+	inRoute.setInRoute(true);
 	var mapquestOSM=L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
 		attribution: 'Mapas por <a href="http://arcgisonline.com" target="blank">ArcGIS Online</a>'
 	});
@@ -289,7 +313,47 @@ angular.module('xploreBilbaoApp')
 				}
 				if(hasWalkingPath === "true"){
 					geoJSON.setJSON(L.geoJson(route,{
-						style: style
+						style: style,
+						onEachFeature: function(feature, layer){
+									if(feature.properties){
+										var html;
+										if($scope.getLang()==='es'){
+											if(feature.properties.first_type_es){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.second_type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_es+"</h4></div><div class='row'><h5>"+feature.properties.type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}
+										}else{
+											if($scope.getLang()==='en'){
+												if(feature.properties.first_type_en){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.second_type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													if(feature.properties.building_type){
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}else{
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_en+"</h4></div><div class='row'><h5>"+feature.properties.type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}
+												}									
+											}else{
+												if(feature.properties.first_type_eu){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.second_type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													if(feature.properties.building_type){
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}else{
+														html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+													}
+												}
+											}
+										}
+										layer.bindPopup(html);
+									}
+								}
 					}));
 					var firstPoint;
 					for (var property in geoJSON.getJSON()._layers) {

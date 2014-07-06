@@ -1,5 +1,11 @@
 .top-buffer { margin-top:75px; }
 .top-medium-buffer { margin-top:35px; }
+.leafletMobile{
+ padding-top:75px;
+ padding-right: 35px;
+ padding-left: 35px;
+
+}
 .glyphicon-star, .glyphicon-star-empty {
 	font-size: 25px;
   padding-top: 30px;

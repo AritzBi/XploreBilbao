@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('MuseumInfoCtrl', function ($scope,$stateParams, $sce, EmblematicBuilding, BuildingComments, Auth, $translate){
-			    var user=Auth.currentUser();
-			    $scope.max=5;
-
+	.controller('MuseumInfoCtrl', function ($scope,$stateParams, $sce, EmblematicBuilding, BuildingComments, Auth, $translate,inRoute){
+	    var user=Auth.currentUser();
+	    $scope.max=5;
+	    inRoute.setInRoute(false);
 		EmblematicBuilding.get({id: $stateParams.id}).$promise.then(                                                                                              
 			function success (data) {
 				$scope.museum=data;
@@ -34,7 +34,6 @@ angular.module('xploreBilbaoApp')
 							$scope.isComment=false;	
 						}
 						$scope.createComment = function() {
-							console.log("hola");
 				    		BuildingComments.save({note: $scope.myComment.note, comment: $scope.myComment.comment, building_id: $scope.museum.id },function(comment){
 		      					$scope.myComment=comment;
 		      					$scope.isComment=true;

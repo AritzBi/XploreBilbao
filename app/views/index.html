@@ -33,10 +33,10 @@
 
     <!-- Add your site or application content here -->
 
-   <snap-content class="noOverflow" ng-controller="SidebarCtrl" snap-options="opts">
+   <snap-content class="noOverflow" ng-controller="SidebarCtrl" snap-options="opts" snap-id="'route'">
         <div class="relative arrow">
-             <button type="button" ng-show="isSidebarEnabled()"  class="btn btn-default btn-lg ">
-                <span snap-toggle class="sidebarButton">
+             <button type="button" ng-if="isArrowEnabled()"  class="btn btn-default btn-lg ">
+                <span snap-toggle snap-id="'route'"class="sidebarButton">
                     <i class="fa fa-arrow-circle-right fa-4x"></i>
                 </span>
             </button>

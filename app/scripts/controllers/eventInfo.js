@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('EventInfoCtrl', function ($scope,$stateParams, $sce, Event, $translate){
+	.controller('EventInfoCtrl', function ($scope,$stateParams, $sce, Event, $translate,inRoute){
+		inRoute.setInRoute(false);
 		Event.get({id: $stateParams.id}).$promise.then(                                                                                              
 			function success (data) {
 				$scope.event=data;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter,$translate,newRoute){
+	.controller('PintxosCtrl', function ($scope,Pintxo, pintxosCategory, $filter,$translate,newRoute,inRoute){
 		Pintxo.query().$promise.then(
 	    	function success (data) {
 	    		$scope.pintxos=data;
@@ -15,6 +15,7 @@ angular.module('xploreBilbaoApp')
 
 	    	}
 	    );
+	    inRoute.setInRoute(false);
 	    $scope.filteredItems = [];
 	   	/*$scope.groupedItems = [];
 	    $scope.itemsPerPage = 3;

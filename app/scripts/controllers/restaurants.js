@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('xploreBilbaoApp')
-	.controller('RestaurantsCtrl', function ($rootScope,$scope,Restaurant, restaurantsCategory, $filter,$translate,newRoute){
+	.controller('RestaurantsCtrl', function ($rootScope,$scope,Restaurant, restaurantsCategory, $filter,$translate,newRoute,inRoute){
+		inRoute.setInRoute(false);
 		Restaurant.query().$promise.then(
 	    	function success (data) {
 	    		$scope.restaurants=data;
