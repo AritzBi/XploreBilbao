@@ -256,7 +256,7 @@ snap-content {
   padding-right:15px
 }
 @media (min-width:768px){
-  .container-leaflet{width:150px}
+  .container-leaflet{width:175px}
 }
 @media (min-width:992px){
   .container-leaflet{width:200px}

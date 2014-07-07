@@ -10,10 +10,7 @@ angular.module('xploreBilbaoApp')
 	    }
 	});
 	$scope.desktop=!(window.mobilecheck());
-	console.log("paso por aqui");
-	console.log($scope.desktop);
 	if(!$scope.desktop){
-		console.log("no llamo aqui");
 		$scope.disenableSidebar = function() {
 	      	snapRemote.getSnapper('route').then(function(snapper) {
 	  			snapper.disable();
@@ -22,8 +19,8 @@ angular.module('xploreBilbaoApp')
 	    $scope.disenableSidebar();
 	    $scope.optsLeaflet = {
 	        disable: 'left',
-	         minPosition: -265,
-	         maxPosition: 265
+	         minPosition: -240,
+	         maxPosition: 240
 	    };
 	    $scope.enableSidebar = function() {
 	      snapRemote.getSnapper('leaflet').then(function(snapper) {
