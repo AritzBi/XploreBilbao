@@ -48,17 +48,35 @@ angular.module('xploreBilbaoApp')
 	            		return found;
 	            	}else{
 	            		var startHour=item.starthour;
+	            		var startHour_hour=parseInt(startHour.substr(0,2));
+	            		var startHour_minutes=parseInt(startHour.substr(3,4));
 	            		var endHour=item.endhour;
+	            		var endHour_hour=parseInt(endHour.substr(0,2));
+	            		var endHour_minutes=parseInt(endHour.substr(3,4))
 	            		var startHourFilter=$scope.startHour;
+	            		var startHourFilter_hour=new Date(startHourFilter).getHours();
+	            		var startHourFilter_minutes=new Date(startHourFilter).getMinutes();
 	            		var endHourFilter=$scope.endHour;
-	            		if(parseInt(startHour.substr(0,2))>=parseInt(startHourFilter.substr(0,2))){
-	            			if(parseInt(startHour.substr(0,2))==parseInt(startHourFilter.substr(0,2))){
-	            				if(parseInt(startHour.substr(3,4))<parseInt(startHourFilter.substr(3,4)))
+	            		var endHourFilter_hour=new Date(endHourFilter).getHours();
+	            		var endHourFilter_minutes=new Date(endHourFilter).getMinutes();
+	            		if(startHour_hour >= startHourFilter_hour){
+	            			if(startHour_hour === startHourFilter_hour){
+	            				if(startHour_minutes > startHourFilter_minutes)
 	            					return false;
 	            			}
-	            			if(parseInt(endHour.substr(0,2))<=parseInt(endHourFilter.substr(0,2))){
-	            				if(parseInt(endHour.substr(0,2))==parseInt(endHourFilter.substr(0,2))){
-	            					if(parseInt(endHour.substr(3,4))>parseInt(endHourFilter.substr(3,4)))
+	            			console.log(endHourFilter_hour);
+	            			console.log(endHour_hour);
+	            			if(endHour_hour >= 0 && endHour_hour <= 3){
+	            				endHour_hour=endHour_hour+24;
+	            			}
+	            			if(endHourFilter_hour >= 0 && endHourFilter_hour <= 3){
+	            				console.log("añado al friltrol");
+	            				endHourFilter_hour=endHourFilter_hour+24;
+	            			}
+	            			if(endHour_hour <= endHourFilter_hour){
+	            				if(endHour_hour === endHourFilter_hour){
+	            					console.log("Llego aqui");
+	            					if(endHour_minutes > endHourFilter_minutes)
 	            						return false;
 	            				}
 	            				return true;
@@ -68,14 +86,19 @@ angular.module('xploreBilbaoApp')
 	            		}else{
 	            			return false;
 	            		}
-	            		//SI EL START HOUR ES MENOR AL DEL FILTRO
-	            		//SI EL EN HOUR ES MAYOR O IGUAL AL DEL FILTRO
+	            		/*
+	            			if(parseInt(endHour.substr(0,2))<=parseInt(endHourFilter.substr(0,2))){
+	            				if(parseInt(endHour.substr(0,2))==parseInt(endHourFilter.substr(0,2))){
+	            					if(parseInt(endHour.substr(3,4))>parseInt(endHourFilter.substr(3,4)))
+	            						return false;
+	            				}
+	            				return true;
+	            			}else{
+	            				return false;
+	            			}*/
 	            	}
 	            }
 	        });
-	        //$scope.currentPage = 0;
-	        // now group by pages
-	        //$scope.groupToPages();
     	};
     	$scope.open = function($event) {
 		    $event.preventDefault();
