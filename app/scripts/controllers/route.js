@@ -305,7 +305,6 @@ angular.module('xploreBilbaoApp')
 					route.features.push(data.features[i]);
 				}
 				for(var i=0;i<data.features.length;i++){
-					console.log(data.features[i]);
 					$scope.routeDetailsInfo.push(data.features[i]);
 				}
 				if(hasWalkingPath === "true"){
@@ -553,7 +552,82 @@ angular.module('xploreBilbaoApp')
 		}
 	}
 }]);
+angular.module('xploreBilbaoApp')
+.controller('CustomRouteCtrl',function ($scope,$location, $modal, leafletData, geoJSON, $translate){
+		var style={
+	    fillColor: "green",
+	    weight: 5,
+	    opacity: 1,
+	    color: 'blue',
+	    fillOpacity: 0.7
+		};
+		$scope.routeDetailsInfo=new Array();
+		$scope.getLang=function(){
+	  		var lang=$translate.use();
+	    	return lang;
+		};
+      var instance=$modal.open({
+        templateUrl: 'partials/recommendation.html',
+        controller: 'RecommendationCtrl'
+      });
+      instance.result.then(function(data){
+      	leafletData.getMap().then(function(map){
+      		geoJSON.setJSON(L.geoJson(data,{
+						style: style,
+							onEachFeature: function(feature, layer){
+								if(feature.properties){
+									$scope.routeDetailsInfo.push(feature);
+									var html;
+									if($scope.getLang()==='es'){
+										if(feature.properties.first_type_es){
+											html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.second_type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+										}else{
+											if(feature.properties.building_type){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_es+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
 
+											}else{
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_es+"</h4></div><div class='row'><h5>"+feature.properties.type_es+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}
+										}
+									}else{
+										if($scope.getLang()==='en'){
+											if(feature.properties.first_type_en){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.second_type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_en+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_en+"</h4></div><div class='row'><h5>"+feature.properties.type_en+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}									
+										}else{
+											if(feature.properties.first_type_eu){
+												html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.second_type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+											}else{
+												if(feature.properties.building_type){
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.denom_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_denom_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}else{
+													html="<div class='container-leaflet'><div class='row'> <h4>"+feature.properties.title_eu+"</h4></div><div class='row'><h5>"+feature.properties.type_eu+"</h5></div><div class='row '><div class='col-md-12'><img class='popUpSize' src='images/"+feature.properties.image_path+"'></div></div></div>";
+												}
+											}
+										}
+									}
+									layer.bindPopup(html);
+								}
+							}
+					}));
+					var firstPoint;
+					for (var property in geoJSON.getJSON()._layers) {
+					    if (geoJSON.getJSON()._layers.hasOwnProperty(property)) {
+					        firstPoint = geoJSON.getJSON()._layers[property];
+					        break;
+					    }
+					}
+					map.setView(firstPoint._latlng);
+					geoJSON.getJSON().addTo(map);
+      	});
+      });
+});
 angular.module('xploreBilbaoApp')
 .controller('ScrollCtrl',function ($scope,$location, $anchorScroll){
 	$scope.gotoBottom = function (){

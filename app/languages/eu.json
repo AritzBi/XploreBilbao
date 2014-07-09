@@ -36,5 +36,8 @@
 	"price": "Prezioa",
 	"startDate": "Hasiera data",
 	"endDate": "Amaiera data",
-	"rangeHours": "Ordu tartea"
+	"rangeHours": "Ordu tartea",
+	"topRoutes": "Ibilbideen rankinga",
+	"showInMap": "Ikusi mapan",
+	"details": "Xehetasunak"
 }

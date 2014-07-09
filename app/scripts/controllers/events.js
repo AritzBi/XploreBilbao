@@ -86,16 +86,6 @@ angular.module('xploreBilbaoApp')
 	            		}else{
 	            			return false;
 	            		}
-	            		/*
-	            			if(parseInt(endHour.substr(0,2))<=parseInt(endHourFilter.substr(0,2))){
-	            				if(parseInt(endHour.substr(0,2))==parseInt(endHourFilter.substr(0,2))){
-	            					if(parseInt(endHour.substr(3,4))>parseInt(endHourFilter.substr(3,4)))
-	            						return false;
-	            				}
-	            				return true;
-	            			}else{
-	            				return false;
-	            			}*/
 	            	}
 	            }
 	        });
@@ -136,14 +126,7 @@ angular.module('xploreBilbaoApp')
 			Event.getEventsByType({id2: $stateParams.id}).$promise.then(
 				function success(data){
 					$scope.events=data;
-					$scope.groupedItems = [];
-				    $scope.itemsPerPage = 4;
-				    $scope.pagedItems = [];
-				    $scope.currentPage = 0;
 		        	for(var i=0; i<$scope.events.length; i++){
-		        		/*var pos=$scope.events[i].startdate.indexOf('T');
-		        		var startDate=$scope.events[i].startdate.substr(0,pos);
-		        		var endDate=$scope.events[i].endate.substr(0,pos);*/
 		        		if($scope.events[i].sdate === $scope.events[i].edate){
 		        			$scope.events[i].showEndDate=false;
 		        		}else{

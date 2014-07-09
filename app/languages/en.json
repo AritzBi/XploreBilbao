@@ -36,5 +36,8 @@
 	"price": "Price",
 	"startDate": "Start Date",
 	"endDate": "End Date",
-	"rangeHours": "Range of hours"
+	"rangeHours": "Range of hours",
+	"topRoutes": "Ranking of routes",
+	"showInMap": "Show in map",
+	"details": "Details"
 }

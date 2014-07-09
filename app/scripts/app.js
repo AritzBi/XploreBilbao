@@ -94,6 +94,11 @@ angular.module('xploreBilbaoApp', [
         templateUrl: 'partials/routeDetails.html',
         controller: 'RouteDetails'      
       })
+      .state('personalRoute.customRoute',{
+        url: '/customRoute',
+        templateUrl: 'partials/customRoute.html',
+        controller: 'CustomRouteCtrl'      
+      })
       .state('signup',{
         url: '/signUp',
         templateUrl: 'partials/prueba.html',

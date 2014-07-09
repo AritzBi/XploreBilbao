@@ -69,6 +69,12 @@ angular.module('xploreBilbaoApp')
           id:'getRouteDetails'
         }
       },
+      getRecommendation:{
+        method: 'GET',
+        params:{
+          id:'getRecommendation'
+        }
+      },
       getFollowingRoutes:{
         method: 'GET',
         params:{
