@@ -433,13 +433,16 @@ angular.module('xploreBilbaoApp')
 			$scope.myCreations=[];
 			$scope.following=[];
 			$scope.myRoutes=data;
+			console.log(data);
 			for(var i=0;i<data.length;i++){
+				console.log(data[i].properties.createdby);
 				if(data[i].properties.createdby===$scope.user.id){
 					$scope.myCreations.push(data[i]);
 				}else{
 					$scope.following.push(data[i]);
 				}
 			}
+			console.log($scope.myCreations);
 		}
 	);
 	$scope.getLang=function(){
@@ -571,7 +574,11 @@ angular.module('xploreBilbaoApp')
         controller: 'RecommendationCtrl'
       });
       instance.result.then(function(data){
+
       	leafletData.getMap().then(function(map){
+      		if(geoJSON.getJSON()){
+				map.removeLayer(geoJSON.getJSON());
+			}
       		geoJSON.setJSON(L.geoJson(data,{
 						style: style,
 							onEachFeature: function(feature, layer){

@@ -13,7 +13,8 @@
 					<a ng-if="location.properties.building_type" ui-sref="buildingInfo({id: location.properties.id})"><h4>{{location.properties['denom_' + getLang()] }}</h4></a>
 				</div>
 				<div ng-if="location.properties.title_es">
-					<h4>{{location.properties.title_es}}</h4>
+					<a ui-sref="eventInfo({id: location.properties.id})">
+					<h4>{{location.properties.title_es}}</h4></a>
 				</div>
 			<div class="col-md-6">
 				<img class="img-responsive"ng-src="images/{{location.properties.image_path}}"></img>

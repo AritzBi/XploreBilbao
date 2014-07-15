@@ -44,17 +44,17 @@
           <li class="dropdown" ng-class="{active: isActive(item.link)}">
             <a class="dropdown-toggle" id="downloadDrop"  role="button" data-toggle="dropdown"><i class="fa fa-calendar" style="color: white"></i>&nbsp;&nbsp;{{'events' | translate}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li ng-repeat="category in mainCategories" ><a ui-sref="events({id: category.id})" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;{{category['type_' + getLang()] }}</a></li>
+              <li ng-repeat="category in mainCategories" ><a ui-sref="events({id: category.id})" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-calendar"></i>&nbsp;&nbsp;{{category['type_' + getLang()] }}</a></li>
             </ul>
           </li>
           <li class="dropdown">
               <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;{{'routes' | translate}} <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#"  ui-sref="personalRoute.topRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ranking de rutas</a></li>
-                <li><a href="#"  ui-sref="personalRoute.myRoutes" ng-show="currentUser" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Mis rutas</a></li>
-                <li><a ng-show="currentUser" href="#"  ui-sref="personalRoute.customRoute" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Ruta personalizada</a></li>
-                <li><a ng-show="currentUser&&!isSidebarEnabled()" ng-click="enableSidebar()" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Crear ruta</a></li>
-                <li><a ng-show="currentUser&&isSidebarEnabled()" ng-click="disenableSidebar()" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Cancelar creación de ruta</a></li>
+                <li><a href="#"  ui-sref="personalRoute.topRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Ranking de rutas</a></li>
+                <li><a href="#"  ui-sref="personalRoute.myRoutes" ng-show="currentUser" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Mis rutas</a></li>
+                <li><a ng-show="currentUser" href="#"  ui-sref="personalRoute.customRoute" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Ruta personalizada</a></li>
+                <li><a ng-show="currentUser&&!isSidebarEnabled()" ng-click="enableSidebar()" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Crear ruta</a></li>
+                <li><a ng-show="currentUser&&isSidebarEnabled()" ng-click="disenableSidebar()" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Cancelar creación de ruta</a></li>
               </ul>
           </li>
           <li><a ng-click="changeLanguage('es')">
