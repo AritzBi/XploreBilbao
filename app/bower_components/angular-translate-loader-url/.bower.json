@@ -1,0 +1,18 @@
+{
+  "name": "angular-translate-loader-url",
+  "version": "2.1.0",
+  "main": "./angular-translate-loader-url.js",
+  "dependencies": {
+    "angular-translate": "~2.1.0"
+  },
+  "homepage": "https://github.com/PascalPrecht/bower-angular-translate-loader-url",
+  "_release": "2.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.0",
+    "commit": "41ca24722b16c0d7af9ab9d7103de5f3db246a79"
+  },
+  "_source": "git://github.com/PascalPrecht/bower-angular-translate-loader-url.git",
+  "_target": "*",
+  "_originalSource": "angular-translate-loader-url"
+}

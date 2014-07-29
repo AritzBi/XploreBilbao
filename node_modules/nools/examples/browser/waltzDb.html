@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="assets/conways.css">
+    <link href='http://fonts.googleapis.com/css?family=Londrina+Shadow' rel='stylesheet' type='text/css'>
+    <title>WaltzDB Benchmark</title>
+</head>
+<body>
+
+
+<div class="middle waltz-db">
+    <div class="header">
+        <h1 class="inline">WaltzDB Benchmark</h1>
+
+        <form class="inline">
+
+            <select id="data">
+                <option value="waltzdb4">Waltzdb 4</option>
+                <option value="waltzdb8">Waltzdb 8</option>
+                <option value="waltzdb12">Waltzdb 12</option>
+                <option value="waltzdb16">Waltzdb 16</option>
+            </select>
+            <input type="submit" value="Run"/>
+
+        </form>
+    </div>
+
+    <div class="editor-container">
+        <div id="editor"></div>
+    </div>
+    <div class="results_container"></div>
+
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/mode-javascript.js"></script>
+
+<script type="text/javascript" src="../../nools.js"></script>
+<script type="text/javascript" src="./src/common.js"></script>
+<script type="text/javascript" src="./src/watlzdbData.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "./rules/waltzDb.nools"
+        }).then(function (res) {
+
+                    var session, dataset,
+                            resultsContainer = $(".results_container"),
+                            statsListener = stats(),
+                            flowStr = res,
+                            flow = nools.compile(res, {name: "waltzDb"})
+                                    .conflictResolution(["salience", "factRecency", "activationRecency"]);
+
+                    function stop() {
+                        if (session) {
+                            session.dispose();
+                            resultsContainer.empty();
+                            session = null;
+                        }
+                    }
+
+                    function createSeat(seating) {
+                        return $("<div/>", {
+                            text: seating.toString()
+                        });
+                    }
+
+                    function run() {
+                        stop();
+                        var data = loadData(flow, dataset);
+                        session = statsListener.listen(flow.getSession());
+                        for (var i = 0, l = data.length; i < l; i++) {
+                            session.assert(data[i]);
+                        }
+                        session.assert(new (flow.getDefined("stage"))({value: "DUPLICATE"}));
+                        session
+                                .on("log", function (data) {
+                                    resultsContainer.append(data + "</br>");
+                                    resultsContainer.scrollTop(resultsContainer.prop("scrollHeight"));
+                                })
+                                .match().then(function () {
+                                    console.log("done");
+                                }, function (e) {
+                                    console.log(e.stack);
+                                })
+                    }
+
+
+                    var statsListener = stats();
+                    //setup grid;
+
+                    var $select = $("#data");
+
+                    $select.on("change", function () {
+                        stop();
+                        dataset = $(this).val();
+                    });
+
+                    $select.val("waltzdb4").trigger("change");
+
+                    $("form").on("submit", function () {
+                        run();
+                        return false;
+                    });
+
+                    $("#edit").on("click", function () {
+                        $("#editor-dialog").dialog("open");
+                        return false;
+                    });
+
+                    var height = $(document).height() - $("#manners .header").height() - 100;
+                    $(".editor-container").height(height);
+                    resultsContainer.height(height);
+
+                    var editor = ace.edit("editor");
+                    //editor.setTheme("ace/theme/monokai");
+                    var editorSession = editor.getSession();
+                    editorSession.setMode("ace/mode/javascript");
+                    editorSession.setValue(res);
+                    editor.setReadOnly(true);
+
+                });
+    });
+</script>
+
+</body>
+</html>

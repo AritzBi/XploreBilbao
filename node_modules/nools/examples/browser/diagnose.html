@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="assets/conways.css">
+    <link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <link href='http://fonts.googleapis.com/css?family=Londrina+Shadow' rel='stylesheet' type='text/css'>
+    <title>Diagnose Me</title>
+</head>
+<body>
+
+
+<div class="diagnose middle">
+    <div class="header">
+        <h1>Diagnose Me</h1>
+    </div>
+
+    <div class="editor-container">
+        <div id="editor"></div>
+    </div>
+
+    <div class="diagnose-container inline">
+        <form action="#">
+            <div class="errors"></div>
+            <label for="name">Patient Name</label>
+            <input type="text" id="name"/>
+            <label for="fever">Fever</label>
+            <select id="fever">
+                <option value="">None</option>
+                <option value="high">High</option>
+                <option value="mild">Mild</option>
+            </select>
+
+            <div>
+                <label for="spots">Spots</label>
+                <input type="checkbox" id="spots"/>
+            </div>
+            <div>
+                <label for="rash">Rash</label>
+                <input type="checkbox" id="rash"/>
+            </div>
+            <div>
+                <label for="sore_throat">Sore Throat</label>
+                <input type="checkbox" id="sore_throat"/>
+            </div>
+            <div>
+                <label for="innoculated">Innoculated</label>
+                <input type="checkbox" id="innoculated"/>
+            </div>
+            <input type="submit" value="Diagnose"/>
+        </form>
+        <hr/>
+        <h2>Diagnoses</h2>
+
+        <div id="results_container"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/mode-javascript.js"></script>
+<script type="text/javascript" src="../../nools.js"></script>
+<script type="text/javascript" src="./src/common.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "./rules/diagnosis.nools"
+        }).then(function (res) {
+
+                    var resultsContainer = $("#results_container"),
+                            statsListener = stats(),
+                            flowStr = res,
+                            flow = nools.compile(res, {name: "diagnosis"}),
+                            Patient = flow.getDefined("patient");
+
+                    function clear() {
+                        $("#fever").val("");
+                        $("#spots").attr("checked", false);
+                        $("#rash").attr("checked", false);
+                        $("#sore_throat").attr("checked", false);
+                        $("#innoculated").attr("checked", false);
+                        $("#name").val("");
+                    }
+
+                    function createPatient() {
+                        return new Patient({
+                            name: $("#name").val(),
+                            fever: $("#fever").val(),
+                            spots: $("#spots").is(":checked"),
+                            rash: $("#rash").is(":checked"),
+                            soreThroat: $("#sore_throat").is(":checked"),
+                            innoculated: $("#innoculated").is(":checked")
+                        })
+
+
+                    }
+
+                    function run() {
+                        var d, t;
+                        statsListener.listen(flow.getSession(createPatient()))
+                                .on("diagnosis", function (diagnosis) {
+                                    d = diagnosis;
+                                })
+                                .on("treatment", function (treatment) {
+                                    t = treatment;
+                                })
+                                .match().then(function () {
+                                    if (t && d) {
+                                        resultsContainer.append($("<div/>", {
+                                            text: d.name + "'s diagnosis is " + d.diagnosis + " we recommend " + t.treatment
+                                        }))
+                                    }
+                                });
+                    }
+
+                    clear();
+
+                    $("form").on("submit", function () {
+                        if ($("#name").val()) {
+                            $(".errors").empty();
+                            run();
+                        } else {
+                            $(".errors").append("<div>Patient Name Required</div>");
+                        }
+                        return false;
+                    });
+
+                    var height = $(document).height() - $("#manners .header").height() - 100;
+                    $(".editor-container").height(height);
+
+                    var editor = ace.edit("editor");
+                    //editor.setTheme("ace/theme/monokai");
+                    var session = editor.getSession();
+                    session.setMode("ace/mode/javascript");
+                    session.setValue(res);
+                    editor.setReadOnly(true);
+
+
+                });
+    });
+</script>
+
+</body>
+</html>
