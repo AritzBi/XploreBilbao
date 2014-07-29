@@ -1,0 +1,76 @@
+<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-lg-3">
+			</div>
+			<div class="col-md-9 col-lg-9">
+				<div class="row">
+					<div class="col-md-9">
+						<h1 style="padding-top:50px">{{'museums' | translate}}</h1>
+					</div>
+					<div class="col-md-3">
+						<div class="right-inner-addon" style="padding-top:75px">
+	        				<i class="glyphicon glyphicon-search" style="padding-top:80px"></i>
+	        				<input type="search" class="form-control" placeholder="Search" ng-model="searchText">
+	    				</div>
+    				</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+		<div class="col-md-3 col-lg-3">
+				<div class="row">
+				<div class="col-md-12 col-12-3">
+					<h3>Ordenar por</h3>
+				</div>
+				</div>
+				<div class="well well-lg filter-background">
+					<div class="control-group">
+				    	<div class="controls">
+				    		<label class="radio">
+				            	<input type="radio" ng-model="predicate" value="" ng-change="order()">
+				            	{{'nothing' | translate}}
+				        	</label>  
+				        	<label class="radio">
+				            	<input type="radio" ng-model="predicate" value="-note" ng-change="order()">
+				            	{{'note' | translate}}
+				        	</label> 
+				    	</div>
+					</div>
+				</div>
+		</div>
+		<div class="col-md-9 col-lg-9 data-container">
+				<div class="panel panel-default">
+					<ul class="list-group">
+						<li class="list-group-item" ng-repeat="museum in museums | filter:searchText" id="{{museum.id}}">
+							<div class="row">
+								<div class="col-md-7">
+									<a ui-sref="museumInfo({id: museum.id})"><h4>{{museum['denom_' + getLang()] }}</h4></a>
+								</div>
+								<div class="col-md-2"><h4><span class="label label-success" ng-class="{labelStyleRed: museum.note == '0' || museum.note == '1' || museum.note == '2' ,labelStyleYellow: museum.note == '3', labelStyleGreen: museum.note=='4'|| museum.note=='5' }">{{museum.note}}</span></h4></div>
+								<div class="col-md-3">
+									<h5>{{'museums' | translate}}</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4">
+									<img class="img-responsive" ng-src="images/{{museum.image_path}}">
+								</div>
+								<div class="col-md-8">
+									<p class="justify">{{museum['description_' + getLang()] }}</p>
+								</div>
+							</div>
+							<div class="row">
+								<button type="button" ng-show="isSidebarEnabled()" ng-click="addLocation(museum.id)" class="btn btn-default btn-lg pull-right buttonNoBorder">
+	  								<span class="addRouteElement glyphicon glyphicon-plus"></span>
+								</button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			<div class="col-md-3 col-lg-3">
+			</div>
+		</div>
+		</div>
+		<div class="row top-buffer"></div>
+
+	</div>

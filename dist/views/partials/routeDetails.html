@@ -1,0 +1,34 @@
+<ul class="sidebar-nav list-group customSidebar">
+	<li class="sidebar-brand list-group-item">
+		<div class="row">
+			<div class="col-md-2">
+                <div class="row">
+	                <button type="button" ui-sref="{{origin}}" class="btn btn-default buttonNoBorder">
+	                    <span>
+	                        <i class="fa fa-arrow-left fa-2x pull-left"></i>
+	                    </span>
+	                </button>
+                </div>
+			</div>
+			<div class="col-md-10"><h3>{{'details'|translate}}</h3></div>
+		</div>
+	</li>
+	<li class="list-group-item" ng-repeat="location in routeDetailsInfo"> 
+		<div class="row">
+				<div ng-if="location.properties.denom_es">
+					<a ng-if="location.properties.hostelery_type" ui-sref="restaurantInfo({id: location.properties.id})"><h4>{{location.properties['denom_' + getLang()] }}</h4></a>
+					<a ng-if="location.properties.building_type" ui-sref="buildingInfo({id: location.properties.id})"><h4>{{location.properties['denom_' + getLang()] }}</h4></a>
+				</div>
+				<div ng-if="location.properties.title_es">
+					<a ui-sref="eventInfo({id: location.properties.id})">
+					<h4>{{location.properties['title_' + getLang()] }}</h4></a>
+				</div>
+			<div class="col-md-6">
+				<img class="img-responsive" ng-src="images/{{location.properties.image_path}}">
+			</div>	
+			<div class="col-md-6">
+				<p class="locations-list">{{location.properties['description_' + getLang()] | characters: 125}}</p>
+			</div>
+		</div>
+	</li>
+</ul>

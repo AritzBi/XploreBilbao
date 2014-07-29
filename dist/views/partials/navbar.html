@@ -1,0 +1,99 @@
+<!--
+<div class="header" ng-controller="NavbarCtrl">
+  <ul class="nav nav-pills pull-right">
+    <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+        <a ng-href="{{item.link}}">{{item.title}}</a>
+    </li>
+  </ul>
+  <h3 class="text-muted">xploreBilbao</h3>
+</div> -->
+
+
+<div class="header" ng-controller="NavbarCtrl">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+          		<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" style="color: white" href="#">XploreBilbao</a>
+		</div>
+		<div class="navbar-collapse collapse">  
+			<ul class="nav navbar-nav" ng-controller="TranslateController">
+  				<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{active: isActive(item.link)}">
+  					<a ui-sref="restaurants">
+  						<i class="icon fa fa-cutlery" style="color: white"></i> {{'restaurants' | translate}}
+  					</a>
+  				</li>
+          <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{active: isActive(item.link)}">
+            <a ui-sref="museums">
+              <i class="icon fa fa-institution" style="color: white"></i> {{'museums' | translate}}
+            </a>
+          </li>
+          <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{active: isActive(item.link)}">
+            <a ui-sref="pintxos">
+              <i class="icon fa fa-beer" style="color: white"></i> {{'pintxos' | translate}}
+            </a>
+          </li>
+          <li data-toggle="collapse" data-target=".navbar-collapse.in" ng-class="{active: isActive(item.link)}">
+            <a ui-sref="emblematicBuildings">
+              <i class="icon fa fa-camera" style="color: white"></i> {{'buildings' | translate}}
+            </a>
+          </li>
+          <li class="dropdown" ng-class="{active: isActive(item.link)}">
+            <a class="dropdown-toggle" id="downloadDrop" role="button" data-toggle="dropdown"><i class="fa fa-calendar" style="color: white"></i>&nbsp;&nbsp;{{'events' | translate}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="category in mainCategories"><a ui-sref="events({id: category.id})" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-calendar"></i>&nbsp;&nbsp;{{category['type_' + getLang()] }}</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa icon-pitch" style="color: white"></i>&nbsp;&nbsp;{{'routes' | translate}} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#" ui-sref="personalRoute.topRoutes" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Ranking de rutas</a></li>
+                <li><a href="#" ui-sref="personalRoute.myRoutes" ng-show="currentUser" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Mis rutas</a></li>
+                <li><a ng-show="currentUser" href="#" ui-sref="personalRoute.customRoute" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Ruta personalizada</a></li>
+                <li><a ng-show="currentUser&&!isSidebarEnabled()" ng-click="enableSidebar()" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Crear ruta</a></li>
+                <li><a ng-show="currentUser&&isSidebarEnabled()" ng-click="disenableSidebar()" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa icon-pitch"></i>&nbsp;&nbsp;Cancelar creación de ruta</a></li>
+              </ul>
+          </li>
+          <li><a ng-click="changeLanguage('es')">
+            <img class="img-responsive language-icon" ng-src="images/c2e22024.castellano.png">
+          </a>
+        </li>
+        <li>
+          <a ng-click="changeLanguage('en')">
+            <img class="img-responsive language-icon" ng-src="images/edf35e62.ingles.png">
+          </a>  
+        </li>
+        <li>
+          <a ng-click="changeLanguage('eu')">
+            <img class="img-responsive language-icon" ng-src="images/c1a5c26b.euskera.png">
+          </a>  
+        </li>
+      </ul>
+        	<ul class="nav navbar-nav pull-right">
+      			<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-hide="currentUser" ng-class="{active: isActive('/login')}">
+          			<a href="#" ng-click="login()">
+          				<i class="icon fa fa-sign-in"></i> Login 
+          			</a>
+        			</li>
+        			<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-hide="currentUser" ng-class="{active: isActive('/signup')}">
+          			<a href="#" ng-click="signup()">
+          				<i class="icon fa fa-users"></i> {{'register' | translate}}
+          			</a>
+        			</li>
+        			<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="currentUser" ng-class="{active: isActive('/myroutes')}">
+          			<a href="#" ui-sref="myprofile">
+          				<i class="icon fa fa-user"></i> {{'myProfile' | translate}}
+          			</a>
+        			</li>
+        			<li data-toggle="collapse" data-target=".navbar-collapse.in" ng-show="currentUser" ng-class="{active: isActive('/logout')}">
+          			<a href="#" ng-click="logout()">
+          				<i class="icon fa fa-sign-out"></i> {{'logout' | translate}}
+          			</a>
+      			</li>
+        	</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,74 @@
+<div ng-if="calendar.state==1" class="modal-header">
+  <h3>¿Cuándo vas a realizar la ruta?</h3>
+</div>
+<div ng-if="calendar.state==1" class="modal-body">
+  <form class="form" name="form" ng-submit="nextState()" novalidate="">
+    <div class="form-group">
+      <label>Fecha</label>
+        <p class="input-group">
+            <input type="text" class="form-control" datepicker-popup="{{(&quot;date&quot;|translate)}}" ng-model="calendar.startDate" is-open="calendar.opened" min-date="calendar.startDate" max="calendar.maxDate" datepicker-options="dateOptions" toggle-weeks-text="{{'weeks'| translate}}" current-text="{{'today'| translate}}" clear-text="{{'clear'| translate}}" close-text="{{'exit'| translate}}" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+    </div>   
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"> Siguiente </button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+
+
+<div ng-if="calendar.state==2" class="modal-header">
+  <h3>¿En qué tipo de ruta está interesado?</h3>
+</div>
+<div ng-if="calendar.state == 2" class="modal-body">
+  <form class="form" name="form" ng-submit="nextState()" novalidate="">
+          <div class="control-group">
+              <div class="controls">
+                <label class="radio">
+                      <input type="radio" ng-model="calendar.type" value="ocio" ng-change="order()">
+                      Ocio
+                  </label>  
+                  <label class="radio">
+                      <input type="radio" ng-model="calendar.type" value="turistica" ng-change="order()">
+                      Turismo
+                  </label> 
+              </div>
+          </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"> Siguiente </button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+     </form>
+</div>
+
+<div ng-if="calendar.state==3" class="modal-header">
+  <h3>¿En qué tipo de ruta está interesado?</h3>
+</div>
+<div ng-if="calendar.state == 3" class="modal-body">
+  <form class="form" name="form" ng-submit="consult()" novalidate="">
+          <div class="control-group">
+              <div class="controls">
+                <label class="radio">
+                      <input type="radio" ng-model="calendar.company" value="solo">
+                      Solo
+                  </label>  
+                  <label class="radio">
+                      <input type="radio" ng-model="calendar.company" value="pareja">
+                      En pareja
+                  </label>
+                  <label class="radio">
+                      <input type="radio" ng-model="calendar.company" value="familia">
+                      Con familia
+                  </label> 
+              </div>
+          </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary"> Consultar </button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+     </form>
+</div>

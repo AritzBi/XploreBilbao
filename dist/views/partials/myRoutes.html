@@ -1,0 +1,55 @@
+<ul class="sidebar-nav list-group customSidebar">
+	<li class="sidebar-brand list-group-item">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<tabset justified="true">
+					<tab active="createdByTab.active"><tab-heading>Creados</tab-heading></tab>
+					<tab active="followingTab.active"><tab-heading>Seguidos</tab-heading></tab>
+				</tabset>
+			</div>
+		</div>
+	</li>
+		<li ng-if="createdByTab.active" class="list-group-item" ng-repeat="route in myCreations">
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="noIdent">{{route.properties.name_es}}</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p class="locations-list noIdent">{{route.properties.description_es| characters: 125}}</p>
+				</div>
+			</div> 
+			<div class="row">
+				<span class="col-md-12">
+					<button class="btn btn-lg btn-block btn-green" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
+					<button class="btn btn-lg btn-block btn-blue" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
+				</span>
+			</div>
+		</li>
+		<li ng-if="followingTab.active" class="list-group-item" ng-repeat="route in following">
+			<div class="row">
+				<div class="col-md-10">
+					<h3 class="noIdent">{{route.properties.name_es}}</h3>
+				</div>
+				<div class="cold-md-2">
+                    <button type="button" ng-click="unfollowRoute($index)" ng-show="currentUser" class="pull-right btn btn-default buttonNoBorder">
+                        <span class="pull-right">
+                            <i class="glyphicon glyphicon-minus"></i>
+                        </span>
+                    </button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p class="locations-list noIdent">{{route.properties.description_es| characters: 125}}</p>
+				</div>
+			</div> 
+			<div class="row">
+				<span class="col-md-12">
+					<button class="btn btn-lg btn-block btn-green" ng-click="showInMap(route.properties.id)" type="submit">Mostar en mapa</button>
+					<button class="btn btn-lg btn-block btn-blue" ng-click="showDetails(route.properties.id)" type="submit">Desglosar</button>
+				</span>
+			</div>
+		</li>
+</ul>

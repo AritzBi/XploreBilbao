@@ -1,0 +1,23 @@
+<div ng-if="desktop" class="container-map row">
+		<div class="col-md-3 fullHeight">
+			<div class="row fullHeight">
+			<div ui-view="">
+            </div>			
+        </div>
+		</div>
+		<div class="col-md-9 fullHeight">
+			<div class="row fullHeight">
+				<leaflet center="center" width="100%"></leaflet>
+			</div>
+		</div>
+</div>
+<div ng-if="!desktop">
+	<div snap-drawer="right" class="top-medium-buffer">
+			<div ui-view="">
+            </div>	
+	</div>
+
+	  <snap-content class="fullHeight leafletMobile" snap-id="'leaflet'" snap-options="optsLeaflet">
+            <leaflet center="center" width="100%"></leaflet>
+	  </snap-content>
+</div>

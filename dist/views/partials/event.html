@@ -1,0 +1,135 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 col-lg-3">
+		</div>
+		<div class="col-md-9 col-lg-9">
+			<div class="row">
+				<div class="col-md-9">
+					<h1 style="padding-top:50px">{{'events' | translate}}</h1>
+				</div>
+				<div class="col-md-3">
+					<div class="right-inner-addon" style="padding-top:75px">
+        				<i class="glyphicon glyphicon-search" style="padding-top:80px"></i>
+        				<input type="search" class="form-control" placeholder="Search" ng-model="searchText">
+    				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row data-container">
+		<div class="col-md-3">
+			<div class="row"> 
+				<div class="col-md-12"><h3>{{'filter' | translate}}</h3></div>
+			</div>
+			<div class="well well-lg filter-background">
+				<div class="control-group">
+				    <div class="controls">
+				    	<div class="row filter-format filter-margin">
+				    		<div class="col-md-12 filter-format">{{'price'| translate}}</div> 
+				    	</div>
+				    	<div class="row">
+				    		<div class="col-md-12">
+				    			<slider ng-model="priceSlider.price" floor="0" ceiling="100">
+								</slider>
+				    		</div> 
+	
+						</div>
+						<div class="row"><div class="col-md-12 filter-format">{{'startDate'| translate}}</div> </div>
+						<div class="row">
+        					<div class="col-md-12">
+            					<p class="input-group">
+              						<input type="text" class="form-control" datepicker-popup="{{(&quot;date&quot;|translate)}}" ng-model="startDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" toggle-weeks-text="{{'weeks'| translate}}" current-text="{{'today'| translate}}" clear-text="{{'clear'| translate}}" close-text="{{'exit'| translate}}" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+              						<span class="input-group-btn">
+                						<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              						</span>
+            					</p>
+        					</div>
+    					</div>
+    					<div class="row"><div class="col-md-12 filter-format">{{'endDate'| translate}}</div> </div>
+    					<div class="row">
+        					<div class="col-md-12">
+            					<p class="input-group">
+              						<input type="text" class="form-control" datepicker-popup="{{(&quot;date&quot;|translate)}}" ng-model="endDate" is-open="opened2" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" toggle-weeks-text="{{'weeks'| translate}}" current-text="{{'today'| translate}}" clear-text="{{'clear'| translate}}" close-text="{{'exit'| translate}}">
+              						<span class="input-group-btn">
+                						<button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              						</span>
+            					</p>
+        					</div>
+    					</div>
+    					<div class="row"><div class="col-md-12 filter-format">{{'rangeHours'|translate}}</div> </div>
+						<div class="row filter-margin">
+							<div class="col-md-6">
+								<timepicker class="timeFontSize" ng-model="startHour" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+							</div>
+							<div class="col-md-6">
+								<timepicker class="timeFontSize" ng-model="endHour" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+							</div>
+						</div>
+						<div class="row">
+							<button class="btn btn-primary" ng-click="filterEvent()" type="submit">{{'filter' | translate}}</button>
+						</div>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="event in filteredItems | filter:searchText">
+						<div class="row">
+							<div class="col-md-10">
+								<a ui-sref="eventInfo({id: event.event_id})"><h4>{{event['title_' + getLang()] }}</h4></a>
+							</div>
+							<div class="col-md-2">
+								<h4>{{event['subtype_' + getLang()] }}</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 stackMargin">
+								<img class="img-responsive" ng-src="images/{{event.image_path}}">
+							</div>
+							<div class="col-md-8">
+								<div class="row">
+									<div class="col-md-12">
+										<p>{{event['description_' + getLang()] }}</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-8"> 
+										<p>
+											<span class="date-format">{{event['startdate'] | date:("date"|translate)}}</span>
+											<span class="date-format" ng-show="{{event.showEndDate}}">/ {{event['endate'] | date:("date"|translate)}}</span>
+											<!--<span class="date-format" ng-show="{{event.showEndDate}}">/ {{event['endate']}}</span>-->
+										</p>
+										<p>
+											<span class="date-format">{{event['starthour']}}</span> - 
+											<span class="date-format">{{event['endhour']}}</span>
+										</p>
+									</div>
+									<div class="col-md-4">
+										<div ng-if="event.price == '0'">
+											<span class="label label-success date-format">{{"free" | translate}}</span>
+										</div>
+										<div ng-if="event.price != '0' && event.price !='-1'">
+											<span class="label label-info date-format">{{event['price']}}€</span>
+										</div>
+										<div ng-if="event.price =='-1'">
+											<span class="label label-danger date-format">{{"toDefine" | translate}}</span>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<button type="button" ng-show="isSidebarEnabled()" ng-click="addLocation(event.event_id)" class="btn btn-default btn-lg pull-right buttonNoBorder">
+  								<span class="addRouteElement glyphicon glyphicon-plus"></span>
+							</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row top-buffer"></div>
+</div>
