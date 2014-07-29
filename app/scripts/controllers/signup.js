@@ -19,10 +19,10 @@ angular.module('xploreBilbaoApp')
         })
         .then( function() {
           // Account created, redirect to home
+          $modalInstance.close();
           $location.path('/');
         })
         .catch( function(err) {
-          console.log(err);
           err = err.data;
           $scope.errors = true;
         });
