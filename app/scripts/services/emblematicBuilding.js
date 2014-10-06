@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('EmblematicBuilding', function ($resource) {
-    return $resource('/api/emblematicBuildings/:id', {
+    return $resource('/xplorebilbao/api/emblematicBuildings/:id', {
       id: '@id'
     }, { //parameters default
       update: {

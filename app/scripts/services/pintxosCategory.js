@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('pintxosCategory', function ($resource) {
-    return $resource('/api/pintxosCategory/:id', {
+    return $resource('/xplorebilbao/api/pintxosCategory/:id', {
       id: '@id'
     }, { //parameters default
       update: {

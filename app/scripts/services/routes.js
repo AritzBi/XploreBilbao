@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('Routes', function ($resource) {
-    return $resource('/api/routes/:id/:id2', {
+    return $resource('/xplorebilbao/api/routes/:id/:id2', {
       id: '@id'
     }, { //parameters default
       update: {

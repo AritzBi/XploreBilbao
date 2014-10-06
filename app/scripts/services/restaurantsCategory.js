@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('restaurantsCategory', function ($resource) {
-    return $resource('/api/restaurantsCategory/:id', {
+    return $resource('/xplorebilbao/api/restaurantsCategory/:id', {
       id: '@id'
     }, { //parameters default
       update: {

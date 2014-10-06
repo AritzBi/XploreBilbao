@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('Event', function ($resource) {
-    return $resource('/api/events/:id/:id2', {
+    return $resource('/xplorebilbao/api/events/:id/:id2', {
       id: '@id',
     }, { //parameters default
       update: {

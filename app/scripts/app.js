@@ -106,7 +106,7 @@ angular.module('xploreBilbaoApp', [
       });
       
     $urlRouterProvider.otherwise('/');
-    $translateProvider.useUrlLoader('language/translation.json');
+    $translateProvider.useUrlLoader('/xplorebilbao/language/translation.json');
     $translateProvider.preferredLanguage('es');
   });
 

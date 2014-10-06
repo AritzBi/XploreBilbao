@@ -2,7 +2,7 @@
 
 angular.module('xploreBilbaoApp')
   .factory('BuildingComments', function ($resource) {
-    return $resource('/api/buildingComments/:id', {
+    return $resource('/xplorebilbao/api/buildingComments/:id', {
       id: '@id'
     }, { //parameters default
       update: {

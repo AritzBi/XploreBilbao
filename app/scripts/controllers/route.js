@@ -64,6 +64,8 @@ angular.module('xploreBilbaoApp')
 	                    color: 'red',
 	                    fillOpacity: 0.7
 	        	};
+	        	console.log(data[0].row_to_json);
+	        	console.log(L);
 				subwayLines.addLayer(L.geoJson(data[0].row_to_json,{style: style}));
         }
 	);
