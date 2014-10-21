@@ -1,10 +1,10 @@
 var pg=require('pg');
-var conString="postgres://xplore:bilbao@localhost:5432/xploreDB";
+var config = require('../config/config');
 
 
 module.exports = {
 	findById: function(id, cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query="SELECT M.ID, M.USERNAME , M.SALT, M.HASH FROM MEMBER M WHERE ID=$1";
 			client.query(query, [id], function(err,result){
 				if(err){
@@ -24,7 +24,7 @@ module.exports = {
 		});
 	},
 	findByUsername: function(username, cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query="SELECT M.ID, M.USERNAME, M.SALT, M.HASH FROM MEMBER M WHERE M.USERNAME=$1 ";
 			client.query(query, [username], function(err,result){
 				if(err){
@@ -43,7 +43,7 @@ module.exports = {
 		});
 	},
 	findAll: function(cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query="SELECT * FROM MEMBER";
 			client.query(query, [], function(err,result){
 				if(err){
@@ -62,7 +62,7 @@ module.exports = {
 		});
 	},
 	changePassword: function(id, newPassword, cb){
-		pg.connect(conString, function(err, client, done){
+		pg.connect(config.bdPath, function(err, client, done){
 			query="UPDATE MEMBER SET PASSWORD=$1 WHERE ID=$2";
 			client.query(query, [newPassword,id], function(err){
 				if(err){
@@ -76,7 +76,7 @@ module.exports = {
 		});	
 	},
 	createUser: function(values, cb){
-		pg.connect(conString,function(err, client, done){
+		pg.connect(config.bdPath,function(err, client, done){
 			query="INSERT INTO MEMBER (EMAIL,USERNAME, HASH, SALT, NAME, SURNAME) VALUES ($1,$2,$3,$4,$5,$6) returning ID";
 			client.query(query,[values.email,values.username, values.hash, values.salt, values.name, values.surname], function(err, result){
 				if(err){

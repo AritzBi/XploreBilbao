@@ -1,8 +1,8 @@
 var pg=require('pg');
-var conString="postgres://xplore:bilbao@localhost:5432/xploreDB";
+var config = require('../config/config');
 module.exports = {
 	findById: function(id, cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query='SELECT * FROM EVENT E,EVENT_LOCATION EL, LOCATION L, EVENT_TYPE ET, EVENT_SUBTYPE ES WHERE E.ID=$1 AND L.ID=EL.LOCATION_ID AND E.ID=EL.EVENT_ID AND E.TYPE_ID=ES.ID AND ES.TYPE_ID=ET.ID ';
 			client.query(query, [id], function(err,result){
 				if(err){
@@ -22,7 +22,7 @@ module.exports = {
 		});
 	},
 	findAll: function(cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query="SELECT * FROM EVENT E,EVENT_LOCATION EL, LOCATION L, EVENT_TYPE ET, EVENT_SUBTYPE ES WHERE L.ID=EL.LOCATION_ID AND E.ID=EL.EVENT_ID AND E.TYPE_ID=ES.ID AND ES.TYPE_ID=ET.ID ";
 			client.query(query, [], function(err,result){
 				if(err){
@@ -42,7 +42,7 @@ module.exports = {
 		});
 	},
 	getEventsByType: function(id,cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query="SELECT to_char(e.startdate,'YYYY-MM-DD') as sDate,to_char(e.endate,'YYYY-MM-DD') as eDate,* FROM EVENT E,EVENT_LOCATION EL, LOCATION L, EVENT_TYPE ET, EVENT_SUBTYPE ES WHERE L.ID=EL.LOCATION_ID AND E.ID=EL.EVENT_ID AND E.TYPE_ID=ES.ID AND ES.TYPE_ID=ET.ID AND ET.ID=$1";
 			client.query(query, [id], function(err,result){
 				if(err){
@@ -62,7 +62,7 @@ module.exports = {
 		});
 	},
 	findByIdGeoJson: function(id, cb){
-		pg.connect(conString, function(err,client, done){
+		pg.connect(config.bdPath, function(err,client, done){
 			var query="SELECT row_to_json(f) \
 				FROM (SELECT 'Feature' as type \
 				, ST_AsGeoJSON(l.geom)::json As geometry \
@@ -88,7 +88,7 @@ module.exports = {
 		});
 	},
 	findByIdGeoJsonWithoutDetails: function(id, cb){
-		pg.connect(conString, function(err,client, done){
+		pg.connect(config.bdPath, function(err,client, done){
 			var query="SELECT row_to_json(f) \
 				FROM (SELECT 'Feature' as type \
 				, ST_AsGeoJSON(l.geom)::json As geometry \

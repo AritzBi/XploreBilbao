@@ -1,8 +1,8 @@
 var pg=require('pg');
-var conString="postgres://xplore:bilbao@localhost:5432/xploreDB";
+var config = require('../config/config');
 module.exports = {
 	findById: function(id, cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query="SELECT T.* FROM BUILDING_TYPE T WHERE T.ID=$1";
 			client.query(query, [id], function(err,result){
 				if(err){
@@ -22,7 +22,7 @@ module.exports = {
 		});
 	},
 	findAll: function(cb){
-		pg.connect(conString, function(err,client,done){
+		pg.connect(config.bdPath, function(err,client,done){
 			query="SELECT T.* FROM BUILDING_TYPE T WHERE T.TYPE_DENOM_ES!='Museo' ";
 			client.query(query, [], function(err,result){
 				if(err){

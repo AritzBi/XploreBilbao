@@ -6,5 +6,6 @@ var rootPath = path.normalize(__dirname + '/../../..');
 
 module.exports = {
   root: rootPath,
-  port: process.env.PORT || 9001
+  port: process.env.PORT || 9001,
+  bdPath: "postgres://xplore:bilbao@localhost:5432/xploreDB"
 };

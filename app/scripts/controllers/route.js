@@ -10,6 +10,8 @@ angular.module('xploreBilbaoApp')
 	    }
 	});
 	$scope.desktop=!(window.mobilecheck());
+	L.Icon.Default.imagePath="images/"
+
 	if(!$scope.desktop){
 		$scope.disenableSidebar = function() {
 	      	snapRemote.getSnapper('route').then(function(snapper) {
