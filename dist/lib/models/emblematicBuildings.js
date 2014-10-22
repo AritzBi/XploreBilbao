@@ -111,7 +111,7 @@ module.exports = {
 		});
 	},
 	findNoteById: function(id, cb){
-		pg.connect(config.bdPaths, function(err,client, done){
+		pg.connect(config.bdPath, function(err,client, done){
 			var query="SELECT AVG(C.NOTE) FROM BUILDING_COMMENTS C, EMBLEMATIC_BUILDING B WHERE B.ID=C.BUILDING_ID AND B.ID=$1"
 			client.query(query, [id], function(err,result){
 				done();
